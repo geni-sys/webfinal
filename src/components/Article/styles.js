@@ -9,6 +9,7 @@ export const Conatiner = styled.article`
 
   background: inherit;
   padding-top: 20px;
+  padding-left: 10px;
 
   h3 {
     font-size: 17px;

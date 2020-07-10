@@ -19,6 +19,19 @@ export default createGlobalStyle`
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     box-sizing: border-box;
     outline: 0;
+
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: var(--dominate);
+      border-radius: 0;
+    }
+
+    ::-webkit-scrollbar-track {
+      background-color: #6633cc;
+    }
   }
 
   body {
@@ -43,6 +56,13 @@ export default createGlobalStyle`
     list-style: none;
   }
 
+  a {
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
   :root { /* #36393f */
 
     --primary: #36393f;
@@ -64,6 +84,11 @@ export default createGlobalStyle`
 
     --link: #5d80d6;
     --force: #ebf3ff;
+    --new: #2ea44f;
+
+    --grey-dark: #24292e;
+    --dominate: #f6f8fa;
+    --reports: #4764f1;
 
     --rocketseat: #6633cc;
     --purple: #bd93f9;
@@ -80,7 +105,7 @@ export default createGlobalStyle`
   div#transcription h5,
   div#transcription p {
     margin: 15px 0;
-    color: #fff;
+    color: var(--grey-dark);
   }
   div#transcription h1 {
     font-size: 25px;
@@ -101,10 +126,9 @@ export default createGlobalStyle`
   }
   div#transcription p {
     line-height: 1.6em;
-    color: #d4d3d6;
   }
   div#transcription a {
-    color: #7159c1;
+    color: var(--reports);
   }
   div#transcription pre {
     border-radius: 5px;
