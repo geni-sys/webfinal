@@ -17,7 +17,7 @@ import {
 
 const Home = () => {
   return (
-    <Container id="App">
+    <Container id="Home">
       <Header />
 
       <Aside>

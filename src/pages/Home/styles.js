@@ -16,17 +16,17 @@ export const Container = styled.div`
   overflow: hidden;
 
   @media (max-width: 1024px) {
-    #root {
-      grid-template-rows: 5rem auto;
-      background: red;
-    }
+    grid-template-rows: 5rem auto;
+    background: red;
   }
 
   @media (max-width: 1000px) {
-    #root {
-      grid-template-columns: 24rem auto 0;
-      grid-template-rows: 5rem auto;
-    }
+    grid-template-columns: 24rem auto 0;
+    grid-template-rows: 5rem auto;
+
+    grid-template-areas:
+      "HEADER HEADER HEADER"
+      "ASIDE MAIN MAIN";
 
     article {
       display: none;
@@ -34,14 +34,12 @@ export const Container = styled.div`
   }
 
   @media (max-width: 600px) {
-    #root {
-      grid-template-areas:
-        "HEADER"
-        "MAIN";
+    grid-template-areas:
+      "HEADER"
+      "MAIN";
 
-      grid-template-columns: auto;
-      grid-template-rows: 5rem auto;
-    }
+    grid-template-columns: auto;
+    grid-template-rows: 5rem auto;
 
     aside,
     article {
@@ -62,7 +60,7 @@ export const Aside = styled.aside`
   border-right: 1px solid rgba(0, 0, 0, 0.4);
 
   padding: 30px 10px;
-  font-size: 14px;
+  font-size: 1.4rem;
 `;
 
 export const TopInformation = styled.div`

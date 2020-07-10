@@ -22,6 +22,7 @@ export default createGlobalStyle`
 
     ::-webkit-scrollbar {
       width: 4px;
+      height: 5px;
     }
 
     ::-webkit-scrollbar-thumb {
@@ -76,6 +77,7 @@ export default createGlobalStyle`
     --gray: #8a8c90;
     --chat-input: rgb(64,68,75);
     --symbol: #74777a;
+    --desfoque: #999;
 
     --notification: #f84a4b;
     --discord: #6e86d6;

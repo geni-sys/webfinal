@@ -7,12 +7,13 @@ export const Conatiner = styled.article`
   flex-direction: column;
   color: var(--tertiary);
 
-  background: inherit;
+  background: var(--force);
   padding-top: 20px;
   padding-left: 10px;
+  font-size: 12px;
 
   h3 {
-    font-size: 17px;
+    font-size: 1.7em;
     font-weight: 600;
   }
 
@@ -40,12 +41,12 @@ export const Inseight = styled.li`
 
   span a {
     color: var(--tertiary);
-    font-size: 12px;
+    font-size: 1.2em;
   }
 
   p {
     color: #777;
-    font-size: 11px;
+    font-size: 1.1em;
     padding-left: 5px;
   }
 
@@ -55,7 +56,7 @@ export const Inseight = styled.li`
     align-items: center;
     padding-top: 5px;
     font-weight: 400;
-    font-size: 13px;
+    font-size: 1.3em;
 
     span {
       display: flex;

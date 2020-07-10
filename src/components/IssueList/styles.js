@@ -5,6 +5,7 @@ export const List = styled.ul`
   flex-direction: column;
   height: 100%;
   width: 100%;
+  position: relative;
 
   overflow-y: auto;
 
@@ -15,6 +16,7 @@ export const Item = styled.li`
   display: flex;
   flex-direction: column;
   max-height: 600px;
+  position: relative;
 
   margin-bottom: 30px;
   padding: 2px;
@@ -40,7 +42,8 @@ export const Item = styled.li`
 
     margin-left: 20px;
     span {
-      background: var(--discord);
+      background: var(--white);
+      color: var(--tertiary);
       margin: 5px;
       padding: 0 5px;
       border-radius: 6px;
@@ -51,12 +54,14 @@ export const Item = styled.li`
 
 export const Transcription = styled.div`
   margin-left: 20px;
-  padding: 10px;
+  padding: 0 10px;
   border-radius: 6px;
+  width: auto;
 
   position: relative !important;
   max-height: 300px;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
 
   background: var(--dominate);
 `;
