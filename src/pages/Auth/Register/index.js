@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { FiArrowDown, FiXOctagon } from "react-icons/fi";
 import ReactLoading from "react-loading";
 // COMPONENTS
-import Header from "../../components/Header";
 // STYLUS | STATIC
-import { Container, Aside, Main, Form, Input, Submit, Card } from "./styles";
-import Friends from "../../assets/friends-negesys.svg";
+import { Container, Load, Main, Form, Input, Submit, Card } from "./styles";
+import "./comprovate.css";
+import Stars from "../../../assets/stars.svg";
+import Montains from "../../../assets/montains.svg";
 
 const Login = () => {
   const [isLoading, setIsLoading] = useState(2);
@@ -43,28 +44,25 @@ const Login = () => {
   }
 
   return (
-    <Container id="Login">
-      <Header />
+    <Container id="register" Montains={Montains} Stars={Stars}>
+      <Main id="session-group">
+        <div id="welcome">
+          <h3>Registrar-se na plataforma</h3>
+        </div>
 
-      <Aside id="Login-aside">
-        <div id="anuncios">
-          <h3>Build for Engineers</h3>
-          <p id="text-limited">
-            Elias é uma plataforma para te ajudar a levar a sua carreira pro
-            outro nível, da melhor forma e sem custo!
-          </p>
-        </div>
-        <div id="ilustry">
-          <img src={Friends} alt="WELCOME FROM FRIENDS IN GENESIS" />
-        </div>
-      </Aside>
-
-      <Main id="login-main">
-        <div id="secret">
-          <h4>Digite as suas credenciais</h4>
-        </div>
-        <Form id="form-comprovate">
+        <Form className="form-session" onSubmit={handleSubmit}>
           <div id="input-group">
+            <div>
+              <label htmlFor="senha">Nome</label>
+              <Input
+                required
+                type="text"
+                placeholder="Digite seu nome"
+                name="name"
+                id="name"
+              />
+            </div>
+
             <div>
               <label htmlFor="email">Email</label>
               <Input
@@ -88,17 +86,17 @@ const Login = () => {
             </div>
           </div>
 
-          <div id="loading-form">{stateInRun(isLoading)}</div>
+          <Load id="loader-session">{stateInRun(isLoading)}</Load>
 
-          <Submit onClick={handleSubmit} id="submit" type="submit">
-            Entrar
+          <Submit className="session" id="submit" type="submit">
+            Registrar
           </Submit>
-
-          <Card id="card-account">
-            <h4>New to Genesys?</h4>
-            <a href="/">create an account</a>
-          </Card>
         </Form>
+
+        <Card id="terms-services">
+          ao se registrar voce aceita nossos
+          <a href="/"> termos de serviço.</a>
+        </Card>
       </Main>
     </Container>
   );

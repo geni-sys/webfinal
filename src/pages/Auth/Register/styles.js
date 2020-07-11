@@ -2,127 +2,35 @@ import styled from "styled-components";
 
 // FATHER STYLUS
 export const Container = styled.div`
-  display: grid;
-
-  grid-template-columns: auto;
-  grid-template-rows: 6rem auto;
-
-  grid-template-areas:
-    "HEADER HEADER"
-    "ASID MAI";
-
   height: 100vh;
-  background: var(--force);
   overflow-y: hidden;
   height: 100vh;
 
-  @media (max-width: 880px) {
-    overflow-y: auto;
-
-    grid-template-columns: auto;
-    grid-template-rows: 6rem auto auto;
-
-    grid-template-areas:
-      "HEADER"
-      "ASID"
-      "MAI";
-
-    aside#Login-aside {
-      img {
-        display: none;
-      }
-    }
-  }
-
-  @media (max-width: 768px) {
-    grid-template-rows: 4.9rem auto;
-  }
-
-  @media (max-width: 600px) {
-    grid-template-rows: 4rem 160px auto;
-
-    height: 100%;
-    overflow-y: auto;
-
-    aside#Login-aside {
-      div#anuncios {
-        p#text-limited {
-          display: none;
-        }
-      }
-    }
-
-    main {
-      align-items: baseline;
-
-      div#secret {
-        display: block;
-        margin: 0 auto;
-
-        h4 {
-          font-size: 16px;
-        }
-      }
-
-      form {
-        margin: 30px auto;
-      }
-    }
-  }
-
-  @media (max-width: 320px) {
-    main {
-      width: 100%;
-
-      form {
-        width: 100%;
-      }
-    }
-  }
-`;
-
-// ASIDE STYLUS
-export const Aside = styled.aside`
-  &#Login-aside {
-    background: #fff;
-    grid-area: ASID;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    h3 {
-      font-size: 6rem;
-    }
-    p#text-limited {
-      max-width: 400px;
-      color: #999;
-      font-size: 30px;
-      margin-left: 10px;
-    }
-
-    div#ilustry img {
-      width: 500px;
-    }
-  }
+  background: url(${(props) =>
+    props.Montains
+      ? props.Montains
+      : `var(--force)`}) repeat-x scroll center bottom,
+    url("${(props) =>
+      props.Stars ? props.Stars : `var(--force)`}") repeat-x scroll 0% 0%,
+    var(--white) none repeat scroll 0% 0%;
+  background-size: auto, auto, auto;
+  background-color: #36393f;
 `;
 
 // MAIN STYLUS
 export const Main = styled.main`
-  background: #ebf3ff;
-  grid-area: MAI;
+  background: transparent;
+  width: 100%;
+  height: auto;
 
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 
-  div#secret {
-    display: block;
-    font-size: 1.3em;
-
-    margin-top: 30px;
+  div#welcome h3 {
+    font-size: 30px;
+    margin: 30px;
+    color: #fff;
   }
 `;
 
@@ -130,7 +38,7 @@ export const Form = styled.form`
   display: block;
   position: relative;
   width: 300px;
-  height: 210px;
+  height: 240px;
 
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
@@ -206,17 +114,30 @@ export const Submit = styled.button`
   }
 `;
 
-export const Card = styled.div`
+export const Load = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  border-radius: 3px;
+  align-items: center;
+  justify-content: center;
 
-  background-color: #fff;
-  color: var(--primary);
-
+  height: 30px;
   width: 100%;
-  padding: 5px;
-  margin: 10px auto;
-  font-size: 1.2em;
+  padding: 10px 0;
+
+  div.css-load {
+    margin-top: -19px;
+  }
+`;
+
+export const Card = styled.div`
+  color: var(--white);
+  font-size: 11px;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+
+  a {
+    color: #bd93f9;
+    margin-left: 3px;
+  }
 `;
