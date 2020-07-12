@@ -23,6 +23,58 @@ export const Main = styled.main`
   display: flex;
   flex-direction: column;
   /* overflow-y: auto; */
+
+  @media (max-width: 1000px) {
+    background: var(--white);
+
+    justify-content: center;
+    align-items: center;
+
+    aside#aside-primary {
+      justify-content: space-evenly;
+    }
+
+    article#main-primary {
+      justify-content: center;
+      align-items: center;
+
+      h4 {
+        padding-left: 20px;
+      }
+
+      ul {
+        justify-content: center;
+      }
+    }
+  }
+
+  @media (max-width: 748px) {
+    aside#aside-primary {
+      padding: 0 20px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    aside#aside-primary {
+      flex-direction: column;
+    }
+
+    article#main-primary ul {
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 440px) {
+    article#main-primary {
+      ul {
+        justify-content: flex-start;
+      }
+
+      h4 {
+        padding-left: 2px;
+      }
+    }
+  }
 `;
 
 export const Aside = styled.aside`
@@ -47,6 +99,7 @@ export const Article = styled.article`
   justify-content: space-evenly;
 
   overflow-y: auto;
+  margin-top: 30px;
 
   h4 {
     margin-top: 30px;
