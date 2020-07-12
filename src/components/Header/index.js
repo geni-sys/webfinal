@@ -36,13 +36,13 @@ const Header = () => {
 
           <List>
             <li>
-              <a href="/">Marketplace</a>
+              <a href="/marketplace">Marketplace</a>
             </li>
             <li>
-              <a href="/">Overview</a>
+              <a href="/overview">Overview</a>
             </li>
             <li>
-              <a href="/">Explore</a>
+              <a href="/explore">Explore</a>
             </li>
           </List>
         </Navegation>

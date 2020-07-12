@@ -1,10 +1,11 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { FiHash, FiStar, FiArrowLeft } from "react-icons/fi";
 // COMPONENTS
 import CodeBlock from "../../components/CodeBlock";
 import Header from "../../components/Header";
 // STYLUS | STATIC
-import { Container, Main, Card, Great, Body } from "./styles";
+import { Container, Main, Card, Great, Body, GoBack } from "./styles";
 
 const lesson = `
 A simple markdown editor with preview, implemented with React.js and TypeScript. This React Component aims to provide a simple Markdown editor with syntax highlighting support. This is based on textarea encapsulation, so it does not depend on any modern code editors such as Acs, CodeMirror, Monaco etc.
@@ -48,33 +49,48 @@ const LearningIssue = () => {
           <strong>C# DotNet</strong>
 
           <div id="tags">
-            <spa>code</spa>
-            <spa>linux</spa>
-            <spa>web</spa>
-            <spa>csharp</spa>
+            <span>code</span>
+            <span>linux</span>
+            <span>web</span>
+            <span>csharp</span>
           </div>
-          <a href="http://" target="_blank" rel="noopener noreferrer">
-            main document
-          </a>
 
           <div id="featureds">
             <div id="stars">
-              <span>*</span>
-              <p>33242</p>
+              <span>
+                {" "}
+                <FiStar />{" "}
+              </span>
+              <p>724</p>
             </div>
 
             <div id="avorage">
-              <span>*</span>
-              <p>33242</p>
+              <span>
+                {" "}
+                <FiHash />{" "}
+              </span>
+              <p>122</p>
             </div>
           </div>
 
           <small>Creator: Elias alexandre</small>
 
-          <Great>Marcar</Great>
+          <a href="http://" target="_blank" rel="noopener noreferrer">
+            main document
+          </a>
+
+          <Great>
+            <FiHash />
+            Marcar
+          </Great>
         </Card>
 
         <Body id="learn-app">
+          <GoBack>
+            {" "}
+            <FiArrowLeft /> Voltar
+          </GoBack>
+
           <div id="transcription">
             <ReactMarkdown renderers={{ code: CodeBlock }} source={lesson} />
           </div>

@@ -87,6 +87,7 @@ export default createGlobalStyle`
     --link: #5d80d6;
     --force: #ebf3ff;
     --new: #2ea44f;
+    --support: #6a737d;
 
     /* LOGIN-BUTTON */
     --ENTER: #7ed376;
@@ -110,7 +111,7 @@ export default createGlobalStyle`
   div#transcription h4,
   div#transcription h5,
   div#transcription p {
-    margin: 15px 0;
+    margin: 10px 0;
     color: var(--grey-dark);
   }
   div#transcription h1 {
@@ -141,4 +142,14 @@ export default createGlobalStyle`
     font-size: 15px;
     line-height: 22px;
   }
+  div#transcription ul li {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+  }
+
+  div#transcription ul li input {
+    margin-right: 3px;
+  }
+
 `;
