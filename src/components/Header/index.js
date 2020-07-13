@@ -49,7 +49,7 @@ const Header = () => {
       </div>
 
       <Session id="session">
-        <a href="/" className="desactived-header">
+        <a href="/notifications" className="desactived-header">
           <FiBell />
         </a>
 

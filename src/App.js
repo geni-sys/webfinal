@@ -7,6 +7,8 @@ import Home from "./pages/Home"; // "/"
 import NewIssue from "./pages/NewIssue"; // "/new/issue"
 import LearningIssue from "./pages/LearningIssue"; // "/user/learning/:issue_id"
 import Marketplace from "./pages/Marketplace"; // "/marketplace"
+import Notifications from "./pages/Notifications"; // "/notifications"
+import SearchResult from "./pages/SearchResult"; // "/search?query="
 // STYLUS
 import GlobalStyles from "./GlobalStyles";
 
@@ -19,6 +21,8 @@ const App = () => {
       <Route component={NewIssue} exact path="/new/issue" />
       <Route component={LearningIssue} path="/user/learning" />
       <Route component={Marketplace} path="/marketplace" />
+      <Route component={Notifications} path="/notifications" />
+      <Route component={SearchResult} path="/search" />
 
       <GlobalStyles />
     </BrowserRouter>

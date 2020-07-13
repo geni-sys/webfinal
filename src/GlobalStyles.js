@@ -88,6 +88,7 @@ export default createGlobalStyle`
     --force: #ebf3ff;
     --new: #2ea44f;
     --support: #6a737d;
+    --Notify: #1b1f23;
 
     /* LOGIN-BUTTON */
     --ENTER: #7ed376;
