@@ -33,7 +33,7 @@ export const Main = styled.main`
 
 // STYLUS ASIDE INNER
 export const Aside = styled.aside`
-  width: 200px;
+  width: 300px;
   font-size: 1.4em;
 
   @media (max-width: 700px) {
@@ -61,6 +61,7 @@ export const List = styled.ul`
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
 
     &#clicked {
       background: var(--white);
@@ -80,8 +81,8 @@ export const Content = styled.div`
   @media (max-width: 700px) {
     margin: 0 20px;
 
-    ul a {
-      justify-content: center;
+    ul#concret li {
+      justify-content: center !important;
     }
   }
 
@@ -89,15 +90,17 @@ export const Content = styled.div`
     width: 100%;
     margin: 0 10px;
 
-    ul a {
+    ul#concret li {
       width: 100%;
     }
   }
 
-  ul {
-    a {
+  ul#concret {
+    width: 450px;
+
+    li {
       display: flex;
-      justify-content: space-between;
+      /* justify-content: space-between; */
       border: 1px solid rgba(0, 0, 0, 0.1);
       padding: 10px;
       margin-bottom: 10px;
@@ -117,9 +120,40 @@ export const Content = styled.div`
     }
 
     div {
+      a {
+        font-size: 1.2em;
+        margin-right: 10px;
+      }
+
       p {
         font-size: 13px;
+        margin: 5px 0;
+      }
+
+      p#lighs {
+        display: flex;
+
+        span {
+          background: var(--white);
+          margin: 0 3px;
+          color: var(--grey-dark);
+        }
       }
     }
+  }
+`;
+
+// BUTTONS STYLUS
+export const Button = styled.button`
+  background: var(--ENTER);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 1px 5px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+
+  &:hover {
+    background: var(--UNANTER);
   }
 `;
