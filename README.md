@@ -9,10 +9,10 @@
   - [x] NOTIFICATIONS ✔️️
   - [x] RESULTS ✔️️
   - [x] LEARNING-A-ISSUE ✔️️
+  - [x] QUESTIONS ✔️️
 
 - OPENED SCREENS ❌
   - [x] LEARN-PLAYLIST ❓
   - [x] PROFILE ❓
   - [x] USERS ❓
-  - [x] QUESTIONS ❓
   - [x] SETTINGS ❓
