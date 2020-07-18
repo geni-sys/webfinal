@@ -10,6 +10,7 @@ import Marketplace from "./pages/Marketplace"; // "/marketplace"
 import Notifications from "./pages/Notifications"; // "/notifications"
 import SearchResult from "./pages/SearchResult"; // "/search?query="
 import Questions from "./pages/Questions"; // "/questions"
+import Settings from "./pages/Settings"; // "/settings"
 // STYLUS
 import GlobalStyles from "./GlobalStyles";
 
@@ -25,6 +26,7 @@ const App = () => {
       <Route component={Notifications} path="/notifications" />
       <Route component={SearchResult} path="/search" />
       <Route component={Questions} path="/questions" />
+      <Route component={Settings} path="/settings" />
 
       <GlobalStyles />
     </BrowserRouter>

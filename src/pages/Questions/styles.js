@@ -14,7 +14,6 @@ export const Container = styled.div`
   max-height: 100vh;
   background: var(--force);
   overflow-x: hidden;
-  overlow-y: auto;
 `;
 
 export const Grid = styled.div`
