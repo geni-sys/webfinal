@@ -25,6 +25,12 @@ export const Main = styled.main`
   padding-top: 30px;
   width: 1000px;
   margin: 0 auto;
+
+  @media (max-width: 705px) {
+    flex-direction: column;
+    /* justify-content: center; */
+    width: auto;
+  }
 `;
 
 export const Aside = styled.aside`
@@ -68,6 +74,20 @@ export const Aside = styled.aside`
         background-color: var(--white);
       }
     }
+
+    li.selected {
+      background-color: var(--white);
+    }
+  }
+
+  @media (max-width: 705px) {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 30px;
+  }
+
+  @media (max-width: 400px) {
+    width: auto;
   }
 `;
 
@@ -100,6 +120,10 @@ export const Body = styled.div`
       }
     }
   }
+
+  @media (max-width: 1014px) {
+    width: auto;
+  }
 `;
 
 export const Input = styled.input`
@@ -119,11 +143,15 @@ export const Description = styled.textarea`
   border: 1px solid #00000010;
   padding: 0 5px;
   color: #000;
-  min-height: 29px;
+  height: 140px;
   max-width: 400px;
 `;
 
-export const Overview = styled.article``;
+export const Overview = styled.article`
+  @media (max-width: 768px) {
+    display: none;
+  }
+`;
 
 export const Update = styled.button`
   height: 30px;
@@ -144,5 +172,18 @@ export const Update = styled.button`
 
   &:hover {
     background: #50fa7b;
+  }
+`;
+
+export const MoreInfo = styled.div`
+  margin-top: 20px;
+
+  p {
+    margin: 5px 0 20px 10px;
+    max-width: 500px;
+  }
+
+  strong {
+    margin-top: 10px;
   }
 `;
