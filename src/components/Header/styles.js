@@ -119,7 +119,7 @@ export const Session = styled.div`
 
   width: 200px;
 
-  a {
+  a#top-level {
     background-color: var(--secondary);
     border-radius: 50%;
     margin-right: 10px;
@@ -138,7 +138,7 @@ export const Session = styled.div`
     }
   }
 
-  div {
+  div#fi-usr {
     border-radius: 50%;
     background-color: var(--secondary);
     cursor: pointer;
@@ -154,6 +154,80 @@ export const Session = styled.div`
     svg {
       width: 20px;
       height: 20px;
+    }
+  }
+`;
+
+export const OverClick = styled.div`
+  position: relative;
+  display: block;
+  background: var(--white);
+
+  max-height: 200px;
+  width: 300px;
+  top: 50px;
+  right: 10px;
+  border-radius: 1.5px;
+
+  z-index: 10;
+
+  span {
+    color: var(--grey-dark);
+    font-size: 12px;
+    padding: 5px 5px 0 5px;
+  }
+
+  div {
+    display: block;
+    padding: 5px;
+
+    a {
+      display: block;
+      font-size: 11px;
+      padding-top: 3px;
+    }
+  }
+
+  &.desaper {
+    display: none;
+  }
+`;
+
+export const LogOut = styled.button`
+  width: 100%;
+  color: var(--support);
+  margin: 10px 0 0 0;
+  padding: 2px;
+
+  &:hover {
+    text-decoration: underline;
+    background: var(--force);
+    color: var(--grey-dark);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+`;
+
+export const Close = styled.div`
+  &#close {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    cursor: pointer;
+
+    svg {
+      position: relative;
+      width: 14px;
+      height: 14px;
+
+      margin: 0 auto;
+      color: var(--grey-dark);
+
+      &:hover {
+        transform: rotateX("angle");
+        transform: rotate(20deg);
+      }
     }
   }
 `;

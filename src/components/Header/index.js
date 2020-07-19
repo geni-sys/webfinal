@@ -1,5 +1,5 @@
-import React from "react";
-import { FiUser, FiBell } from "react-icons/fi";
+import React, { useState } from "react";
+import { FiUser, FiBell, FiMinimize2 } from "react-icons/fi";
 // STYLUS | STATICS
 import {
   Container,
@@ -9,9 +9,14 @@ import {
   InputSearch,
   Search,
   List,
+  OverClick,
+  LogOut,
+  Close,
 } from "./styles";
 
 const Header = () => {
+  const [modal, setModal] = useState(true);
+
   return (
     <Container id="header">
       <Screen id="screen">
@@ -49,13 +54,30 @@ const Header = () => {
       </div>
 
       <Session id="session">
-        <a href="/notifications" className="desactived-header">
+        <a id="top-level" href="/notifications" className="desactived-header">
           <FiBell />
         </a>
 
-        <div>
+        <div id="fi-usr" onClick={() => setModal(!modal)}>
           <FiUser />
         </div>
+
+        <OverClick className={modal && "desaper"} id="over-modal">
+          <Close id="close" onClick={() => setModal(!modal)}>
+            <FiMinimize2 />
+          </Close>
+
+          <span>
+            Logado como <strong>eliasallex</strong>
+          </span>
+          <div>
+            <a href="/">Seu perfil</a>
+            <a href="/">Atividades</a>
+            <a href="/">Artigos</a>
+            <a href="/">Desafios</a>
+          </div>
+          <LogOut>Sign out</LogOut>
+        </OverClick>
       </Session>
     </Container>
   );
