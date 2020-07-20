@@ -16,31 +16,57 @@ export const Container = styled.div`
   overflow: hidden;
 
   @media (max-width: 1024px) {
-    grid-template-columns: 250px auto 240px;
+    grid-template-columns: 200px auto 240px;
     grid-template-rows: 5rem auto;
-    background: red;
   }
 
   @media (max-width: 768px) {
     grid-template-columns: 60px auto 240px;
     grid-template-rows: 5rem auto;
+
+    aside {
+      div#learn-theme-group {
+        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+
+        svg {
+          margin: 10px 0;
+        }
+
+        h3#desaper {
+          display: none;
+        }
+      }
+
+      div ul {
+        li {
+          justify-content: center;
+
+          span#desaper {
+            display: none;
+          }
+          span {
+            font-size: 1.4em;
+            margin: 0;
+            svg {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 620px) {
+    grid-template-columns: auto 140px;
+    grid-template-rows: 5rem auto 5rem;
+
     grid-template-areas:
       "HEADER HEADER"
       "MAIN MAIN"
       "ARTICLE ARTICLE";
 
-    grid-template-columns: auto 140px;
-    grid-template-rows: 5rem auto 5rem;
-
     aside {
       display: none;
-    }
-
-    article {
-      background: #f25;
     }
   }
 `;
@@ -55,8 +81,47 @@ export const Aside = styled.aside`
   color: #999;
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 
-  padding: 30px 10px;
+  padding: 5px 0;
   font-size: 1.4rem;
+
+  div#learn-theme-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    h3 {
+      padding: 15px 3px;
+      color: var(--grey-dark);
+    }
+  }
+
+  div#learning-lessons {
+    ul {
+      li {
+        color: var(--reports);
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        margin: 0;
+        width: 100%;
+        font-size: 14px;
+        background: var(--white);
+
+        span svg {
+          margin-right: 3px;
+          margin-left: 10px;
+        }
+
+        &:hover {
+          background: var(--dominating);
+        }
+        &.learning {
+        }
+      }
+    }
+  }
 `;
 
 export const Main = styled.main`
@@ -100,6 +165,12 @@ export const Article = styled.article`
       span {
         background: var(--unpurple);
       }
+    }
+  }
+
+  @media (max-width: 620px) {
+    ul#messages {
+      display: none;
     }
   }
 `;

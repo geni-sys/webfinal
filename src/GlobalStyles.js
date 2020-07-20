@@ -97,6 +97,7 @@ export default createGlobalStyle`
     --grey-dark: #24292e;
     --dominate: #f6f8fa;
     --reports: #4764f1;
+    --dominating: #9eaac2;
 
     --rocketseat: #6633cc;
     --purple: #bd93f9;

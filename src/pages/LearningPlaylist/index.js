@@ -1,5 +1,5 @@
 import React from "react";
-import { FiPieChart } from "react-icons/fi";
+import { FiFileText, FiFolder } from "react-icons/fi";
 import ReactMarkdown from "react-markdown";
 // COMPONENTS
 import Header from "../../components/Header";
@@ -69,43 +69,44 @@ function LearningPlaylist() {
 
       <Aside>
         <div id="learn-theme-group">
-          <h3>DotNet Orientation</h3>
+          <FiFolder />
+          <h3 id="desaper">DotNet Orientation</h3>
         </div>
         <div id="learning-lessons">
           <ul>
             <li className="isLearning">
               <span>
-                <FiPieChart />
+                <FiFileText />
               </span>
-              <span>how to create Array</span>
+              <span id="desaper">how to create Array</span>
             </li>
 
             <li>
               <span>
-                <FiPieChart />
+                <FiFileText />
               </span>
-              <span>how to add numbers</span>
+              <span id="desaper">how to add numbers</span>
             </li>
 
             <li>
               <span>
-                <FiPieChart />
+                <FiFileText />
               </span>
-              <span>build games</span>
+              <span id="desaper">build games</span>
             </li>
 
             <li>
               <span>
-                <FiPieChart />
+                <FiFileText />
               </span>
-              <span>changing tag names</span>
+              <span id="desaper">changing tag names</span>
             </li>
 
             <li>
               <span>
-                <FiPieChart />
+                <FiFileText />
               </span>
-              <span>Build a search bar</span>
+              <span id="desaper">Build a search bar</span>
             </li>
           </ul>
         </div>
