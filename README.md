@@ -12,7 +12,7 @@
   - [x] QUESTIONS ✔️️
   - [x] SETTINGS ✔️️
   - [x] PROFILE ✔️
+  - [x] USERS ✔️
 
 - OPENED SCREENS ❌
   - [x] LEARN-PLAYLIST ❓
-  - [x] USERS ❓
