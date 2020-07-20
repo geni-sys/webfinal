@@ -74,6 +74,7 @@ export default createGlobalStyle`
     --senary: #828386;
     
     --white: #fff;
+    --whit: #FAFAF8;
     --gray: #8a8c90;
     --chat-input: rgb(64,68,75);
     --symbol: #74777a;
@@ -98,6 +99,7 @@ export default createGlobalStyle`
     --dominate: #f6f8fa;
     --reports: #4764f1;
     --dominating: #9eaac2;
+    --witer: #fafbfc;
 
     --rocketseat: #6633cc;
     --purple: #bd93f9;

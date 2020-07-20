@@ -1,5 +1,7 @@
 # the finl of WEB project
 
+## DESIGN
+
 - CLOSED SCREENS ✅
 
   - [x] AUTH ✔️️
@@ -15,9 +17,19 @@
   - [x] USERS ✔️
   - [x] LEARN-PLAYLIST ✔️
 
+- CLOSED FEATURES ✅
+
+  - [x] Create a list ✔️
+  - [x] Add issue in list ✔️
+  - [x] Overview screens ✔️
+
 - OPENED FEATURES ❌
-  - [x] Create a list ❓
-  - [x] Add issue in list ❓
   - [x] market pages ❓
-  - [x] Overview screens ❓
   - [x] Explore: all about users: best, mentions, news.. ❓
+
+## FUNTIONAL
+
+- OPENED FEATURES ❌
+  - [x] login / register ❓
+  - [x] Middleware ❓
+  - [x] HOME: issues / insights ❓
