@@ -13,6 +13,11 @@
   - [x] SETTINGS ✔️️
   - [x] PROFILE ✔️
   - [x] USERS ✔️
+  - [x] LEARN-PLAYLIST ✔️
 
-- OPENED SCREENS ❌
-  - [x] LEARN-PLAYLIST ❓
+- OPENED FEATURES ❌
+  - [x] Create a list ❓
+  - [x] Add issue in list ❓
+  - [x] market pages ❓
+  - [x] Overview screens ❓
+  - [x] Explore: all about users: best, mentions, news.. ❓
