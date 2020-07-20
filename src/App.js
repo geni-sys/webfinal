@@ -13,6 +13,7 @@ import Questions from "./pages/Questions"; // "/questions"
 import Settings from "./pages/Settings"; // "/settings"
 import Profile from "./pages/Profile"; // "/profile"
 import Users from "./pages/Users"; // "/users/:user_email"
+import LearningPlaylist from "./pages/LearningPlaylist"; // "/share/lists/:list_id/user/:user_id"
 // STYLUS
 import GlobalStyles from "./GlobalStyles";
 
@@ -31,6 +32,7 @@ const App = () => {
       <Route component={Settings} path="/settings" />
       <Route component={Profile} path="/profile" />
       <Route component={Users} path="/users" />
+      <Route component={LearningPlaylist} path="/share" />
       <GlobalStyles />
     </BrowserRouter>
   );

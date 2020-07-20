@@ -100,6 +100,7 @@ export default createGlobalStyle`
 
     --rocketseat: #6633cc;
     --purple: #bd93f9;
+    --unpurple: #bd93f911;
   }
 
   div#transcription.issue-limitaion img {
@@ -134,6 +135,7 @@ export default createGlobalStyle`
   }
   div#transcription p {
     line-height: 1.6em;
+    font-size: 1.3em;
   }
   div#transcription a {
     color: var(--reports);
