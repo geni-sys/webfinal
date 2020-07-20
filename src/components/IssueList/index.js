@@ -40,7 +40,7 @@ const lesson = `
 
 function IssueList() {
   return (
-    <List class="unique" id="publications" style={{}}>
+    <List className="unique" id="publications" style={{}}>
       <Item id="issue-publication">
         <header>
           <span>

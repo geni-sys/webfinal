@@ -29,7 +29,10 @@
 
 ## FUNTIONAL
 
+- CLOSED FEATURES
+
+  - [x] Middlewares ✔️
+  - [x] login / register ✔️
+
 - OPENED FEATURES ❌
-  - [x] login / register ❓
-  - [x] Middleware ❓
   - [x] HOME: issues / insights ❓

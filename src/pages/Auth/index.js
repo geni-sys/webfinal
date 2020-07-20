@@ -1,14 +1,88 @@
-import React, { useState } from "react";
+import React, { memo, useState, useEffect } from "react";
+import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
+import api from "../../services/api";
+// COMPONENTS
 import { FiArrowDown, FiXOctagon } from "react-icons/fi";
 import ReactLoading from "react-loading";
-// COMPONENTS
 import Header from "../../components/Header";
 // STYLUS | STATIC
 import { Container, Aside, Main, Form, Input, Submit, Card } from "./styles";
 import Friends from "../../assets/friends-negesys.svg";
 
 const Login = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(2);
+
+  const history = useHistory();
+  const [cookies, setCookie] = useCookies(["token"]);
+
+  useEffect(() => {
+    if (!cookies.token && !cookies.user_id) {
+      console.log("Usuário sem log " + JSON.stringify(cookies));
+      return;
+    }
+
+    history.push("/");
+  }, [cookies, history]);
+
+  async function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!email && !password) {
+      setIsLoading(0);
+      alert("Informações incorretas");
+      return false;
+    }
+
+    let eml = email.trim();
+
+    setIsLoading(1);
+
+    try {
+      const response = await api
+        .post("/authenticate", {
+          email: eml,
+          password,
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+          setIsLoading(0);
+        });
+
+      setIsLoading(2);
+
+      const { id, name, email } = response.data.user;
+      const token = response.data.token;
+
+      setCookie("token", String(`Bearer ${token}`));
+      setCookie("user_id", String(id));
+      localStorage.setItem("email", String(email));
+      localStorage.setItem("name", String(name));
+
+      return history.push("/");
+    } catch (err) {
+      console.log(err.message);
+      alert("Erro ao fazer o login!");
+      setIsLoading(0);
+    }
+  }
 
   function stateInRun(id) {
     let condition = null;
@@ -37,9 +111,6 @@ const Login = () => {
     }
 
     return condition;
-  }
-  function handleSubmit() {
-    setIsLoading(0);
   }
 
   return (
@@ -73,6 +144,8 @@ const Login = () => {
                 type="email"
                 name="email"
                 id="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
 
@@ -84,6 +157,8 @@ const Login = () => {
                 placeholder="Digite sua senha secreta"
                 name="senha"
                 id="senha"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
               />
             </div>
           </div>
@@ -104,4 +179,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default memo(Login);
