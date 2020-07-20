@@ -12,6 +12,7 @@ import SearchResult from "./pages/SearchResult"; // "/search?query="
 import Questions from "./pages/Questions"; // "/questions"
 import Settings from "./pages/Settings"; // "/settings"
 import Profile from "./pages/Profile"; // "/profile"
+import Users from "./pages/Users"; // "/users/:user_email"
 // STYLUS
 import GlobalStyles from "./GlobalStyles";
 
@@ -29,7 +30,7 @@ const App = () => {
       <Route component={Questions} path="/questions" />
       <Route component={Settings} path="/settings" />
       <Route component={Profile} path="/profile" />
-
+      <Route component={Users} path="/users" />
       <GlobalStyles />
     </BrowserRouter>
   );
