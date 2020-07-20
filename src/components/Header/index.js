@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 import { FiUser, FiBell, FiMinimize2 } from "react-icons/fi";
 // STYLUS | STATICS
 import {
@@ -16,6 +17,11 @@ import {
 
 const Header = () => {
   const [modal, setModal] = useState(true);
+
+  const history = useHistory();
+  function handleSignOut() {
+    history.push("/login");
+  }
 
   return (
     <Container id="header">
@@ -71,12 +77,12 @@ const Header = () => {
             Logado como <strong>eliasallex</strong>
           </span>
           <div>
-            <a href="/">Seu perfil</a>
-            <a href="/">Atividades</a>
-            <a href="/">Artigos</a>
+            <a href="/profile">Seu perfil</a>
+            <a href="/activity">Atividades</a>
+            <a href="/marketplace">Artigos</a>
             <a href="/">Desafios</a>
           </div>
-          <LogOut>Sign out</LogOut>
+          <LogOut onClick={handleSignOut}>Sign out</LogOut>
         </OverClick>
       </Session>
     </Container>

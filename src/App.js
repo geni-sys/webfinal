@@ -11,6 +11,7 @@ import Notifications from "./pages/Notifications"; // "/notifications"
 import SearchResult from "./pages/SearchResult"; // "/search?query="
 import Questions from "./pages/Questions"; // "/questions"
 import Settings from "./pages/Settings"; // "/settings"
+import Profile from "./pages/Profile"; // "/profile"
 // STYLUS
 import GlobalStyles from "./GlobalStyles";
 
@@ -27,6 +28,7 @@ const App = () => {
       <Route component={SearchResult} path="/search" />
       <Route component={Questions} path="/questions" />
       <Route component={Settings} path="/settings" />
+      <Route component={Profile} path="/profile" />
 
       <GlobalStyles />
     </BrowserRouter>
