@@ -11,8 +11,8 @@
   - [x] LEARNING-A-ISSUE ✔️️
   - [x] QUESTIONS ✔️️
   - [x] SETTINGS ✔️️
+  - [x] PROFILE ✔️
 
 - OPENED SCREENS ❌
   - [x] LEARN-PLAYLIST ❓
-  - [x] PROFILE ❓
   - [x] USERS ❓
