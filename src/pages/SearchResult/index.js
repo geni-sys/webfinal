@@ -1,324 +1,238 @@
-import React, { useState } from "react";
-import { FiUser, FiHash, FiAirplay } from "react-icons/fi";
+import React, { useState, useEffect, useCallback } from "react";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // COMPONENS
+import { FiUser, FiHash, FiAirplay } from "react-icons/fi";
 import Header from "../../components/Header";
 // STYLUS STATIC
 import { Container, Aside, List, Main, Content, Button } from "./styles";
 
-function Users() {
+function Users({ query }) {
+  const [DataUsers, setDataUsers] = useState([]);
+
+  const [cookies] = useCookies();
+  const handleUsersQuery = useCallback(async () => {
+    const { token } = cookies;
+    try {
+      const response = await api
+        .get(`/users?query=${query}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      const data = response.data;
+      setDataUsers(data);
+    } catch (err) {
+      console.log(err.message);
+      return alert(err.message);
+    }
+  }, [cookies, query]);
+
+  useEffect(() => {
+    handleUsersQuery(query);
+  }, [handleUsersQuery, query]);
+
   return (
     <>
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiUser />
-        </span>
-        <div id="nlw">
-          <a href="/users">eliasallex</a>
-          <span>elias@gmail.com</span>
-          <p>
-            Potential security vulnerability found in the logkitty dependency
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
+      {DataUsers.map((item) => (
+        <li key={item.id} href="/playlist">
+          <span id="ilustry">
+            <FiUser />
+          </span>
+          <div id="nlw">
+            <a href={`/users/${item.email}`}>{item.name}</a>
+            <span>{item.email}</span>
+            <p>
+              Potential security vulnerability found in the logkitty dependency
+            </p>
+            <div id="ftr">
+              <Button>
+                <FiHash />
+                Marcar
+              </Button>
+            </div>
           </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiUser />
-        </span>
-        <div id="nlw">
-          <a href="/users">eliasallex</a>
-          <span>elias@gmail.com</span>
-          <p>
-            Potential security vulnerability found in the logkitty dependency
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiUser />
-        </span>
-        <div id="nlw">
-          <a href="/users">eliasallex</a>
-          <span>elias@gmail.com</span>
-          <p>
-            Potential security vulnerability found in the logkitty dependency
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiUser />
-        </span>
-        <div id="nlw">
-          <a href="/users">eliasallex</a>
-          <span>elias@gmail.com</span>
-          <p>
-            Potential security vulnerability found in the logkitty dependency
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
+        </li>
+      ))}
     </>
   );
 }
 
-function Lists() {
+function Lists({ query }) {
+  const [dataList, setDataList] = useState([]);
+
+  const [cookies] = useCookies();
+  const handleDataListQuery = useCallback(async () => {
+    const { token } = cookies;
+
+    try {
+      const response = await api
+        .get(`/playlists?query=${query}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      return setDataList(response.data);
+    } catch (err) {
+      console.log(err.message);
+      return alert(err.message);
+    }
+  }, [cookies, query]);
+
+  useEffect(() => {
+    handleDataListQuery(query);
+  }, [handleDataListQuery, query]);
+
   return (
     <>
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
+      {dataList.map((item) => (
+        <li key={item.id} href="/playlist">
+          <span id="ilustry">
+            <FiAirplay />
+          </span>
+          <div id="nlw">
+            <a href={`/share?title=${item.id}`}>{item.name}</a>
+            <span>{item.stars}</span>
+            <div id="ftr">
+              <Button>
+                <FiHash />
+                Marcar
+              </Button>
+            </div>
           </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
-
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
-          </div>
-        </div>
-      </li>
+        </li>
+      ))}
     </>
   );
 }
 
-function Issues() {
+function Issues({ query }) {
+  const [dataIssue, setDataIssue] = useState([]);
+
+  const [cookies] = useCookies();
+  const handleDataIssueQuery = useCallback(async () => {
+    const { token } = cookies;
+
+    const response = await api
+      .get(`/issues?query=${query}`, {
+        headers: { Authorization: String(token) },
+      })
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          alert(error.response.data.error);
+          console.log(error.response.status);
+          return;
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+
+    setDataIssue(response.data);
+  }, [cookies, query]);
+
+  useEffect(() => {
+    handleDataIssueQuery(query);
+  }, [handleDataIssueQuery, query]);
+
+  function serializeTags(tags) {
+    const separete = String(tags).split(",");
+    const serials = separete.map((tag) => tag.trim());
+
+    return (
+      <>
+        {serials.map((serial) => (
+          <span key={serial}>
+            <a style={{ color: "#4764f1" }} href={`/search/${serial}`}>
+              {serial}
+            </a>
+          </span>
+        ))}
+      </>
+    );
+  }
+
   return (
     <>
-      <li href="/playlist">
-        <span id="ilustry">
-          <FiAirplay />
-        </span>
-        <div id="nlw">
-          <a href="/lists?title=334231">Dotnet Orientation</a>
-          <span>57864</span>
-          <p id="lighs">
-            <span>C#</span>
-            <span>PROGRAMMER</span>
-            <span>.NET</span>
-            <span>VS</span>
-            <span>VISUAL-STUDIO</span>
-          </p>
-          <div id="ftr">
-            <Button>
-              <FiHash />
-              Marcar
-            </Button>
+      {dataIssue.map((item) => (
+        <li key={item.id} href="/playlist">
+          <span id="ilustry">
+            <FiAirplay />
+          </span>
+          <div id="nlw">
+            <a href={`/lists?title=${item.id}`}>{item.title}</a>
+            <span>#{parseInt(item.id) * 122}</span>
+            <p id="lighs">{serializeTags(item.tags)}</p>
+            <div id="ftr">
+              <Button>
+                <FiHash />
+                Marcar
+              </Button>
+            </div>
           </div>
-        </div>
-      </li>
+        </li>
+      ))}
     </>
   );
 }
 
-const SearchResult = () => {
+const SearchResult = ({ match }) => {
   const [clicked, setClicked] = useState(0);
 
-  function handleClicked(id) {
+  const { query_search } = match.params;
+
+  function handleClicked(id, query) {
     if (id === 1) {
-      return <Lists />;
+      return <Lists query={query} />;
     }
 
     if (id === 2) {
-      return <Issues />;
+      return <Issues query={query} />;
     }
 
-    return <Users />;
+    return <Users query={query} />;
   }
 
   return (
@@ -353,7 +267,7 @@ const SearchResult = () => {
         </Aside>
 
         <Content>
-          <ul id="concret">{handleClicked(clicked)}</ul>
+          <ul id="concret">{handleClicked(clicked, query_search)}</ul>
         </Content>
       </Main>
     </Container>

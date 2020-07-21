@@ -28,7 +28,7 @@ const App = () => {
       <Route component={LearningIssue} path="/user/learning" />
       <Route component={Marketplace} path="/marketplace" />
       <Route component={Notifications} path="/notifications" />
-      <Route component={SearchResult} path="/search" />
+      <Route component={SearchResult} path="/search/:query_search" />
       <Route component={Questions} path="/questions" />
       <Route component={Settings} path="/settings" />
       <Route component={Profile} path="/profile" />

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
 import { FiUser, FiBell, FiMinimize2 } from "react-icons/fi";
 // STYLUS | STATICS
 import {
@@ -16,11 +17,31 @@ import {
 } from "./styles";
 
 const Header = () => {
+  const [query, setQuery] = useState("");
   const [modal, setModal] = useState(true);
 
   const history = useHistory();
+  const [, , removeCookie] = useCookies();
+
   function handleSignOut() {
-    history.push("/login");
+    try {
+      removeCookie("token");
+      removeCookie("user_id");
+      localStorage.removeItem("name");
+      localStorage.removeItem("email");
+
+      history.push("/login");
+    } catch (err) {
+      console.log(err.message);
+      alert("Antes de terminar a sessão conclua os campos necessários");
+    }
+  }
+  function handleSearch(query_search) {
+    if (!query_search) {
+      alert("Insira uma pesquisa válida");
+      return history.goBack();
+    }
+    return history.push(`/search/${query_search}`);
   }
 
   return (
@@ -41,8 +62,10 @@ const Header = () => {
               type="search"
               name="search"
               id="search-bar"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
-            <Search>GO</Search>
+            <Search onClick={() => handleSearch(query)}>GO</Search>
           </div>
 
           <List>

@@ -40,7 +40,7 @@ export const Inseight = styled.li`
   font-weight: 600;
 
   span a {
-    color: var(--tertiary);
+    color: var(--reports);
     font-size: 1.2em;
   }
 
@@ -65,6 +65,7 @@ export const Inseight = styled.li`
       padding: 2px;
       margin-right: 20px;
       color: var(--tertiary);
+      font-size: 13px;
     }
   }
 `;

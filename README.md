@@ -33,6 +33,9 @@
 
   - [x] Middlewares ✔️
   - [x] login / register ✔️
+  - [x] HOME: issues / insights ✔️
+  - [x] get query_search from search ✔️
+  - [x] search bar ✔️
+  - [x] logOut ✔️
 
-- OPENED FEATURES ❌
-  - [x] HOME: issues / insights ❓
+- OPENED FEATURES ❌ ❓
