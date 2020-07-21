@@ -15,7 +15,7 @@ export const List = styled.ul`
 export const Item = styled.li`
   display: flex;
   flex-direction: column;
-  max-height: 600px;
+  max-height: 700px;
   position: relative;
 
   margin-bottom: 30px;
@@ -55,7 +55,7 @@ export const Item = styled.li`
 export const Transcription = styled.div`
   margin-left: 20px;
   padding: 0 10px;
-  border-radius: 6px;
+  border-radius: 1.2px;
   width: auto;
 
   position: relative !important;
@@ -63,7 +63,7 @@ export const Transcription = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
 
-  background: var(--dominate);
+  background: var(--force);
 `;
 
 export const Link = styled.a`

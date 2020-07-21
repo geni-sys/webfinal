@@ -39,3 +39,5 @@
   - [x] logOut ✔️
 
 - OPENED FEATURES ❌ ❓
+  - [x] Create a new issue ❓
+  - [x] Preview new issue ❓

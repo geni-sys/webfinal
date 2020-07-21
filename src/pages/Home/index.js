@@ -65,7 +65,7 @@ const Home = () => {
   }, [cookies, history, removeCookie]);
 
   function newIssue() {
-    history.push("/new/issues");
+    history.push("/new/issue");
   }
 
   useEffect(() => {

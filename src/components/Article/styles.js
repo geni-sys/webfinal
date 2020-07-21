@@ -7,7 +7,8 @@ export const Conatiner = styled.article`
   flex-direction: column;
   color: var(--tertiary);
 
-  background: var(--force);
+  background: var(--dominate);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 20px;
   padding-left: 10px;
   font-size: 12px;

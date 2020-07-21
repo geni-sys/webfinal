@@ -116,6 +116,19 @@ export const Body = styled.div`
   margin-top: 10px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   margin-bottom: 25px;
+
+  div#transcription {
+    position: relative;
+    max-width: 700px;
+    background-color: var(--dominate);
+    font-size: 13px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 3px 5px;
+
+    img {
+      max-width: 600px;
+    }
+  }
 `;
 export const Textarea = styled.textarea`
   resize: vertical;
@@ -128,4 +141,25 @@ export const Textarea = styled.textarea`
   display: block;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 1.5em;
+`;
+
+export const Preview = styled.button`
+  border-radius: 3px;
+  padding: 1px 10px;
+  margin: 5px;
+
+  transition: background-color 0.2s ease-in;
+
+  cursor: pointer;
+  color: #000;
+  background-color: (var(--whit));
+
+  font-weight: 700;
+  font-family: Roboto, arial, sans-serif;
+  border: 1px solid #aa9696;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background: var(--dominating);
+  }
 `;

@@ -12,7 +12,7 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: var(--witer);
   overflow: hidden;
 
   @media (max-width: 1024px) {
@@ -57,7 +57,7 @@ export const Aside = styled.aside`
   display: flex;
   flex-direction: column;
   color: #999;
-  border-right: 1px solid rgba(0, 0, 0, 0.4);
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
 
   padding: 30px 10px;
   font-size: 1.4rem;
@@ -175,7 +175,7 @@ export const Footer = styled.footer`
 
 // MAIN STYLUS
 export const Main = styled.main`
-  background: #ebf3ff;
+  background: var(--witer);
   grid-area: MAIN;
 
   overflow-y: auto;

@@ -110,6 +110,19 @@ export default createGlobalStyle`
     width: 100%;
     height: 400px;
   }
+  div#transcription {
+    blockquote {
+    font-size: 11px;
+    border: 1px solid rgba(0,0,0, .1);
+    border-left: 3px solid green !important;
+    padding: 0;
+    padding-left: 5px;
+    margin-left: 10px;
+    p {
+      margin: 0;
+    }
+    }
+  }
   div#transcription h1,
   div#transcription h2,
   div#transcription h3,
@@ -144,9 +157,10 @@ export default createGlobalStyle`
     color: var(--reports);
   }
   div#transcription pre {
-    border-radius: 5px;
+    border-radius: 1.3px;
     font-size: 15px;
     line-height: 22px;
+    padding: 10px 0;
   }
   div#transcription ul li {
     margin: 5px 0;
