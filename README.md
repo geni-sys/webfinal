@@ -37,7 +37,7 @@
   - [x] get query_search from search ✔️
   - [x] search bar ✔️
   - [x] logOut ✔️
-
+  - [x] Create a new issue ✔️
+  - [x] Preview new issue ✔️
+  
 - OPENED FEATURES ❌ ❓
-  - [x] Create a new issue ❓
-  - [x] Preview new issue ❓
