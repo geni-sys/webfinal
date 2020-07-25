@@ -25,7 +25,7 @@ const App = () => {
       <Route component={Register} exact path="/register" />
       <Route component={Home} exact path="/" />
       <Route component={NewIssue} exact path="/new/issue" />
-      <Route component={LearningIssue} path="/user/learning" />
+      <Route component={LearningIssue} path="/user/learning/:issue_id" />
       <Route component={Marketplace} path="/marketplace" />
       <Route component={Notifications} path="/notifications" />
       <Route component={SearchResult} path="/search/:query_search" />
@@ -33,7 +33,7 @@ const App = () => {
       <Route component={Settings} path="/settings" />
       <Route component={Profile} path="/profile" />
       <Route component={Users} path="/users" />
-      <Route component={LearningPlaylist} path="/share" />
+      <Route component={LearningPlaylist} path="/share/:list_id" />
       <Route component={Overview} path="/overview" />
       <GlobalStyles />
     </BrowserRouter>

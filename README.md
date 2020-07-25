@@ -25,7 +25,8 @@
 
 - OPENED FEATURES ❌
   - [x] market pages ❓
-  - [x] Explore: all about users: best, mentions, news.. ❓
+  - [x] Explore: all about users: best,me ntions, news.. ❓
+  - [x] Explore DSG
 
 ## FUNTIONAL
 
@@ -39,5 +40,10 @@
   - [x] logOut ✔️
   - [x] Create a new issue ✔️
   - [x] Preview new issue ✔️
-  
+  - [x] learning issue ✔️
+
 - OPENED FEATURES ❌ ❓
+  - [x] learning lista ❓
+  - [x] Marcar / star ❓
+  - [x] Aswer questions ❓
+  - [x] Overviw getters

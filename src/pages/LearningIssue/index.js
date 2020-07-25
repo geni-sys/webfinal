@@ -1,59 +1,88 @@
-import React from "react";
+import React, { useCallback, useState, useEffect, useMemo } from "react";
 import ReactMarkdown from "react-markdown";
-import { FiHash, FiStar, FiArrowLeft } from "react-icons/fi";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // COMPONENTS
+import { FiHash, FiStar, FiArrowLeft } from "react-icons/fi";
 import CodeBlock from "../../components/CodeBlock";
 import Header from "../../components/Header";
 // STYLUS | STATIC
 import { Container, Main, Card, Great, Body, GoBack } from "./styles";
 
-const lesson = `
-A simple markdown editor with preview, implemented with React.js and TypeScript. This React Component aims to provide a simple Markdown editor with syntax highlighting support. This is based on textarea encapsulation, so it does not depend on any modern code editors such as Acs, CodeMirror, Monaco etc.
+const LearningIssue = ({ match }) => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [tags, setTags] = useState("");
+  const [link, setLink] = useState("");
+  const [cookies] = useCookies();
 
-### Features
+  const { issue_id } = match.params;
+  const { token } = cookies;
+  const getLessonsData = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/issues/${issue_id}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
 
-- 📑 Indent line or selected text by pressing tab key, with customizable indentation.
-- ♻️ Based on textarea encapsulation, does not depend on any modern code editors.
-- 🚧 Does not depend on the [uiw](https://github.com/uiwjs/uiw) component library.
-- 🚘 Automatic list on new lines.
+      setTitle(response.data.title);
+      setBody(response.data.body);
+      setTags(response.data.tags);
+      setLink(response.data.link);
+    } catch (err) {
+      console.log(err.message);
+      return alert("Erro na conexão");
+    }
+  }, [issue_id, token]);
 
-### Quick Start
+  useEffect(() => {
+    getLessonsData();
+  }, [getLessonsData]);
 
-### Using
+  function serializeTags(tags) {
+    const separete = String(tags).split(",");
+    const serials = separete.map((tag) => tag.trim());
 
-- [X] value: string: The Markdown value.
-- [X] onChange?: (value: string): Event handler for the onChange event.
-- [X] commands?: ICommand[]: An array of ICommand, which, each one, contain a commands property. If no commands are specified, the default will be used. Commands are explained in more details below.
-- [X] autoFocus?: number=true: Can be used to make Markdown Editor focus itself on initialization.
-- [X] previewOptions?: ReactMarkdown.ReactMarkdownProps: This is reset react-markdown settings.
-- [X] textareaProps?: TextareaHTMLAttributes: Set the textarea related props.
-- [X] height?: number=200: The height of the editor.
-- [X] visiableDragbar?: boolean=true: Show drag and drop tool. Set the height of the editor.
-- [X] fullscreen?: boolean=false: Show markdown preview.
-- [X] preview?: 'live' | 'edit' | 'preview': Default value live, Show markdown preview.
-- [X] maxHeight?: number=1200: Maximum drag height. The visiableDragbar=true value is valid.
-- [X] minHeights?: number=100: Minimum drag height. The visiableDragbar=true value is valid.
-- [X] tabSize?: number=2: The number of characters to insert when pressing tab key. Default 2 spaces.
+    return (
+      <>
+        {serials.map((serial) => (
+          <span key={serial}>
+            <a style={{ color: "#4764f1" }} href={`/search/${serial}`}>
+              {serial}
+            </a>
+          </span>
+        ))}
+      </>
+    );
+  }
 
-### License
-
-Licensed under the MIT License.`;
-
-const LearningIssue = () => {
   return (
     <Container>
       <Header />
 
       <Main id="learn-main">
         <Card>
-          <strong>C# DotNet</strong>
+          <strong>{title}</strong>
 
-          <div id="tags">
-            <span>code</span>
-            <span>linux</span>
-            <span>web</span>
-            <span>csharp</span>
-          </div>
+          <div id="tags">{serializeTags(tags)}</div>
 
           <div id="featureds">
             <div id="stars">
@@ -75,7 +104,7 @@ const LearningIssue = () => {
 
           <small>Creator: Elias alexandre</small>
 
-          <a href="http://" target="_blank" rel="noopener noreferrer">
+          <a href={link ? link : "/"} target="_blank" rel="noopener noreferrer">
             main document
           </a>
 
@@ -87,12 +116,11 @@ const LearningIssue = () => {
 
         <Body id="learn-app">
           <GoBack>
-            {" "}
             <FiArrowLeft /> Voltar
           </GoBack>
 
           <div id="transcription">
-            <ReactMarkdown renderers={{ code: CodeBlock }} source={lesson} />
+            <ReactMarkdown renderers={{ code: CodeBlock }} source={body} />
           </div>
         </Body>
       </Main>

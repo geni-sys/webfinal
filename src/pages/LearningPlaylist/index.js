@@ -1,7 +1,9 @@
-import React from "react";
-import { FiFileText, FiFolder } from "react-icons/fi";
-import ReactMarkdown from "react-markdown";
+import React, { useState, useEffect, useCallback } from "react";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // COMPONENTS
+import ReactMarkdown from "react-markdown";
+import { FiFileText, FiFolder } from "react-icons/fi";
 import Header from "../../components/Header";
 import CodeBlock from "../../components/CodeBlock";
 // STYLES | STATIC
@@ -62,7 +64,53 @@ import ReactDOM from "react-dom";
 import MDEditor, { commands, ICommand, TextState, TextApi } from '@uiw/react-md-editor';
 `;
 
-function LearningPlaylist() {
+function LearningPlaylist({ match }) {
+  const [data, setData] = useState([]);
+  const [body, setBody] = useState("");
+  const [title, setTitle] = useState("");
+  const [isSelected, setIsSelected] = useState(1);
+
+  const [cookies] = useCookies();
+
+  const { list_id } = match.params;
+  const { token } = cookies;
+  const getLessonsData = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/playlist/${list_id}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      setData(response.data);
+      setTitle(response.data[0].lists.name);
+    } catch (err) {
+      console.log(err.message);
+      return alert("Erro no conexão");
+    }
+  }, [list_id, token]);
+
+  useEffect(() => {
+    getLessonsData();
+  }, [getLessonsData]);
+
   return (
     <Container>
       <Header />
