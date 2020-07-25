@@ -117,7 +117,8 @@ export const Aside = styled.aside`
         &:hover {
           background: var(--dominating);
         }
-        &.learning {
+        &.isLearning {
+          border-left: 5px solid rgba(0, 0, 0, 0.5);
         }
       }
     }

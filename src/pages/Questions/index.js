@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // import {} from "react-icons/fi";
 // COMPONENTS
 import Header from "../../components/Header";
@@ -10,6 +13,11 @@ const NewIssue = () => {
   const [selectedXP, setSelectedXP] = useState(0);
   const [interest, setInterest] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(0);
+
+  const [cookies] = useCookies();
+  const { user_id, token } = cookies;
+
+  const history = useHistory();
 
   function handleSelectWork(id) {
     setSelectedWork(id);
@@ -84,7 +92,29 @@ const NewIssue = () => {
 
     const { plan, work, xp } = responsesOfQuestions();
 
-    return { plan, work, xp };
+    try {
+      await api
+        .post(
+          `/users/${user_id}/questions`,
+          {
+            experience: xp,
+            tool: work,
+            use_case: plan,
+            interests: String(interest),
+          },
+          { headers: { Authorization: String(token) } }
+        )
+        .catch((error) => {
+          return alert(error.message);
+        });
+
+      alert("Perfil atualizado!");
+
+      history.push("/");
+    } catch (err) {
+      console.log(err.message);
+      return;
+    }
   }
 
   return (

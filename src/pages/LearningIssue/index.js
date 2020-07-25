@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useEffect, useMemo } from "react";
+import React, { useCallback, useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";

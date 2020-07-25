@@ -41,9 +41,10 @@
   - [x] Create a new issue ✔️
   - [x] Preview new issue ✔️
   - [x] learning issue ✔️
+  - [x] learning list ✔️
+  - [x] Overviw getters ✔️
+  - [x] Aswer questions ✔️
 
 - OPENED FEATURES ❌ ❓
-  - [x] learning lista ❓
   - [x] Marcar / star ❓
-  - [x] Aswer questions ❓
-  - [x] Overviw getters
+  - [x] playlist (CHAT) ❓

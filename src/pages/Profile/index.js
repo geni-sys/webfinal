@@ -1,141 +1,14 @@
 import React, { useState } from "react";
-import { FiUser, FiBox } from "react-icons/fi";
 // COMPONENTS
+import { FiUser } from "react-icons/fi";
 import Header from "../../components/Header";
+import { Default, Lists, Markeds } from "./components";
 // STYLUS | STATIC
 import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 import ProfileImage from "../../assets/github-icon.png";
 
 const Profile = () => {
   const [isSelected, setIsSelected] = useState(0);
-
-  const Default = () => {
-    return (
-      <>
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-      </>
-    );
-  };
-  const Lists = () => {
-    return (
-      <>
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-      </>
-    );
-  };
-  const Markeds = () => {
-    return (
-      <>
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-
-        <li id="pinned">
-          <div id="tper">
-            <span id="left">
-              <FiBox />
-            </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
-          </div>
-
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
-        </li>
-      </>
-    );
-  };
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {

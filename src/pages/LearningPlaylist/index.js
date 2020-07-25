@@ -16,54 +16,6 @@ import {
   Sender,
 } from "./styles";
 
-const lesson = `
-A simple markdown editor with preview, implemented with React.js and TypeScript. This React Component aims to provide a simple Markdown editor with syntax highlighting support. This is based on textarea encapsulation, so it does not depend on any modern code editors such as Acs, CodeMirror, Monaco etc.
-
-### Features
-
-- 📑 Indent line or selected text by pressing tab key, with customizable indentation.
-- ♻️ Based on textarea encapsulation, does not depend on any modern code editors.
-- 🚧 Does not depend on the [uiw](https://github.com/uiwjs/uiw) component library.
-- 🚘 Automatic list on new lines.
-
-### Quick Start
-
-bash
-npm i @uiw/react-md-editor
-
-
-### Using
-
-jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import MDEditor from '@uiw/react-md-editor';
-
-export default function App() {
-  const [value, setValue] = React.useState("**Hello world!!!**");
-  return (
-    <div className="container">
-      <MDEditor
-        value={value}
-        onChange={setValue}
-      />
-      <MDEditor.Markdown source={value} />
-    </div>
-  );
-}
-
-- [Demo preview for CodeSandbox](https://codesandbox.io/s/markdown-editor-for-react-izdd6)  
-- [Demo preview for Github gh-pages](https://uiwjs.github.io/react-md-editor/)  
-- [Demo preview for Gitee gh-pages](https://uiw.gitee.io/react-md-editor/)  
-
-### Custom Toolbars
-
-tsx
-import React from "react";
-import ReactDOM from "react-dom";
-import MDEditor, { commands, ICommand, TextState, TextApi } from '@uiw/react-md-editor';
-`;
-
 function LearningPlaylist({ match }) {
   const [data, setData] = useState([]);
   const [body, setBody] = useState("");
@@ -111,6 +63,17 @@ function LearningPlaylist({ match }) {
     getLessonsData();
   }, [getLessonsData]);
 
+  function alterateBody(id) {
+    const view = data.map((item) => {
+      if (id === item.id) {
+        return item.issues.body;
+      }
+      return "";
+    });
+
+    setBody(String(view));
+  }
+
   return (
     <Container>
       <Header />
@@ -118,51 +81,32 @@ function LearningPlaylist({ match }) {
       <Aside>
         <div id="learn-theme-group">
           <FiFolder />
-          <h3 id="desaper">DotNet Orientation</h3>
+          <h3 id="desaper">{title}</h3>
         </div>
         <div id="learning-lessons">
           <ul>
-            <li className="isLearning">
-              <span>
-                <FiFileText />
-              </span>
-              <span id="desaper">how to create Array</span>
-            </li>
-
-            <li>
-              <span>
-                <FiFileText />
-              </span>
-              <span id="desaper">how to add numbers</span>
-            </li>
-
-            <li>
-              <span>
-                <FiFileText />
-              </span>
-              <span id="desaper">build games</span>
-            </li>
-
-            <li>
-              <span>
-                <FiFileText />
-              </span>
-              <span id="desaper">changing tag names</span>
-            </li>
-
-            <li>
-              <span>
-                <FiFileText />
-              </span>
-              <span id="desaper">Build a search bar</span>
-            </li>
+            {data.map((item) => (
+              <li
+                key={item.id}
+                className={isSelected === item.id ? "isLearning" : ""}
+                onClick={() => {
+                  setIsSelected(item.id);
+                  alterateBody(item.id);
+                }}
+              >
+                <span>
+                  <FiFileText />
+                </span>
+                <span id="desaper">{item.issues.title}</span>
+              </li>
+            ))}
           </ul>
         </div>
       </Aside>
 
       <Main>
         <Transcription id="transcription">
-          <ReactMarkdown renderers={{ code: CodeBlock }} source={lesson} />
+          <ReactMarkdown renderers={{ code: CodeBlock }} source={body} />
         </Transcription>
       </Main>
 

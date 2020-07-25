@@ -17,6 +17,9 @@ import {
 } from "./styles";
 
 const Header = () => {
+  const [userName] = useState(() => {
+    return localStorage.getItem("name") || "reload";
+  });
   const [query, setQuery] = useState("");
   const [modal, setModal] = useState(true);
 
@@ -97,12 +100,12 @@ const Header = () => {
           </Close>
 
           <span>
-            Logado como <strong>eliasallex</strong>
+            Logado como <strong>{userName}</strong>
           </span>
           <div>
             <a href="/profile">Seu perfil</a>
             <a href="/activity">Atividades</a>
-            <a href="/marketplace">Artigos</a>
+            <a href="/new/issue">Novo artigo</a>
             <a href="/">Desafios</a>
           </div>
           <LogOut onClick={handleSignOut}>Sign out</LogOut>
