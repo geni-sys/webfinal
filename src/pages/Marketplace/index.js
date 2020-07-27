@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { FiAirplay } from "react-icons/fi";
 // COMPONENTS
 import Header from "../../components/Header";
+import OurAPI from "./components/OurAPI";
 // STYLUS | STATIC
 import Illustration from "../../assets/market-illustration.svg";
 import Nine from "../../assets/9.png";
@@ -15,7 +16,22 @@ import {
 } from "./styles";
 import "./styles.css";
 
-const Marketplace = () => {
+const Marketplace = (props) => {
+  const [activedGroup, setActivedGroup] = useState(() => {
+    const params = new URLSearchParams(props.location.search);
+    const tab = parseInt(params.get("tab"));
+    return tab || 0;
+  });
+
+  function determinateWhoActive(id) {
+    if (activedGroup === 1) {
+      return <OurAPI />;
+    }
+
+    setActivedGroup(1);
+    return <OurAPI />;
+  }
+
   return (
     <Container>
       <Header />
@@ -35,12 +51,24 @@ const Marketplace = () => {
           <aside id="aside-secondary">
             <h4>Categories</h4>
             <ul>
-              <li>API management</li>
-              <li>Chat</li>
-              <li>Code quality</li>
-              <li>Continuos integration</li>
-              <li>Dependency management</li>
-              <li>Deployment</li>
+              <li>
+                <a href="/marketplace?tab=1">API management</a>
+              </li>
+              <li>
+                <a href="/marketplace?tab=2">Chat</a>
+              </li>
+              <li>
+                <a href="/marketplace?tab=3">Code quality</a>
+              </li>
+              <li>
+                <a href="/marketplace?tab=4">Continuos integration</a>
+              </li>
+              <li>
+                <a href="/marketplace?tab=5">Dependency management</a>
+              </li>
+              <li>
+                <a href="/marketplace?tab=6">Deployment</a>
+              </li>
             </ul>
           </aside>
 
