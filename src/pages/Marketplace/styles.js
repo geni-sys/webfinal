@@ -118,6 +118,10 @@ export const Article = styled.article`
     li {
       font-size: 12px;
       margin-top: 25px;
+
+      &.actived {
+        text-decoration: underline;
+      }
     }
 
     @media (max-width: 1000px) {

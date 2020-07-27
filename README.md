@@ -22,10 +22,10 @@
   - [x] Create a list ✔️
   - [x] Add issue in list ✔️
   - [x] Overview screens ✔️
+  - [x] market pages : 4/6 ✔️
 
 - OPENED FEATURES ❌
-  - [x] market pages ❓
-  - [x] Explore: all about users: best,me ntions, news.. ❓
+  - [x] Explore: all about users: best, mentions, news.. ❓
   - [x] Explore DSG
 
 ## FUNTIONAL

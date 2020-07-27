@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, BrowserRouter, withRouter } from "react-router-dom";
+import { Route, BrowserRouter } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 // COMPONENTS
 import Auth from "./pages/Auth"; // "/login"
