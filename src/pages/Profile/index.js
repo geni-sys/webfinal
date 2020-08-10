@@ -64,13 +64,13 @@ const Profile = () => {
               onClick={() => setIsSelected(1)}
               className={isSelected === 1 ? "selected" : ""}
             >
-              Listas
+              Marcados
             </li>
             <li
               onClick={() => setIsSelected(2)}
               className={isSelected === 2 ? "selected" : ""}
             >
-              Marcados
+              Usuários
             </li>
           </Top>
 

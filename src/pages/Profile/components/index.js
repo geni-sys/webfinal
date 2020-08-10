@@ -79,7 +79,7 @@ export const Lists = () => {
   const handleListData = useCallback(async () => {
     try {
       const response = await api
-        .get(`/users/${user_id}/lists`, {
+        .get(`/user/${user_id}/marked/issues`, {
           headers: { Authorization: token },
         })
         .catch((error) => {
@@ -101,7 +101,7 @@ export const Lists = () => {
           console.log(error.config);
         });
 
-      setListas(response.data.lists);
+      setListas(response.data);
     } catch (err) {
       return alert(err.message);
     }
@@ -114,18 +114,20 @@ export const Lists = () => {
   return (
     <>
       {listasData.map((itm) => (
-        <li key={itm.id} id="pinned">
+        <li style={{ minWidth: "200px" }} key={itm.id} id="pinned">
           <div id="tper">
             <span id="left">
               <FiBox />
             </span>
-            <a href={`/share/`}>{itm.name}</a>
+            <a href={`/share/`}>{itm.issue.title}</a>
           </div>
 
-          <p>Listas são descritas pelas suas tags!</p>
+          <p>
+            Listas são descritas pelas suas tags! Lista marcada pelo usuário.
+          </p>
 
           <div id="btom">
-            <p id="language">{itm.createdAt}</p>
+            <p id="language">{itm.issue.createdAt}</p>
             <span>JavaScript</span>
           </div>
         </li>

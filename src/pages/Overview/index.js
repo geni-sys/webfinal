@@ -18,41 +18,110 @@ import {
 } from "./styles";
 
 function Modal() {
-  function HandleCheck({ checked }) {
-    if (checked) {
-      return <FiCheck />;
-    }
+  const [name, setName] = useState("");
+  const [idNewList, setIdNewList] = useState("");
+  const [data, setData] = useState([]);
+  // const [markeds, setMarkeds] = useState([]);
 
-    return <FiPlus />;
+  const [cookies] = useCookies();
+  const { token, user_id } = cookies;
+
+  const getIssuesMarkeds = useCallback(async () => {
+    try {
+      // const { token, user_id } = cookies;
+      const response = await api
+        .get(`/user/${user_id}/marked/issues`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      setData(response.data);
+    } catch (err) {
+      console.log(err.message);
+      return alert(err.message);
+    }
+  }, [token, user_id]);
+
+  useEffect(() => {
+    getIssuesMarkeds();
+  }, [getIssuesMarkeds]);
+
+  // function HandleCheck({ checked }) {
+  //   if (checked) {
+  //     return <FiCheck />;
+  //   }
+
+  //   return <FiPlus />;
+  // }
+  async function addANewIssueInNewList(issue_id) {
+    const response = await api.post(
+      `/create/list/${idNewList}`,
+      {
+        issuesx: issue_id,
+      },
+      { headers: { Authorization: String(token) } }
+    );
+
+    if (response.data) alert("Added in new list");
+  }
+  async function serializeMarkeds(id, inBase) {
+    const newArray = data.filter((item) => item.id !== id);
+    await addANewIssueInNewList(inBase);
+
+    setData(newArray);
+  }
+  async function createListName() {
+    try {
+      const response = await api.post(
+        `/users/${user_id}/create/playlist`,
+        {
+          name,
+        },
+        { headers: { Authorization: String(token) } }
+      );
+
+      if (response.data) {
+        alert("Lista criada!");
+        setIdNewList(response.data.id);
+      }
+    } catch (err) {
+      console.log(err.message);
+      alert(err.message);
+    }
   }
 
   return (
     <>
       <Modals id="create">
         <Lists>
-          <li>
-            <strong>vscode-docs</strong>
-            <button>
-              <FiPlus />
-              Add
-            </button>
-          </li>
-
-          <li className="added">
-            <strong>DotNet Orientation</strong>
-            <button>
-              <HandleCheck checked={true} />
-              Add
-            </button>
-          </li>
-
-          <li>
-            <strong>Initial with NodeJS</strong>
-            <button>
-              <FiPlus />
-              Add
-            </button>
-          </li>
+          {data.map((marked, index) => (
+            <li key={marked.id}>
+              <strong>{marked.issue.title}</strong>
+              <button
+                onClick={() => serializeMarkeds(marked.id, marked.issue_id)}
+              >
+                <FiPlus />
+                Add
+              </button>
+            </li>
+          ))}
         </Lists>
 
         <Controls>
@@ -62,11 +131,13 @@ function Modal() {
             type="text"
             name="namer"
             id="namer"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
           <span>
-            Artigos: <strong>3</strong>
+            Artigos: <strong>{idNewList}</strong>
           </span>
-          <Create>Criar</Create>
+          <Create onClick={createListName}>Criar</Create>
         </Controls>
       </Modals>
     </>

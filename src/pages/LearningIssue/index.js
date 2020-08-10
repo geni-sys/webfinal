@@ -73,6 +73,22 @@ const LearningIssue = ({ match }) => {
       </>
     );
   }
+  async function handleMarkIssue() {
+    try {
+      const response = await api.post(
+        `/issues/${issue_id}`,
+        {},
+        {
+          headers: { Authorization: String(token) },
+        }
+      );
+
+      if (response.data) alert("Issue marked");
+    } catch (err) {
+      console.log(err.message);
+      alert(err.message);
+    }
+  }
 
   return (
     <Container>
@@ -87,16 +103,14 @@ const LearningIssue = ({ match }) => {
           <div id="featureds">
             <div id="stars">
               <span>
-                {" "}
-                <FiStar />{" "}
+                <FiStar />
               </span>
               <p>724</p>
             </div>
 
             <div id="avorage">
               <span>
-                {" "}
-                <FiHash />{" "}
+                <FiHash />
               </span>
               <p>122</p>
             </div>
@@ -108,7 +122,7 @@ const LearningIssue = ({ match }) => {
             main document
           </a>
 
-          <Great>
+          <Great onClick={handleMarkIssue}>
             <FiHash />
             Marcar
           </Great>
