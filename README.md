@@ -48,6 +48,7 @@
 - OPENED FEATURES ❌ ❓
   - [x] Marcar / star ❓
   - [x] playlist (CHAT) ❓
-  - [x] Create list
-  - [x] Add issue in list
-  - [x] get user description (Profile)
+  - [x] Create list ❓
+  - [x] Add issue in list ❓
+  - [x] get user description (Profile) ❓
+  - [X] Filter activity (HOME) ❓
