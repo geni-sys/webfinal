@@ -10,14 +10,37 @@ import Header from "../../components/Header";
 import { Container, Main, Card, Great, Body, GoBack } from "./styles";
 
 const LearningIssue = ({ match }) => {
+  const [cookies] = useCookies();
+
+  const { issue_id } = match.params;
+  const { token, user_id } = cookies;
+
   const [title, setTitle] = useState("");
   const [body, setBody] = useState("");
   const [tags, setTags] = useState("");
   const [link, setLink] = useState("");
-  const [cookies] = useCookies();
 
-  const { issue_id } = match.params;
-  const { token } = cookies;
+  const [isMarked, setIsMarked] = useState(false);
+
+  const verifyIfIsMarked = useCallback(async function () {
+    // try {
+    //   const res = await api.get(
+    //     `/user/${user_id}/issue/marked?element=${issue_id}`,
+    //     {
+    //       headers: { Authorization: String(token) },
+    //     }
+    //   );
+    //   // console.log(res.data.length);
+    //   if (res.data.length === 0) {
+    //     return false;
+    //   }
+    // } catch (error) {
+    //   alert(error.message);
+    // }
+
+    return false;
+  }, []);
+
   const getLessonsData = useCallback(async () => {
     try {
       const response = await api
@@ -55,7 +78,8 @@ const LearningIssue = ({ match }) => {
 
   useEffect(() => {
     getLessonsData();
-  }, [getLessonsData]);
+    setIsMarked(verifyIfIsMarked());
+  }, [getLessonsData, verifyIfIsMarked]);
 
   function serializeTags(tags) {
     const separete = String(tags).split(",");
@@ -74,9 +98,13 @@ const LearningIssue = ({ match }) => {
     );
   }
   async function handleMarkIssue() {
+    if (isMarked) {
+      return;
+    }
+
     try {
       const response = await api.post(
-        `/issues/${issue_id}`,
+        `/user/${user_id}/mark/issues/${issue_id}`,
         {},
         {
           headers: { Authorization: String(token) },
@@ -84,6 +112,8 @@ const LearningIssue = ({ match }) => {
       );
 
       if (response.data) alert("Issue marked");
+
+      setIsMarked(true);
     } catch (err) {
       console.log(err.message);
       alert(err.message);
@@ -122,9 +152,9 @@ const LearningIssue = ({ match }) => {
             main document
           </a>
 
-          <Great onClick={handleMarkIssue}>
+          <Great onClick={handleMarkIssue} disabled={isMarked}>
             <FiHash />
-            Marcar
+            {isMarked ? "Desmarcar" : "Marcar"}
           </Great>
         </Card>
 
