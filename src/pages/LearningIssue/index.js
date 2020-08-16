@@ -20,26 +20,23 @@ const LearningIssue = ({ match }) => {
   const [tags, setTags] = useState("");
   const [link, setLink] = useState("");
 
-  const [isMarked, setIsMarked] = useState(false);
-
-  const verifyIfIsMarked = useCallback(async function () {
-    // try {
-    //   const res = await api.get(
-    //     `/user/${user_id}/issue/marked?element=${issue_id}`,
-    //     {
-    //       headers: { Authorization: String(token) },
-    //     }
-    //   );
-    //   // console.log(res.data.length);
-    //   if (res.data.length === 0) {
-    //     return false;
-    //   }
-    // } catch (error) {
-    //   alert(error.message);
-    // }
+  async function verifyIfIsMarked() {
+    const res = await api
+      .get(`/user/${user_id}/issue/marked?element=${issue_id}`, {
+        headers: { Authorization: String(token) },
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
+    console.log(res.data.length);
+    console.log(res.data);
+    if (res.data.length === 0) {
+      return true;
+    }
 
     return false;
-  }, []);
+  }
+  const [isMarked, setIsMarked] = useState(verifyIfIsMarked);
 
   const getLessonsData = useCallback(async () => {
     try {
@@ -78,8 +75,7 @@ const LearningIssue = ({ match }) => {
 
   useEffect(() => {
     getLessonsData();
-    setIsMarked(verifyIfIsMarked());
-  }, [getLessonsData, verifyIfIsMarked]);
+  }, [getLessonsData]);
 
   function serializeTags(tags) {
     const separete = String(tags).split(",");
@@ -154,7 +150,7 @@ const LearningIssue = ({ match }) => {
 
           <Great onClick={handleMarkIssue} disabled={isMarked}>
             <FiHash />
-            {isMarked ? "Desmarcar" : "Marcar"}
+            {isMarked === true ? "Desmarcar" : "Marcar"}
           </Great>
         </Card>
 

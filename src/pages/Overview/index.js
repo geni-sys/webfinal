@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
-import { FiActivity, FiAirplay, FiStar, FiPlus, FiCheck } from "react-icons/fi";
+import { FiActivity, FiAirplay, FiStar, FiPlus } from "react-icons/fi";
 import Header from "../../components/Header";
 // STYLUS | STATIC
 import {

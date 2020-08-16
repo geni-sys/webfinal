@@ -21,7 +21,7 @@ export const Item = styled.li`
   margin-bottom: 30px;
   padding: 2px;
   font-size: 14px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.3); */
 
   header {
     display: flex;
@@ -64,6 +64,7 @@ export const Transcription = styled.div`
   overflow-y: hidden;
 
   background: var(--force);
+  border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 
 export const Link = styled.a`

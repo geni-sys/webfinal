@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from "react";
+import * as _ from "lodash";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
@@ -19,11 +20,13 @@ import {
 } from "./styles";
 
 const Home = () => {
+  const [filterValue, setFilterValue] = useState("");
+  const [issues, setIssues] = useState([]);
+
   const [name] = useState(
     () => localStorage.getItem("name") || "Recarregue a página"
   );
   // const [email, setEmail] = useState(() => (localStorage.getItem('email') || "Load the page"))
-  const [issues, setIssues] = useState([]);
 
   const history = useHistory();
   const [cookies, , removeCookie] = useCookies(["token"]);
@@ -73,6 +76,20 @@ const Home = () => {
     getIssueOfUser();
   }, [getIssueOfUser, middleware]);
 
+  function filterActivities(collection, newValue) {
+    const arrayFiltered = _.filter(collection, (item) =>
+      String(item.link).toLowerCase().includes(String(newValue).toLowerCase())
+    );
+
+    if (!(arrayFiltered.length === 0)) {
+      setIssues(arrayFiltered);
+      return arrayFiltered;
+    }
+    getIssueOfUser();
+
+    return arrayFiltered;
+  }
+
   return (
     <Container id="Home">
       <Header />
@@ -98,6 +115,11 @@ const Home = () => {
                 type="search"
                 name="search-repo"
                 id="search-repo"
+                value={filterValue}
+                onChange={(e) => {
+                  setFilterValue(e.target.value);
+                  console.log(filterActivities(issues, filterValue));
+                }}
               />
             </div>
           </div>
