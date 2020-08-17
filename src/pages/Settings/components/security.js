@@ -19,6 +19,9 @@ function Security() {
     if (newPassword !== confirmPassword) {
       return alert("AS SENHAS NÃO CORRESPONDEM");
     }
+    if (newPassword === oldPassword) {
+      return alert("AS SENHAS NÃO PODEM SER INDÊNTICAS");
+    }
 
     try {
       const response = await api
