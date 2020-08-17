@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // COMPONENTS
 import Header from "../../components/Header";
 import Security from "./components/security";
@@ -21,7 +23,26 @@ const Settings = () => {
   const [githubAvatar] = useState(
     () => localStorage.getItem("github_avatar") || null
   );
+  const [user_name] = useState(
+    () => localStorage.getItem("name") || "Recarregue a página"
+  );
   const [isSelected, setIsSelected] = useState(1);
+
+  const [cookies] = useCookies();
+  const { user_id, token } = cookies;
+
+  async function generateToken() {
+    try {
+      const response = await api.get(`newToken/${user_id}`, {
+        headers: { Authorization: String(token) },
+      });
+
+      alert("AUTORIZAÇÃO: " + response.data.token);
+    } catch (err) {
+      console.log(err.message);
+      alert(err.message);
+    }
+  }
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
@@ -54,7 +75,7 @@ const Settings = () => {
               </p>
               <span id="tips">expira em 234234 seg | 1 dia</span>
 
-              <Token>Gerar token</Token>
+              <Token onClick={generateToken}>Gerar token</Token>
             </Demarker>
           </MoreInfo>
         </>
@@ -104,10 +125,10 @@ const Settings = () => {
       <Main>
         <Aside>
           <div id="personal">
-            <span>+</span>
+            <span id="plus">+</span>
             <div>
-              <span>eliasallex</span>
-              <p>Configurações pessoal</p>
+              <a href="/profile">{user_name}</a>
+              <p style={{ fontSize: "9px" }}>Painel de configurações.</p>
             </div>
           </div>
 

@@ -30,6 +30,11 @@ export const Main = styled.main`
     flex-direction: column;
     /* justify-content: center; */
     width: auto;
+    /* max-width: calc(100vw - 20px); */
+  }
+  @media (max-width: 620px) {
+    min-width: calc(100vw - 20px);
+    max-width: calc(100vw - 20px);
   }
 `;
 
