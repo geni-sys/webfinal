@@ -146,7 +146,7 @@ export const Recommended = styled.ul`
 
   margin-top: 15px;
 
-  li {
+  a {
     position: relative;
     min-width: 200px;
     width: 300px;
@@ -158,17 +158,23 @@ export const Recommended = styled.ul`
     justify-content: center;
     align-items: center;
 
-    background-color: var(--discord);
+    background-color: var(--quaternary);
     border-radius: 3px;
 
     img {
       width: 100px;
       height: 100px;
       border-radius: 50%;
-
-      span#middle {
-        color: white;
-      }
+    }
+    span#middle {
+      max-width: 100%;
+      padding: 0 5px;
+      max-height: 35px;
+      overflow: hidden;
+      position: relative;
+      font-size: 12px;
+      color: #fff;
+      margin-top: 5px;
     }
   }
 `;

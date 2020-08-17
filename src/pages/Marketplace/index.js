@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { FiAirplay } from "react-icons/fi";
+import { google } from "../../services/api";
 // COMPONENTS
 import Header from "../../components/Header";
 import OurAPI, { Extention, Feedback } from "./components/OurAPI";
@@ -24,29 +25,41 @@ const Marketplace = (props) => {
   });
 
   function Default() {
+    const [news, setNews] = useState([]);
+
+    const handleRequestOnGoogleNews = useCallback(async () => {
+      try {
+        const response = await google.get();
+
+        const [one, three, two, four] = response.data.articles;
+        console.log(one);
+        setNews([one, three, two, four]);
+      } catch (err) {
+        console.log(err.message);
+      }
+    }, []);
+
+    useEffect(() => {
+      handleRequestOnGoogleNews();
+    }, [handleRequestOnGoogleNews]);
+
     return (
       <main id="main-secondary">
-        <h4>Recommended for you</h4>
+        <h4>
+          Last news! <span style={{ fontSize: "9px" }}>From google news</span>{" "}
+        </h4>
         <Recommended id="recomendations">
-          <li>
-            <img src={Nine} alt="Alternative" />
-            <span id="middle">Azure pipelines</span>
-          </li>
-
-          <li>
-            <img src={Nine} alt="Alternative" />
-            <span id="middle">Azure pipelines</span>
-          </li>
-
-          <li>
-            <img src={Nine} alt="Alternative" />
-            <span id="middle">Azure pipelines</span>
-          </li>
-
-          <li>
-            <img src={Nine} alt="Alternative" />
-            <span id="middle">Azure pipelines</span>
-          </li>
+          {news.map((nws) => (
+            <a
+              href={nws.url}
+              target="_BLANK"
+              rel="noopener noreferrer"
+              key={nws.title}
+            >
+              <img src={nws.image || Nine} alt={nws.description || nws.url} />
+              <span id="middle">{nws.title}</span>
+            </a>
+          ))}
         </Recommended>
 
         <h4>Trending</h4>
