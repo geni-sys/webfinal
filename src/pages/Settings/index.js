@@ -16,10 +16,13 @@ import {
   MoreInfo,
   Token,
   Demarker,
+  TokenBox,
 } from "./styles";
 import ProfileImage from "../../assets/github-icon.png";
 
 const Settings = () => {
+  const [newToken, setNewToken] = useState("");
+  const [desactived, setDesactived] = useState(false);
   const [githubAvatar] = useState(
     () => localStorage.getItem("github_avatar") || null
   );
@@ -31,13 +34,26 @@ const Settings = () => {
   const [cookies] = useCookies();
   const { user_id, token } = cookies;
 
-  async function generateToken() {
+  function copyToClipboard() {
+    var copyText = document.querySelector("input#clipboard");
+    copyText.select();
+    copyText.setSelectionRange(0, 99999);
+    document.execCommand("copy");
+  }
+  function generateToken() {
     try {
-      const response = await api.get(`newToken/${user_id}`, {
-        headers: { Authorization: String(token) },
-      });
-
-      alert("AUTORIZAÇÃO: " + response.data.token);
+      api
+        .get(`newToken/${user_id}`, {
+          headers: { Authorization: String(token) },
+        })
+        .then((response) => {
+          setNewToken(String(response.data.token));
+          copyToClipboard();
+          setDesactived(true);
+          setTimeout(() => {
+            setDesactived(false);
+          }, 5000);
+        });
     } catch (err) {
       console.log(err.message);
       alert(err.message);
@@ -174,6 +190,16 @@ const Settings = () => {
         <Overview>
           <img src={githubAvatar || ProfileImage} alt="ELIASALLEX - PROFILE" />
         </Overview>
+
+        <TokenBox className={!desactived && "desactived"}>
+          <input
+            type="text"
+            name="clipboard"
+            id="clipboard"
+            value={newToken}
+            readonly
+          />
+        </TokenBox>
       </Main>
     </Container>
   );

@@ -214,3 +214,45 @@ export const Token = styled.button`
     background: #fff;
   }
 `;
+
+export const TokenBox = styled.div`
+  position: absolute;
+  background: var(--unpurple);
+  right: 0;
+  min-width: 400px;
+  bottom: 10px;
+  padding: 15px 10px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  border-radius: 1px;
+  opacity: 98%;
+  transition: display 2s ease-in-out;
+  animation-name: fade;
+  animation-duration: 400ms;
+
+  &.desactived {
+    display: none;
+  }
+
+  @keyframes fade {
+    from {
+      /* vai começãr */
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      /* vai terminar */
+      opacity: 1;
+      transform: scale(1);
+      backgound: var(--new);
+    }
+  }
+
+  input {
+    border: 0;
+    border-radius: 0;
+    font-size: 16px;
+    color: var(--reports);
+    background: transparent;
+    width: 100%;
+  }
+`;
