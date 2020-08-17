@@ -19,6 +19,10 @@ export const hub = axios.create({
   baseURL: "https://api.github.com/orgs",
 });
 
+export const git = axios.create({
+  baseURL: "https://api.github.com",
+});
+
 export default api;
 
 /**

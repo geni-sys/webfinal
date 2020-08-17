@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 // COMPONENTS
 import { FiUser } from "react-icons/fi";
 import Header from "../../components/Header";
@@ -8,7 +9,12 @@ import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 import ProfileImage from "../../assets/github-icon.png";
 
 const Profile = () => {
+  const [githubAvatar] = useState(
+    () => localStorage.getItem("github_avatar") || null
+  );
   const [isSelected, setIsSelected] = useState(0);
+
+  const history = useHistory();
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
@@ -20,6 +26,10 @@ const Profile = () => {
 
     return <Default />;
   }
+  function handleNavigateToSetting() {
+    history.push("/settings");
+  }
+  // "https://github.com/eliasallex" + ".png"
 
   return (
     <Container className="profile">
@@ -29,14 +39,18 @@ const Profile = () => {
         <Aside>
           <span id="badge-overview">#LEARNING</span>
 
-          <img id="user-img-over" src={ProfileImage} alt="Foto de perfil" />
+          <img
+            id="user-img-over"
+            src={githubAvatar || ProfileImage}
+            alt="Foto de perfil"
+          />
           <div id="user-over">
             <span>
               <FiUser />
             </span>
             <strong>Elias alexandre</strong>
           </div>
-          <button>Editar Usuário</button>
+          <button onClick={handleNavigateToSetting}>Editar Usuário</button>
 
           <div id="about-user-overview">
             <div id="about-over">

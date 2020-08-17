@@ -74,11 +74,13 @@ const Login = () => {
 
       const token = response.data.token;
       const user_id = response.data.user.id;
+      const github = response.data.user.github;
 
       setCookie("token", `Bearer ${token}`.trim());
       setCookie("user_id", String(user_id).trim());
       localStorage.setItem("email", String(email));
       localStorage.setItem("name", String(name));
+      localStorage.setItem("github_avatar", String(github + ".png"));
 
       setIsLoading(2);
 

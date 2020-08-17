@@ -1,57 +1,31 @@
 import React, { useState } from "react";
 // COMPONENTS
 import Header from "../../components/Header";
+import Security from "./components/security";
+import Default from "./components/default";
 // STYLUS | STATIC
 import {
   Container,
   Main,
   Aside,
   Body,
-  Input,
-  Description,
   Update,
   Overview,
   MoreInfo,
+  Token,
+  Demarker,
 } from "./styles";
 import ProfileImage from "../../assets/github-icon.png";
 
 const Settings = () => {
+  const [githubAvatar] = useState(
+    () => localStorage.getItem("github_avatar") || null
+  );
   const [isSelected, setIsSelected] = useState(1);
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
-      return (
-        <>
-          <li>
-            <label htmlFor="input">Nome</label>
-            <Input id="input" placeholder="Eliasallex" />
-            <label htmlFor="input" id="description">
-              Seu nome pode aparecer em torno do GitHub onde você contribui ou é
-              mencionado.
-            </label>
-          </li>
-
-          <li>
-            <label htmlFor="input">Bio</label>
-            <Description
-              id="input"
-              placeholder="Programmer. Focused on technologies around the JS language."
-            />
-            <label htmlFor="input" id="description">
-              como voce se descreve em torno da sua carreira?.
-            </label>
-          </li>
-
-          <li>
-            <label htmlFor="input">Github</label>
-            <Input id="input" placeholder="seu Github URL" />
-            <label htmlFor="input" id="description">
-              Todos os campos nesta página são opcionais e podem ser excluídos a
-              qualquer momento.
-            </label>
-          </li>
-        </>
-      );
+      return <Default />;
     }
     if (parseInt(id) === 4) {
       return (
@@ -71,33 +45,23 @@ const Settings = () => {
               voçê faz login na GS (WEB | MOBILE), é muito importante manter ele
               e a senha sempre atualizados.
             </p>
+
+            <Demarker>
+              <strong>Obter token</strong>
+              <p id="non">
+                O token gerado serve para abilitar acesso as requisições na API
+                da plataforma
+              </p>
+              <span id="tips">expira em 234234 seg | 1 dia</span>
+
+              <Token>Gerar token</Token>
+            </Demarker>
           </MoreInfo>
         </>
       );
     }
     if (parseInt(id) === 3) {
-      return (
-        <>
-          <li>
-            <label htmlFor="input">Senha antiga</label>
-            <Input type="password" id="input" />
-          </li>
-
-          <li>
-            <label htmlFor="input">Nova senha</label>
-            <Input type="password" id="input" />
-          </li>
-
-          <li>
-            <label htmlFor="input">Confirmar nova senha</label>
-            <Input type="password" id="input" />
-
-            <label htmlFor="input" id="description">
-              Senhas fortes ajudam a manter o seu perfil seguro!
-            </label>
-          </li>
-        </>
-      );
+      return <Security />;
     }
     if (parseInt(id) === 5) {
       return (
@@ -122,19 +86,15 @@ const Settings = () => {
       );
     }
   }
-  function Buttons({ id, handleClick }) {
-    if (id === 1) {
-      return <Update onClick={handleClick}>Update profile</Update>;
-    }
-    if (id === 3) {
-      return <Update onClick={handleClick}>Update password</Update>;
-    }
+  function Buttons({ id }) {
     if (id === 4) {
       return <a href="/">HOME</a>;
     }
     if (id === 5) {
       return <Update>Começar</Update>;
     }
+
+    return <></>;
   }
 
   return (
@@ -191,7 +151,7 @@ const Settings = () => {
           <Buttons id={isSelected} />
         </Body>
         <Overview>
-          <img src={ProfileImage} alt="ELIASALLEX - PROFILE" />
+          <img src={githubAvatar || ProfileImage} alt="ELIASALLEX - PROFILE" />
         </Overview>
       </Main>
     </Container>

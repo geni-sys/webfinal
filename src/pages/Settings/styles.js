@@ -126,30 +126,14 @@ export const Body = styled.div`
   }
 `;
 
-export const Input = styled.input`
-  border-radius: 6px;
-  background: #ffffff;
-  border: 1px solid #00000010;
-  padding: 0 5px;
-  color: #000;
-  min-height: 29px;
-  max-width: 400px;
-`;
-
-export const Description = styled.textarea`
-  resize: vertical;
-  border-radius: 6px;
-  background: #ffffff;
-  border: 1px solid #00000010;
-  padding: 0 5px;
-  color: #000;
-  height: 140px;
-  max-width: 400px;
-`;
-
 export const Overview = styled.article`
   @media (max-width: 768px) {
     display: none;
+  }
+
+  img {
+    max-width: 240px;
+    border-radius: 50%;
   }
 `;
 
@@ -175,15 +159,53 @@ export const Update = styled.button`
   }
 `;
 
+export const Demarker = styled.div`
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  padding: 4px;
+  max-width: 400px;
+`;
+
 export const MoreInfo = styled.div`
   margin-top: 20px;
 
   p {
     margin: 5px 0 20px 10px;
     max-width: 500px;
+
+    &#non {
+      margin: 0;
+
+      font-size: 12px;
+      padding-left: 3px;
+      margin-left: 5px;
+      border-left: 1px solid rgba(0, 0, 0, 0.5);
+      background: azure;
+    }
   }
 
   strong {
     margin-top: 10px;
+  }
+
+  span#tips {
+    font-size: 9px;
+    color: green;
+  }
+`;
+
+export const Token = styled.button`
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.2px;
+  background: #dedede;
+
+  cursor: pointer;
+  height: 20px;
+
+  margin-left: 10px;
+  padding: 0 5px;
+
+  &:hover {
+    background: #fff;
   }
 `;

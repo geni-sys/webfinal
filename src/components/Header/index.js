@@ -103,10 +103,10 @@ const Header = () => {
             Logado como <strong>{userName}</strong>
           </span>
           <div>
-            <a href="/profile">Seu perfil</a>
-            <a href="/activity">Atividades</a>
             <a href="/new/issue">Novo artigo</a>
-            <a href="/">Desafios</a>
+            <a href="/profile">Seu perfil</a>
+            <a href="/explore">Trends</a>
+            <a href="/settings">Definições</a>
           </div>
           <LogOut onClick={handleSignOut}>Sign out</LogOut>
         </OverClick>
