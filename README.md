@@ -1,4 +1,4 @@
-# the finl of WEB project
+# the final of WEB project
 
 ## DESIGN
 
@@ -44,11 +44,11 @@
   - [x] learning list ✔️
   - [x] Overviw getters ✔️
   - [x] Aswer questions ✔️
+  - [X] Filter activity (HOME) ✔️
+  - [x] Create list ✔️
+  - [x] Add issue in list ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] Marcar / star ❓
   - [x] playlist (CHAT) ❓
-  - [x] Create list ❓
-  - [x] Add issue in list ❓
   - [x] get user description (Profile) ❓
-  - [X] Filter activity (HOME) ❓
