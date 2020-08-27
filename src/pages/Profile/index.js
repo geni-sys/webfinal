@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState , useCallback, useEffect} from "react";
 import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // COMPONENTS
 import { FiUser } from "react-icons/fi";
 import Header from "../../components/Header";
@@ -9,10 +11,53 @@ import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 import ProfileImage from "../../assets/github-icon.png";
 
 const Profile = () => {
+  const [userData, setUserDatas] = useState({});
+  const [user_email] = useState(() => String(localStorage.getItem('email')) || "");
   const [githubAvatar] = useState(
     () => localStorage.getItem("github_avatar") || null
   );
   const [isSelected, setIsSelected] = useState(0);
+  const [cookies] = useCookies()
+
+  const { token } = cookies;
+  const handleRequest = useCallback(async () => {
+
+    try {
+      const response = await api
+        .get(`/users_/${user_email}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+        console.log(response.data);
+        console.log(response.data.questions[0].tool);
+      return setUserDatas(response.data);
+    } catch (err) {
+      console.log(err.message);
+      return alert(err.message);
+    }
+  }, [token, user_email])
+
+  useEffect(() => {
+    handleRequest();
+  }, [handleRequest]);
 
   const history = useHistory();
 
@@ -43,12 +88,13 @@ const Profile = () => {
             id="user-img-over"
             src={githubAvatar || ProfileImage}
             alt="Foto de perfil"
+            draggable={false}
           />
           <div id="user-over">
             <span>
               <FiUser />
             </span>
-            <strong>Elias alexandre</strong>
+            <strong>{userData.name}</strong>
           </div>
           <button onClick={handleNavigateToSetting}>Editar Usuário</button>
 
@@ -60,8 +106,8 @@ const Profile = () => {
 
             <div id="about-over">
               <h5>Descrição</h5>
-              <p>Programador</p>
-              <p>Inicinate</p>
+              <p>{userData.name}</p>
+              <p>{userData.name}</p>
             </div>
           </div>
         </Aside>
