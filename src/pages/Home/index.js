@@ -4,10 +4,12 @@ import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
-import { FiActivity, FiPlus, FiUser } from "react-icons/fi";
+import { FiActivity, FiPlus } from "react-icons/fi";
 import IssueList from "../../components/IssueList";
 import Header from "../../components/Header";
 import Article from "../../components/Article";
+import Miniature from "../../components/Miniature";
+import Confirmations from "../../components/Confirmations";
 // STYLUS
 import {
   Container,
@@ -22,6 +24,15 @@ import {
 const Home = () => {
   const [filterValue, setFilterValue] = useState("");
   const [issues, setIssues] = useState([]);
+  const [profileCompleted, setProfileCompleted] = useState(() => {
+    const state = localStorage.getItem("questions_status");
+    if (state === "null" || state === "false") {
+      return false;
+    }
+
+    return true;
+  });
+  const [showConfirmation, setShowConfirmation] = useState(false);
 
   const [name] = useState(
     () => localStorage.getItem("name") || "Recarregue a página"
@@ -71,10 +82,22 @@ const Home = () => {
     history.push("/new/issue");
   }
 
+  const userAlreadyCompleteProfile = useCallback(async () => {
+    if (profileCompleted) {
+      return setShowConfirmation(false);
+    }
+
+    setShowConfirmation(true);
+    setTimeout(() => {
+      setProfileCompleted(true);
+    }, 3000);
+  }, [profileCompleted]);
+
   useEffect(() => {
     middleware();
     getIssueOfUser();
-  }, [getIssueOfUser, middleware]);
+    userAlreadyCompleteProfile();
+  }, [getIssueOfUser, middleware, userAlreadyCompleteProfile]);
 
   function filterActivities(collection, newValue) {
     const arrayFiltered = _.filter(collection, (item) =>
@@ -97,8 +120,8 @@ const Home = () => {
       <Aside>
         <TopInformation id="top-aside">
           <div id="user-aside">
-            <FiUser />
-            <strong>{name}</strong>
+            <Miniature width="30px" height="30px" />
+            <a href="/profile">{name}</a>
           </div>
 
           <div id="aside-repo">
@@ -166,6 +189,8 @@ const Home = () => {
         <IssueList />
       </Main>
       <Article />
+
+      <Confirmations isShow={showConfirmation && "confirmate"} />
     </Container>
   );
 };

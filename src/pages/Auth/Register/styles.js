@@ -7,11 +7,10 @@ export const Container = styled.div`
   height: 100vh;
 
   background: url(${(props) =>
-    props.Montains
-      ? props.Montains
-      : `var(--force)`}) repeat-x scroll center bottom,
-    url("${(props) =>
-      props.Stars ? props.Stars : `var(--force)`}") repeat-x scroll 0% 0%,
+        props.Montains ? props.Montains : `var(--force)`})
+      repeat-x scroll center bottom,
+    url("${(props) => (props.Stars ? props.Stars : `var(--force)`)}") repeat-x
+      scroll 0% 0%,
     var(--white) none repeat scroll 0% 0%;
   background-size: auto, auto, auto;
   background-color: #36393f;
@@ -38,7 +37,7 @@ export const Form = styled.form`
   display: block;
   position: relative;
   width: 300px;
-  height: 240px;
+  height: 280px;
 
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
@@ -58,8 +57,8 @@ export const Form = styled.form`
     color: #111;
   }
 
-  div#input-group + label {
-    margin-top: 5px;
+  div#input-group div {
+    margin-top: 10px;
   }
 
   div#loading-form {
@@ -96,7 +95,7 @@ export const Input = styled.input`
 export const Submit = styled.button`
   width: 100%;
   height: 30px;
-  margin-top: 5px;
+  margin-top: 10px;
   border-radius: 3px;
 
   cursor: pointer;
@@ -131,6 +130,7 @@ export const Load = styled.div`
 export const Card = styled.div`
   color: var(--white);
   font-size: 11px;
+  margin-top: 40px;
 
   display: flex;
   flex-direction: row;

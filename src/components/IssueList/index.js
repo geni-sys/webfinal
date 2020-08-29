@@ -3,7 +3,7 @@ import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
 import ReactMarkdown from "react-markdown";
-import { FiUser } from "react-icons/fi";
+import Miniature from "../Miniature";
 import CodeBlock from "../CodeBlock";
 // STYLUS | STATIC
 import { List, Item, Transcription, Link } from "./styles";
@@ -57,7 +57,11 @@ function IssueList() {
         <Item key={lesson.id} id="issue-publication">
           <header>
             <span>
-              <FiUser color="#333" />
+              <Miniature
+                source={lesson.user.github + ".png"}
+                width="40px"
+                hright="40px"
+              />
             </span>
             <strong>{lesson.user.name}</strong>
           </header>

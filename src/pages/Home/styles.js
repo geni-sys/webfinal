@@ -65,9 +65,12 @@ export const Aside = styled.aside`
 
 export const TopInformation = styled.div`
   div#user-aside {
+    display: flex;
+    align-items: center;
+
     border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 
-    strong {
+    a {
       max-width: 125px;
       overflow: hidden;
 

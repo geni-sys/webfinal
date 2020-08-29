@@ -15,6 +15,7 @@ const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [github, setGithub] = useState("");
   const [isLoading, setIsLoading] = useState(2);
 
   const [cookies, setCookie] = useCookies(["token"]);
@@ -43,6 +44,7 @@ const Login = () => {
     let psw = String(password).trim();
     let eml = String(email).trim();
     let nm = String(name).trim();
+    let git = String(github).trim();
 
     try {
       const response = await api
@@ -50,6 +52,7 @@ const Login = () => {
           name: nm,
           email: eml,
           password: psw,
+          github: git,
           canny: false,
         })
         .catch((error) => {
@@ -75,11 +78,13 @@ const Login = () => {
       const token = response.data.token;
       const user_id = response.data.user.id;
       const github = response.data.user.github;
+      const completed = response.data.user.completed;
 
       setCookie("token", `Bearer ${token}`.trim());
       setCookie("user_id", String(user_id).trim());
       localStorage.setItem("email", String(email));
       localStorage.setItem("name", String(name));
+      localStorage.setItem("questions_status", String(completed));
       localStorage.setItem("github_avatar", String(github + ".png"));
 
       setIsLoading(2);
@@ -130,7 +135,7 @@ const Login = () => {
         <Form className="form-session" onSubmit={handleSubmit}>
           <div id="input-group">
             <div>
-              <label htmlFor="senha">Nome</label>
+              <label htmlFor="senha">Nome *</label>
               <Input
                 required
                 type="text"
@@ -143,7 +148,7 @@ const Login = () => {
             </div>
 
             <div>
-              <label htmlFor="email">Email</label>
+              <label htmlFor="email">Email *</label>
               <Input
                 required
                 placeholder="Digite seu email"
@@ -156,7 +161,20 @@ const Login = () => {
             </div>
 
             <div>
-              <label htmlFor="senha">Senha</label>
+              <label htmlFor="senha">Github?</label>
+              <Input
+                required
+                type="text"
+                placeholder="url do seu perfil no git hub"
+                name="github"
+                id="github"
+                value={github}
+                onChange={(e) => setGithub(e.target.value)}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="senha">Senha *</label>
               <Input
                 required
                 type="password"

@@ -68,13 +68,14 @@ const Login = () => {
 
       setIsLoading(2);
 
-      const { id, name, email, github } = response.data.user;
+      const { id, name, email, github, completed } = response.data.user;
       const token = response.data.token;
 
       setCookie("token", String(`Bearer ${token}`));
       setCookie("user_id", String(id));
       localStorage.setItem("email", String(email));
       localStorage.setItem("name", String(name));
+      localStorage.setItem("questions_status", String(completed));
       localStorage.setItem("github_avatar", String(github + ".png"));
 
       return history.push("/");
@@ -172,7 +173,7 @@ const Login = () => {
 
           <Card id="card-account">
             <h4>New to Genesys?</h4>
-            <a href="/">create an account</a>
+            <a href="/register">create an account</a>
           </Card>
         </Form>
       </Main>

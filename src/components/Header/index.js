@@ -56,7 +56,9 @@ const Header = () => {
       </Screen>
 
       <div id="comun">
-        <h1>GENESIS</h1>
+        <a href="/">
+          <h1>GENESIS</h1>
+        </a>
 
         <Navegation className="desactived-header">
           <div style={{ position: "relative" }}>

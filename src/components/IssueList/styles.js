@@ -25,6 +25,7 @@ export const Item = styled.li`
 
   header {
     display: flex;
+    align-items: center;
 
     span {
       margin-right: 10px;
