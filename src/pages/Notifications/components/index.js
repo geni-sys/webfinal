@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
-import { FiAlertTriangle } from "react-icons/fi";
+import { Triangle, Notificate, Clicked } from "../styles";
 import api from "../../../services/api";
 // COMPONENTS
 export const All = () => {
@@ -30,15 +30,26 @@ export const All = () => {
     <>
       {!(notify.length === 0) ? (
         notify.map((note) => (
-          <a key={note.id} href="/playlist" targer="_blannk" id="alert">
-            <span id="ilustry">
-              <FiAlertTriangle />
-            </span>
+          <Notificate
+            key={note.id}
+            href="/playlist"
+            targer="_blannk"
+            id="alert"
+          >
+            <div id="header">
+              <span>De: {note.de.name}</span>
+
+              <Triangle />
+            </div>
+
             <div id="nlw">
-              <span>DE: {note.de.name}</span>
               <p>{note.transcription}</p>
             </div>
-          </a>
+
+            <div id="footer">
+              <Clicked href="/">Aceitar</Clicked>
+            </div>
+          </Notificate>
         ))
       ) : (
         <h1> SEM NOTIFICACÕES </h1>
@@ -77,17 +88,26 @@ export const Mentioned = () => {
     <>
       {!(notify.length === 0) ? (
         notify.map((note) => (
-          <a key={note.id} href="/playlist" targer="_blannk" id="alert">
-            <span id="ilustry">
-              <FiAlertTriangle />
-            </span>
+          <Notificate
+            key={note.id}
+            href="/playlist"
+            targer="_blannk"
+            id="alert"
+          >
+            <div id="header">
+              <span>De: {note.de.name}</span>
+
+              <Triangle />
+            </div>
+
             <div id="nlw">
-              <span>
-                {note.de.name}/{note.para.name}
-              </span>
               <p>{note.transcription}</p>
             </div>
-          </a>
+
+            <div id="footer">
+              <Clicked href="/">Aceitar</Clicked>
+            </div>
+          </Notificate>
         ))
       ) : (
         <h1> SEM NOTIFICACÕES </h1>
@@ -126,15 +146,26 @@ export const OurTeam = () => {
     <>
       {!(notify.length === 0) ? (
         notify.map((note) => (
-          <a key={note.id} href="/playlist" targer="_blannk" id="alert">
-            <span id="ilustry">
-              <FiAlertTriangle />
-            </span>
+          <Notificate
+            key={note.id}
+            href="/playlist"
+            targer="_blannk"
+            id="alert"
+          >
+            <div id="header">
+              <span>De: {note.de.name}</span>
+
+              <Triangle />
+            </div>
+
             <div id="nlw">
-              <span>DE: {note.de.name}</span>
               <p>{note.transcription}</p>
             </div>
-          </a>
+
+            <div id="footer">
+              <Clicked href="/">Aceitar</Clicked>
+            </div>
+          </Notificate>
         ))
       ) : (
         <h1> SEM NOTIFICACÕES </h1>

@@ -104,13 +104,16 @@ const Header = () => {
           <span>
             Logado como <strong>{userName}</strong>
           </span>
+
           <div>
-            <a href="/new/issue">Novo artigo</a>
-            <a href="/profile">Seu perfil</a>
-            <a href="/explore">Trends</a>
+            <a href="/new/issue">Criar novo artigo</a>
+            <a href="/profile">Ver seu perfil</a>
+            <a href="/explore">Overview - nova lista</a>
             <a href="/settings">Definições</a>
+            <a href="/">Genesis</a>
           </div>
-          <LogOut onClick={handleSignOut}>Sign out</LogOut>
+
+          <LogOut onClick={handleSignOut}>Sair</LogOut>
         </OverClick>
       </Session>
     </Container>

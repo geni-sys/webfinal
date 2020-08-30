@@ -159,32 +159,36 @@ export const Session = styled.div`
 `;
 
 export const OverClick = styled.div`
-  position: relative;
+  position: absolute;
+  top: 30px;
+  max-width: 260px;
   display: block;
-  background: var(--white);
+  background: var(--Notify);
 
   max-height: 200px;
-  width: 300px;
-  top: 50px;
+  width: 100%;
+  height: 100%;
   right: 10px;
   border-radius: 1.5px;
 
   z-index: 10;
 
   span {
-    color: var(--grey-dark);
+    color: var(--reports);
     font-size: 12px;
-    padding: 5px 5px 0 5px;
+    padding: 5px 5px 0 20px;
   }
 
   div {
     display: block;
     padding: 5px;
+    padding-left: 20px;
 
     a {
       display: block;
-      font-size: 11px;
+      font-size: 14px;
       padding-top: 3px;
+      color: var(--desfoque);
     }
   }
 
@@ -194,16 +198,25 @@ export const OverClick = styled.div`
 `;
 
 export const LogOut = styled.button`
+  position: absolute;
+  bottom: 0;
+  color: var(--ENTER);
+
   width: 100%;
-  color: var(--support);
   margin: 10px 0 0 0;
   padding: 2px;
+  font-size: 17px;
+
+  border: 0;
+  border-top: 1px solid black;
+  border-radius: 0;
+  padding-top: 7px;
+  background: var(--grey-dark);
+  padding-bottom: 7px;
 
   &:hover {
-    text-decoration: underline;
-    background: var(--force);
-    color: var(--grey-dark);
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    background: var(--notification);
+    color: white;
   }
 `;
 
@@ -215,6 +228,7 @@ export const Close = styled.div`
     align-items: center;
     height: 20px;
     cursor: pointer;
+    margin-bottom: 10px;
 
     svg {
       position: relative;
@@ -222,7 +236,7 @@ export const Close = styled.div`
       height: 14px;
 
       margin: 0 auto;
-      color: var(--grey-dark);
+      color: var(--ENTER);
 
       &:hover {
         transform: rotateX("angle");

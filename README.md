@@ -23,6 +23,7 @@
   - [x] Add issue in list ✔️
   - [x] Overview screens ✔️
   - [x] market pages : 4/6 ✔️
+  - [x] Header contextmenu ✔️
 
 - OPENED FEATURES ❌
   - [x] Explore: all about users: best, mentions, news.. ❓
@@ -44,11 +45,14 @@
   - [x] learning list ✔️
   - [x] Overviw getters ✔️
   - [x] Aswer questions ✔️
-  - [X] Filter activity (HOME) ✔️
+  - [x] Filter activity (HOME) ✔️
   - [x] Create list ✔️
   - [x] Add issue in list ✔️
+  - [x] Notifications ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] Marcar / star ❓
   - [x] playlist (CHAT) ❓
   - [x] get user description (Profile) ❓
+  - [x] panel for create notifications ❓
+  - [x] explore ❓

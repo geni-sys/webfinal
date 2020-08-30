@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FiAlertTriangle } from "react-icons/fi";
 
 // FATHER STYLUS
 export const Container = styled.div`
@@ -13,7 +14,7 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: var(--dominate);
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -33,7 +34,7 @@ export const Main = styled.main`
 
 // STYLUS ASIDE INNER
 export const Aside = styled.aside`
-  width: 200px;
+  width: 300px;
   font-size: 1.4em;
 
   @media (max-width: 700px) {
@@ -52,6 +53,8 @@ export const Aside = styled.aside`
   }
 `;
 export const List = styled.ul`
+  width: 100%;
+
   li {
     color: var(--Notify);
     margin-right: 30px;
@@ -97,31 +100,65 @@ export const Content = styled.div`
   ul {
     min-width: 400px;
 
-    a {
-      display: flex;
-      justify-content: space-between;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      padding: 10px;
-      margin-bottom: 10px;
-      color: var(--Notify);
-
-      span#ilustry {
-        display: flex;
-        margin-right: 3px;
-        padding: 0 10px 0 0;
-        border-right: 1px solid rgba(0, 0, 0, 0.1);
-
-        svg {
-          width: 50px;
-          height: 20px;
-        }
-      }
-    }
-
     div {
       p {
         font-size: 13px;
       }
     }
   }
+`;
+
+export const Triangle = styled(FiAlertTriangle)`
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+  color: var(--gray);
+`;
+
+export const Notificate = styled.li`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  min-height: 100px;
+  padding: 0;
+  font-size: 2rem;
+
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
+  background: var(--dominating);
+  color: var(--witer);
+
+  div#header {
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    background: var(--chat-input);
+  }
+
+  div#nlw {
+    padding: 7px;
+    /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
+
+    p {
+      font-size: 13px;
+      color: var(--grey-dark);
+    }
+  }
+`;
+
+export const Clicked = styled.a`
+  position: absolute;
+  bottom: 0;
+  left: 0;
+
+  border: 0;
+  border-radius: 1px;
+  background: var(--link);
+  text-decoration: none;
+  /* var(--force) */
+  font-size: 12px;
+  color: var(--white);
+  margin-top: 5px;
+  padding: 3px 10px;
 `;
