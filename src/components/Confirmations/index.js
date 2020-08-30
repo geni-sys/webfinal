@@ -2,7 +2,7 @@ import React from "react";
 // STYLES | STATICS
 import { Confirmate, Title, Transcription, Go, Close } from "./styles";
 
-function Confirmations({ title, transcription, link, isShow }) {
+function Confirmations({ title, transcription, link, isShow, onClose }) {
   return (
     <Confirmate className={isShow}>
       <Title>{title || "What you are looking for?"}</Title>
@@ -10,9 +10,9 @@ function Confirmations({ title, transcription, link, isShow }) {
         {transcription ||
           "voce ainda não completou todo o seu perfil. responda as questões para a conclusão."}
       </Transcription>
-      <Go>{link || "Prosseguir"}</Go>
+      <Go href={link}>{"Prosseguir"}</Go>
 
-      <Close />
+      <Close onClick={onClose} />
     </Confirmate>
   );
 }

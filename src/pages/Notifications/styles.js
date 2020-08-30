@@ -95,6 +95,8 @@ export const Content = styled.div`
   }
 
   ul {
+    min-width: 400px;
+
     a {
       display: flex;
       justify-content: space-between;

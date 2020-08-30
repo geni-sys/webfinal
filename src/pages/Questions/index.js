@@ -8,7 +8,7 @@ import Header from "../../components/Header";
 // STYLUS | STATIC
 import { Container, Grid, Main, Create, Card, Welcome, GotIt } from "./styles";
 
-const NewIssue = () => {
+const Questions = () => {
   const [selectedWork, setSelectedWork] = useState(0);
   const [selectedXP, setSelectedXP] = useState(0);
   const [interest, setInterest] = useState("");
@@ -108,6 +108,7 @@ const NewIssue = () => {
           return alert(error.message);
         });
 
+      localStorage.setItem("questions_status", String("true"));
       alert("Perfil atualizado!");
 
       history.push("/");
@@ -185,7 +186,7 @@ const NewIssue = () => {
                 className={selectedXP === 2 ? "selected" : ""}
               >
                 <strong>Um pouco</strong>
-                <p>Eu desenho interfaces</p>
+                <p>Ja escrevi algumas linhas</p>
               </li>
 
               <li
@@ -193,7 +194,7 @@ const NewIssue = () => {
                 className={selectedXP === 3 ? "selected" : ""}
               >
                 <strong>Quantidade moderada</strong>
-                <p>Tenho alguma experiência</p>
+                <p>Tenho boa experiência</p>
               </li>
 
               <li
@@ -255,4 +256,4 @@ const NewIssue = () => {
   );
 };
 
-export default NewIssue;
+export default Questions;

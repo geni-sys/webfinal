@@ -1,39 +1,27 @@
-import React, { useState, useEffect, useCallback, memo } from "react";
-import { useCookies } from "react-cookie";
-import api from "../../services/api";
+import React, { useState, memo } from "react";
 // COMPONENS
-import {
-  FiAlertTriangle,
-  FiTarget,
-  FiGitBranch,
-  FiShield,
-} from "react-icons/fi";
+import { FiTarget, FiGitBranch, FiShield } from "react-icons/fi";
 import Header from "../../components/Header";
+import { All, Mentioned, OurTeam } from "./components";
 // STYLUS STATIC
 import { Container, Aside, List, Main, Content } from "./styles";
 
-const Notifications = () => {
-  const [notify, setNotify] = useState([]);
+const Notifications = ({ match }) => {
+  const [activeTab, setActiveTab] = useState(0);
 
-  const [cookies] = useCookies();
-  const { token, user_id } = cookies;
+  // const { tab } = match.params;
 
-  const handleRequests = useCallback(async () => {
-    try {
-      const response = await api.get(`/notifications/${user_id}`, {
-        headers: { Authorization: String(token) },
-      });
-
-      setNotify(response.data);
-    } catch (err) {
-      alert(err.message);
-      console.log(err.message);
+  function ChooseComponent() {
+    if (activeTab === 0) {
+      return <All />;
     }
-  }, [token, user_id]);
-
-  useEffect(() => {
-    handleRequests();
-  }, [handleRequests]);
+    if (activeTab === 1) {
+      return <Mentioned />;
+    }
+    if (activeTab === 2) {
+      return <OurTeam />;
+    }
+  }
 
   return (
     <Container>
@@ -42,15 +30,26 @@ const Notifications = () => {
       <Main>
         <Aside>
           <List>
-            <li id="clicked">
+            <li
+              id={activeTab === 0 ? "clicked" : ""}
+              onClick={() => setActiveTab(0)}
+            >
               <FiTarget color="#2ea44f" />
               <a href="/notifications?tab=1">All</a>
             </li>
-            <li>
+
+            <li
+              id={activeTab === 1 ? "clicked" : ""}
+              onClick={() => setActiveTab(1)}
+            >
               <FiGitBranch color="#f9a839" />
               <a href="/notifications?tab=2">Mentioned</a>
             </li>
-            <li>
+
+            <li
+              id={activeTab === 2 ? "clicked" : ""}
+              onClick={() => setActiveTab(2)}
+            >
               <FiShield color="#f84a4b" />
               <a href="/notifications?tab=3">Our team</a>
             </li>
@@ -58,60 +57,7 @@ const Notifications = () => {
         </Aside>
 
         <Content>
-          <ul>
-            <a id="mentioned" href="/playlist">
-              <span id="ilustry">
-                <FiAlertTriangle />
-              </span>
-              <div id="nlw">
-                <span>eliasallex/aplication-route-tabs</span>
-                <p>
-                  Potential security vulnerability found in the logkitty
-                  dependency
-                </p>
-              </div>
-            </a>
-
-            <a href="/playlist" id="convided">
-              <span id="ilustry">
-                <FiAlertTriangle />
-              </span>
-              <div id="nlw">
-                <span>eliasallex/aplication-route-tabs</span>
-                <p>
-                  Potential security vulnerability found in the logkitty
-                  dependency
-                </p>
-              </div>
-            </a>
-
-            <a href="/playlist" id="mentioned">
-              <span id="ilustry">
-                <FiAlertTriangle />
-              </span>
-              <div id="nlw">
-                <span>eliasallex/aplication-route-tabs</span>
-                <p>
-                  Potential security vulnerability found in the logkitty
-                  dependency
-                </p>
-              </div>
-            </a>
-
-            {notify.map((note) => (
-              <a key={note.id} href="/playlist" targer="_blannk" id="alert">
-                <span id="ilustry">
-                  <FiAlertTriangle />
-                </span>
-                <div id="nlw">
-                  <span>
-                    {note.de.name}/{note.para.name}
-                  </span>
-                  <p>{note.transcription}</p>
-                </div>
-              </a>
-            ))}
-          </ul>
+          <ul>{ChooseComponent()}</ul>
         </Content>
       </Main>
     </Container>

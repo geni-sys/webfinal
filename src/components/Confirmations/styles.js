@@ -65,4 +65,8 @@ export const Close = styled(FiArrowRight)`
   margin-bottom: 5px;
 
   color: var(--witer);
+
+  &:hover {
+    color: #f24;
+  }
 `;

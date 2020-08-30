@@ -26,9 +26,11 @@ const Home = () => {
   const [issues, setIssues] = useState([]);
   const [profileCompleted, setProfileCompleted] = useState(() => {
     const state = localStorage.getItem("questions_status");
-    if (state === "null" || state === "false") {
+    if (state === "null" || state === "false" || state === "undefined") {
+      console.log("questions_status: " + state);
       return false;
     }
+    if (state === "true") return true;
 
     return true;
   });
@@ -87,11 +89,11 @@ const Home = () => {
       return setShowConfirmation(false);
     }
 
-    setShowConfirmation(true);
-    setTimeout(() => {
-      setProfileCompleted(true);
-    }, 3000);
+    return setShowConfirmation(true);
   }, [profileCompleted]);
+  function closeConfirmation() {
+    setProfileCompleted(true);
+  }
 
   useEffect(() => {
     middleware();
@@ -190,7 +192,12 @@ const Home = () => {
       </Main>
       <Article />
 
-      <Confirmations isShow={showConfirmation && "confirmate"} />
+      <Confirmations
+        title={"Atualizar o perfil!"}
+        link={"/questions"}
+        isShow={showConfirmation && "confirmate"}
+        onClose={closeConfirmation}
+      />
     </Container>
   );
 };
