@@ -163,7 +163,6 @@ const Login = () => {
             <div>
               <label htmlFor="senha">Github?</label>
               <Input
-                required
                 type="text"
                 placeholder="url do seu perfil no git hub"
                 name="github"
