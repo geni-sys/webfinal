@@ -4,10 +4,10 @@ import api from "../../services/api";
 // COMPONENTS
 import { FiUser } from "react-icons/fi";
 import Header from "../../components/Header";
+import Miniature from "../../components/Miniature";
 import { Default, Lists, Markeds } from "./components";
 // STYLUS | STATIC
 import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
-import ProfileImage from "../../assets/github-icon.png";
 
 function Users({ match }) {
   const [data, setData] = useState([]);
@@ -28,12 +28,12 @@ function Users({ match }) {
 
   // GLOBAL VARs
   const [cookies] = useCookies();
-  const { token } = cookies;
+  const { token, user_id } = cookies;
 
   const handleRequest = useCallback(async () => {
     try {
       const response = await api
-        .get(`/users_/${friend_email}`, {
+        .get(`/users_/${friend_email}?eu=${user_id}`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -59,11 +59,49 @@ function Users({ match }) {
     } catch (err) {
       alert(err.message);
     }
-  }, [friend_email, token]);
+  }, [friend_email, token, user_id]);
 
   useEffect(() => {
     handleRequest();
   }, [handleRequest]);
+
+  async function markUser(id) {
+    try {
+      const response = await api
+        .post(
+          `/user/${user_id}/mark/users/${id}`,
+          {},
+          {
+            headers: { Authorization: String(token) },
+          }
+        )
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      console.log(response);
+      if (response.data) {
+        alert("Usuario marcada");
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  }
 
   return (
     <Container className="profile">
@@ -73,15 +111,20 @@ function Users({ match }) {
         {data.map((usr) => (
           <Aside key={usr.id}>
             <span id="badge-overview">#{usr.questions[0].use_case}</span>
-
-            <img id="user-img-over" src={ProfileImage} alt="Foto de perfil" />
+            <Miniature source={usr.github + ".png"} desc="Foto de perfil" />
             <div id="user-over">
               <span>
                 <FiUser />
               </span>
               <strong>{usr.name}</strong>
             </div>
-            <button>Marcar Usuário</button>
+            <button
+              disabled={usr.isFriend && true}
+              type="button"
+              onClick={() => markUser(usr.id)}
+            >
+              {usr.isFriend ? "Usuário marcado" : "Marcar Usuário"}
+            </button>
 
             <div id="about-user-overview">
               <div id="about-over">

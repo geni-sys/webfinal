@@ -162,6 +162,10 @@ export const List = styled.ul`
 
       span {
         margin-right: 5px;
+        position: relative;
+        max-width: 300px;
+        overflow: hidden;
+        max-height: 15px;
       }
     }
   }

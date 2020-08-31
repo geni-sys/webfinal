@@ -56,3 +56,4 @@
   - [x] get user description (Profile) ❓
   - [x] panel for create notifications ❓
   - [x] explore ❓
+  - [x] unmark user ❓

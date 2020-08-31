@@ -11,8 +11,8 @@ function Users({ query }) {
   const [DataUsers, setDataUsers] = useState([]);
 
   const [cookies] = useCookies();
+  const { token, user_id } = cookies;
   const handleUsersQuery = useCallback(async () => {
-    const { token } = cookies;
     try {
       const response = await api
         .get(`/users?query=${query}`, {
@@ -43,11 +43,49 @@ function Users({ query }) {
       console.log(err.message);
       return alert(err.message);
     }
-  }, [cookies, query]);
+  }, [query, token]);
 
   useEffect(() => {
     handleUsersQuery(query);
   }, [handleUsersQuery, query]);
+
+  async function markUser(id) {
+    try {
+      const response = await api
+        .post(
+          `/user/${user_id}/mark/users/${id}`,
+          {},
+          {
+            headers: { Authorization: String(token) },
+          }
+        )
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      console.log(response);
+      if (response.data) {
+        alert("Usuario marcado");
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  }
 
   return (
     <>
@@ -63,9 +101,13 @@ function Users({ query }) {
               Potential security vulnerability found in the logkitty dependency
             </p>
             <div id="ftr">
-              <Button>
+              <Button
+                disabled={item.isFriend && true}
+                type="button"
+                onClick={() => markUser(item.id)}
+              >
                 <FiHash />
-                Marcar
+                {item.isFriend ? "Usuário marcado" : "Marcar Usuário"}
               </Button>
             </div>
           </div>
