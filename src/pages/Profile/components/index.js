@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import api from "../../../services/api";
 //
 import { FiBox } from "react-icons/fi";
+import Miniature from "../../../components/Miniature";
 
 export const Default = () => {
   const [overview, setOverview] = useState([]);
@@ -147,7 +148,7 @@ export const Markeds = () => {
     console.log("called");
     try {
       const response = await api
-        .get(`/user/${user_id}/issues`, {
+        .get(`/user/${user_id}/marked/users`, {
           headers: { Authorization: token },
         })
         .catch((error) => {
@@ -185,17 +186,17 @@ export const Markeds = () => {
         <li key={marked.id} id="pinned">
           <div id="tper">
             <span id="left">
-              <FiBox />
+              <Miniature
+                width={"30px"}
+                height={"30px"}
+                desc={"Perfil de " + marked.marked.name}
+                source={marked.marked.github + ".png"}
+              />
             </span>
-            <a href="/user/learning/1">Dotnet Orientation</a>
+            <a href="/user/learning/1">{marked.marked.name}</a>
           </div>
 
-          <p>Create a basic contextmenu with html, css and JS</p>
-
-          <div id="btom">
-            <span id="language"></span>
-            <span>JavaScript</span>
-          </div>
+          <p>{marked.marked.email}</p>
         </li>
       ))}
     </>
