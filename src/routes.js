@@ -34,7 +34,7 @@ function Routes() {
         <Route component={Questions} path="/questions" />
         <Route component={Settings} path="/settings" />
         <Route component={Profile} path="/profile" />
-        <Route component={Users} path="/users" />
+        <Route component={Users} path="/users/:friend_email" />
         <Route component={LearningPlaylist} path="/share/:list_id" />
         <Route component={Overview} path="/overview" />
         <GlobalStyles />
