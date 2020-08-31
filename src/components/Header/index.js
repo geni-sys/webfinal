@@ -32,6 +32,9 @@ const Header = () => {
       removeCookie("user_id");
       localStorage.removeItem("name");
       localStorage.removeItem("email");
+      localStorage.removeItem("github_avatar");
+      localStorage.removeItem("questions_status");
+      localStorage.removeItem("user_description");
 
       history.push("/login");
     } catch (err) {
@@ -108,7 +111,7 @@ const Header = () => {
           <div>
             <a href="/new/issue">Criar novo artigo</a>
             <a href="/profile">Ver seu perfil</a>
-            <a href="/explore">Overview - nova lista</a>
+            <a href="/overview?newList=true">Overview - nova lista</a>
             <a href="/settings">Definições</a>
             <a href="/">Genesis</a>
           </div>

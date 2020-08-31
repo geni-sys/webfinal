@@ -10,6 +10,7 @@ function Miniature({ width, height, desc, source }) {
   return (
     <>
       <Image
+        draggable={false}
         src={source || linkImage}
         style={{ width: width, height: height }}
         alt={desc || "Miniatura"}

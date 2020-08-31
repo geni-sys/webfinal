@@ -84,13 +84,38 @@ const Home = () => {
     history.push("/new/issue");
   }
 
+  const setUserDescription = useCallback(async () => {
+    const u_email = localStorage.getItem("email");
+
+    const { token } = cookies;
+    try {
+      const response = await api
+        .get(`/users_/${String(u_email)}`, {
+          headers: {
+            Authorization: String(token),
+          },
+        })
+        .catch((err) => {
+          console.log(err.message);
+          return;
+        });
+
+      const { questions } = response.data;
+      console.log("questions: " + JSON.stringify(questions));
+      localStorage.setItem("user_description", JSON.stringify(questions));
+    } catch (err) {
+      console.log(err.message);
+    }
+  }, [cookies]);
+
   const userAlreadyCompleteProfile = useCallback(async () => {
     if (profileCompleted) {
+      setUserDescription();
       return setShowConfirmation(false);
     }
 
     return setShowConfirmation(true);
-  }, [profileCompleted]);
+  }, [profileCompleted, setUserDescription]);
   function closeConfirmation() {
     setProfileCompleted(true);
   }
