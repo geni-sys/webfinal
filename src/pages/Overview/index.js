@@ -13,8 +13,11 @@ import {
   CreateList,
   Modals,
   Lists,
-  Controls,
-  Create,
+  Top,
+  ListElement,
+  Checker,
+  CreateTitle,
+  AddIn,
 } from "./styles";
 
 function Modal() {
@@ -110,35 +113,42 @@ function Modal() {
   return (
     <>
       <Modals id="create">
-        <Lists>
-          {data.map((marked, index) => (
-            <li key={marked.id}>
-              <strong>{marked.issue.title}</strong>
-              <button
-                onClick={() => serializeMarkeds(marked.id, marked.issue_id)}
-              >
-                <FiPlus />
-                Add
-              </button>
-            </li>
-          ))}
-        </Lists>
-
-        <Controls>
-          Nome da lista
+        <Top>
           <input
-            placeholder="Que não exista"
             type="text"
-            name="namer"
-            id="namer"
+            name="creation"
+            id="creation"
+            placeholder="Nome da nova lista"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <span>
-            Artigos: <strong>{idNewList}</strong>
-          </span>
-          <Create onClick={createListName}>Criar</Create>
-        </Controls>
+          <CreateTitle>
+            <Checker /> Create
+          </CreateTitle>
+        </Top>
+
+        <Lists>
+          {data.length !== 0 ? (
+            data.map((marked, index) => (
+              <ListElement key={marked.id}>
+                <span>{marked.issue.title}</span>
+                <AddIn
+                  onClick={() => serializeMarkeds(marked.id, marked.issue_id)}
+                >
+                  <Checker /> adicionar
+                </AddIn>
+              </ListElement>
+            ))
+          ) : (
+            <strong>
+              Comece{" "}
+              <a href="/explore" target="_blank" rel="noopener noreferrer">
+                adicionando
+              </a>{" "}
+              artigos na sua lista de favoritos!
+            </strong>
+          )}
+        </Lists>
       </Modals>
     </>
   );

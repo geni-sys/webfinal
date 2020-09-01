@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FiCheck } from "react-icons/fi";
 
 export const Container = styled.div`
   display: grid;
@@ -121,66 +122,110 @@ export const CreateList = styled.button`
 // MODAL STYLUS
 export const Modals = styled.div`
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+
+  height: 230px;
+  width: 410px;
+  background: transparent;
+
   font-size: 1.2em;
   margin-top: 20px;
   padding: 10px 0;
-  width: 700px;
 
   border: 1px solid rgba(0, 0, 0, 0.2);
-  background: var(--force);
 `;
 
 export const Lists = styled.ul`
   padding: 5px 20px;
-  width: 300px;
+  width: 400px;
+  max-height: 220px;
+  height: auto;
+
+  background: var(--witer);
   overflow-y: auto;
 
-  li {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    border: none;
+  border: 1px solid black;
+  border-radius: 3px;
+  margin-top: 13px;
+`;
 
-    margin: 10px;
-    border-radius: 2px;
-    padding: 3px 10px;
+export const Top = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 
-    strong {
-      font-size: 14px;
-      color: var(--reports);
-    }
+  width: 400px;
+  height: 33px;
+  border: 1px solid black;
+  border-radius: 4px;
+  position: relative;
 
-    button {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      padding: 0 10px;
-      border-radius: 4px;
-      border: 1px solid rgba(0, 0, 0, 0.5);
-
-      &:hover {
-        background: var(--reports);
-      }
-    }
-
-    &.added {
-      background: var(--white);
-    }
+  input {
+    width: calc(100% - 99px);
+    border: 0;
+    padding: 5px 7px;
+    height: 100%;
   }
 `;
 
-export const Controls = styled.div`
+export const Checker = styled(FiCheck)``;
+
+export const ListElement = styled.li`
+  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  max-height: 20px;
+  width: 100%;
+
+  position: relative;
+  margin-bottom: 5px;
+
+  min-height: 23px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
 `;
 
-export const Create = styled.button`
-  height: 30px;
-  margin-top: 40px;
+export const AddIn = styled.button`
+  display: flex;
+  align-items: center;
+
+  height: 20px;
   padding: 0 20px;
   border-radius: 3px;
+
+  margin: 0;
+  position: absolute;
+  right: 0;
+
+  transition: background-color 0.2s ease-in;
+
+  cursor: pointer;
+  color: #000;
+  background-color: #d3d3d3;
+
+  font-weight: 700;
+  font-family: Roboto, arial, sans-serif;
+  border: 0 solid #aa9696;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+  &:hover {
+    background: #50fa7b;
+  }
+`;
+
+export const CreateTitle = styled.button`
+  display: flex;
+  align-items: center;
+
+  padding: 0 20px;
+  border-radius: 3px;
+
+  position: absolute;
+  right: 0;
+
+  height: 25px;
+  margin: auto 0;
+  text-align: center;
+  margin-right: 5px;
 
   transition: background-color 0.2s ease-in;
 

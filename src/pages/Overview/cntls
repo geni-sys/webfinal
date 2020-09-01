@@ -1,0 +1,29 @@
+
+  /**
+   * {data.map((marked, index) => (
+            <li key={marked.id}>
+              <strong>{marked.issue.title}</strong>
+              <button
+                onClick={() => serializeMarkeds(marked.id, marked.issue_id)}
+              >
+                <FiPlus />
+                Add
+              </button>
+            </li>
+          ))}
+
+          Nome da lista
+          <input
+            placeholder="Que não exista"
+            type="text"
+            name="namer"
+            id="namer"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <span>
+            Artigos: <strong>{idNewList}</strong>
+          </span>
+          <Create onClick={createListName}>Criar</Create>
+   *
+   */

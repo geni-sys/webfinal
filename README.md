@@ -19,8 +19,8 @@
 
 - CLOSED FEATURES ✅
 
-  - [x] Create a list ✔️
-  - [x] Add issue in list ✔️
+  - [x] Create a list (review) ✔️
+  - [x] Add issue in list (review) ✔️
   - [x] Overview screens ✔️
   - [x] market pages : 4/6 ✔️
   - [x] Header contextmenu ✔️
