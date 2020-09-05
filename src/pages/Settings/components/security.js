@@ -53,6 +53,9 @@ function Security() {
           type="password"
           name="old_password"
           id="old_password"
+          autocapitalize="none"
+          autocomplete="off"
+          autocorrect="off"
           value={oldPassword}
           onChange={(e) => setOldPassowrd(e.target.value)}
         />
@@ -65,6 +68,9 @@ function Security() {
           type="password"
           name="new_password"
           id="new_password"
+          autocapitalize="none"
+          autocomplete="off"
+          autocorrect="off"
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
         />
@@ -78,6 +84,9 @@ function Security() {
           id="input_confirm"
           placeholder="Nova senha"
           name="input_confirm"
+          autocapitalize="none"
+          autocomplete="off"
+          autocorrect="off"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
         />

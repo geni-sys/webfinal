@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
-import { FiActivity, FiAirplay, FiStar, FiPlus } from "react-icons/fi";
+import { FiActivity, FiAirplay, FiStar } from "react-icons/fi";
 import Header from "../../components/Header";
 // STYLUS | STATIC
 import {
@@ -91,6 +91,11 @@ function Modal() {
     setData(newArray);
   }
   async function createListName() {
+    if (!name) {
+      alert("Listas devem ter um nome");
+      return;
+    }
+
     try {
       const response = await api.post(
         `/users/${user_id}/create/playlist`,
@@ -122,7 +127,7 @@ function Modal() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <CreateTitle>
+          <CreateTitle type="submit" onClick={createListName}>
             <Checker /> Create
           </CreateTitle>
         </Top>
@@ -133,6 +138,7 @@ function Modal() {
               <ListElement key={marked.id}>
                 <span>{marked.issue.title}</span>
                 <AddIn
+                  disabled={!name ? true : false}
                   onClick={() => serializeMarkeds(marked.id, marked.issue_id)}
                 >
                   <Checker /> adicionar
@@ -187,7 +193,7 @@ function Overview() {
           console.log(error.config);
         });
 
-      setData(response.data);
+      setData(response.data.lists);
     } catch (err) {
       console.log(err.message);
       return alert(err.message);

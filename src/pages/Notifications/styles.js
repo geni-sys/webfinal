@@ -79,6 +79,7 @@ export const List = styled.ul`
 // STYLUS MAIN INNER
 export const Content = styled.div`
   margin-right: 100px;
+  width: 400px;
 
   @media (max-width: 700px) {
     margin: 0 20px;
@@ -161,4 +162,26 @@ export const Clicked = styled.a`
   color: var(--white);
   margin-top: 5px;
   padding: 3px 10px;
+`;
+
+export const New = styled.button`
+  /* background-color: var(--new); */
+  color: var(--white);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  justify-content: center;
+
+  width: 70px;
+  background: var(--Notify);
+
+  align-items: center;
+  transition: opacity 0.1s;
+  padding: 2px;
+  margin: 10px 0;
+
+  &:hover {
+    opacity: 0.9;
+  }
 `;

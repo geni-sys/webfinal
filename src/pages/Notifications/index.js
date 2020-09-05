@@ -1,13 +1,15 @@
 import React, { useState, memo } from "react";
 // COMPONENS
 import { FiTarget, FiGitBranch, FiShield } from "react-icons/fi";
-import Header from "../../components/Header";
 import { All, Mentioned, OurTeam } from "./components";
+import Header from "../../components/Header";
+import CreateNotification from "../../components/CreateNotification";
 // STYLUS STATIC
-import { Container, Aside, List, Main, Content } from "./styles";
+import { Container, Aside, List, Main, Content, New } from "./styles";
 
 const Notifications = ({ match }) => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isCreatingNotification, setIsCreatingNotification] = useState(false);
 
   // const { tab } = match.params;
 
@@ -21,6 +23,9 @@ const Notifications = ({ match }) => {
     if (activeTab === 2) {
       return <OurTeam />;
     }
+  }
+  function handleCerateNotification() {
+    setIsCreatingNotification(!isCreatingNotification);
   }
 
   return (
@@ -53,11 +58,17 @@ const Notifications = ({ match }) => {
               <FiShield color="#f84a4b" />
               <a href="/notifications?tab=3">Our team</a>
             </li>
+
+            <New onClick={handleCerateNotification}>New</New>
           </List>
         </Aside>
 
         <Content>
-          <ul>{ChooseComponent()}</ul>
+          {isCreatingNotification ? (
+            <CreateNotification clsName={"monted"} />
+          ) : (
+            <ul>{ChooseComponent()}</ul>
+          )}
         </Content>
       </Main>
     </Container>

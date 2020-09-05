@@ -67,9 +67,12 @@ const Header = () => {
           <div style={{ position: "relative" }}>
             <InputSearch
               placeholder="Search or jump to"
-              type="search"
+              type="text"
               name="search"
               id="search-bar"
+              autocapitalize="none"
+              autocomplete="off"
+              autocorrect="off"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
             />
