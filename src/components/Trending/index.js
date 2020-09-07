@@ -50,23 +50,31 @@ function Trender() {
 
   return (
     <Trending>
-      {data.map((item) => (
-        <li key={item.id}>
-          <div id="top">
-            <Miniature width={"40px"} height={"40px"} />
-          </div>
-          <div id="bottom">
-            <div id="header">
-              <strong>API com nodeJS</strong>
-              <span>*</span>
+      {!(data.length === 0) ? (
+        data.map((item) => (
+          <li key={item.id}>
+            <div id="top">
+              <Miniature
+                source={item.user.github + ".png"}
+                width={"40px"}
+                height={"40px"}
+              />
             </div>
-            <p id="description">
-              Artigo destacado com base em tags mais pesquisqadas e com maiores
-              marcações. Destacado pelos especialistas da plataforma.
-            </p>
-          </div>
-        </li>
-      ))}
+            <div id="bottom">
+              <div id="header">
+                <strong>{item.title}</strong>
+                <span>*</span>
+              </div>
+              <p id="description">
+                Artigo destacado com base em tags mais pesquisqadas e com
+                maiores marcações. Destacado pelos especialistas da plataforma.
+              </p>
+            </div>
+          </li>
+        ))
+      ) : (
+        <h1>EM BREVE</h1>
+      )}
     </Trending>
   );
 }

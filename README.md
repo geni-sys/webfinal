@@ -49,6 +49,7 @@
   - [x] Create list ✔️
   - [x] Add issue in list ✔️
   - [x] Notifications ✔️
+  - [x] Marketplace ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] Marcar / star ❓
