@@ -40,7 +40,7 @@ const Notifications = ({ match }) => {
               onClick={() => setActiveTab(0)}
             >
               <FiTarget color="#2ea44f" />
-              <a href="/notifications?tab=1">All</a>
+              <a href="/notifications?tab=1">Usuários adicionando</a>
             </li>
 
             <li
@@ -48,7 +48,7 @@ const Notifications = ({ match }) => {
               onClick={() => setActiveTab(1)}
             >
               <FiGitBranch color="#f9a839" />
-              <a href="/notifications?tab=2">Mentioned</a>
+              <a href="/notifications?tab=2">Requisições de listas</a>
             </li>
 
             <li
@@ -56,7 +56,7 @@ const Notifications = ({ match }) => {
               onClick={() => setActiveTab(2)}
             >
               <FiShield color="#f84a4b" />
-              <a href="/notifications?tab=3">Our team</a>
+              <a href="/notifications?tab=3">Nossa equipe</a>
             </li>
 
             <New onClick={handleCerateNotification}>New</New>
@@ -65,7 +65,10 @@ const Notifications = ({ match }) => {
 
         <Content>
           {isCreatingNotification ? (
-            <CreateNotification clsName={"monted"} />
+            <CreateNotification
+              closeIt={handleCerateNotification}
+              clsName={"monted"}
+            />
           ) : (
             <ul>{ChooseComponent()}</ul>
           )}

@@ -34,6 +34,10 @@ export const Aside = styled.article`
       margin-top: 10px;
     }
 
+    &.selected {
+      background: var(--discord);
+    }
+
     display: flex;
     justify-content: flex-start;
     min-width: 140px;
@@ -66,8 +70,34 @@ export const Main = styled.main`
     }
   }
 
-  ul li {
-    padding: 3px 15px;
-    color: var(--rocketseat);
+  select {
+    margin: 5px;
+  }
+`;
+
+export const Shareit = styled.input`
+  margin: 5px;
+  padding: 1px 3px;
+`;
+
+export const Send = styled.button`
+  margin: 5px;
+  padding: 1px 3px;
+  width: 110px;
+  background-color: var(--witer);
+  color: var(--tertiary);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  align-items: center;
+  transition: opacity 0.1s;
+
+  &:hover {
+    background-color: var(--new);
+    color: var(--white);
   }
 `;

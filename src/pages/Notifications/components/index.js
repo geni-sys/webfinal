@@ -37,17 +37,17 @@ export const All = () => {
             id="alert"
           >
             <div id="header">
-              <span>De: {note.de.name}</span>
+              <span>Usuário: {note.de.name}</span>
 
               <Triangle />
             </div>
 
             <div id="nlw">
-              <p>{note.transcription}</p>
+              <p>Adicionou você em sua lista de usuários marcados</p>
             </div>
 
             <div id="footer">
-              <Clicked href="/">Aceitar</Clicked>
+              <Clicked href="/">Adicionar</Clicked>
             </div>
           </Notificate>
         ))
@@ -101,11 +101,13 @@ export const Mentioned = () => {
             </div>
 
             <div id="nlw">
-              <p>{note.transcription}</p>
+              <p>Está compartilhando uma nova playlist com anotações. </p>
             </div>
 
             <div id="footer">
-              <Clicked href="/">Aceitar</Clicked>
+              <Clicked target="_BLANK" href={note.transcription}>
+                Aceitar
+              </Clicked>
             </div>
           </Notificate>
         ))
@@ -153,7 +155,7 @@ export const OurTeam = () => {
             id="alert"
           >
             <div id="header">
-              <span>De: {note.de.name}</span>
+              <span>De: GEneSis</span>
 
               <Triangle />
             </div>
@@ -163,7 +165,9 @@ export const OurTeam = () => {
             </div>
 
             <div id="footer">
-              <Clicked href="/">Aceitar</Clicked>
+              <Clicked target="_BLANK" href={note.state}>
+                Prosseguir
+              </Clicked>
             </div>
           </Notificate>
         ))
