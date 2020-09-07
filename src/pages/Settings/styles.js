@@ -39,7 +39,7 @@ export const Main = styled.main`
 `;
 
 export const Aside = styled.aside`
-  width: 250px;
+  width: 400px;
   font-size: 1.3em;
   max-width: 300px;
   margin: 0 20px 0 0;

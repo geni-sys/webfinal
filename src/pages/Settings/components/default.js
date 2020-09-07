@@ -77,8 +77,7 @@ function Default() {
           onChange={(e) => setGithub(e.target.value)}
         />
         <label htmlFor="input_git" id="description">
-          Todos os campos nesta página são opcionais e podem ser excluídos a
-          qualquer momento.
+          Vai servir para pegarmos sua foto de perfil e sua descrição.
         </label>
       </li>
 

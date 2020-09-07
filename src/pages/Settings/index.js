@@ -3,6 +3,7 @@ import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
 import Header from "../../components/Header";
+import Miniature from "../../components/Miniature";
 import Security from "./components/security";
 import Default from "./components/default";
 // STYLUS | STATIC
@@ -141,7 +142,9 @@ const Settings = () => {
       <Main>
         <Aside>
           <div id="personal">
-            <span id="plus">+</span>
+            <span id="plus">
+              <Miniature width={"30px"} height={"30px"} />
+            </span>
             <div>
               <a href="/profile">{user_name}</a>
               <p style={{ fontSize: "9px" }}>Painel de configurações.</p>
@@ -196,8 +199,8 @@ const Settings = () => {
             type="text"
             name="clipboard"
             id="clipboard"
-            value={newToken}
-            readonly
+            defaultValue={newToken}
+            readOnly
           />
         </TokenBox>
       </Main>

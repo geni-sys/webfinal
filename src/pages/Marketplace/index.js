@@ -1,20 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
-import { FiAirplay } from "react-icons/fi";
 import { google } from "../../services/api";
 // COMPONENTS
 import Header from "../../components/Header";
+import Trending from "../../components/Trending";
 import OurAPI, { Extention, Feedback } from "./components/OurAPI";
 // STYLUS | STATIC
 import Illustration from "../../assets/market-illustration.svg";
 import Nine from "../../assets/9.png";
-import {
-  Container,
-  Main,
-  Aside,
-  Recommended,
-  Article,
-  Trending,
-} from "./styles";
+import { Container, Main, Aside, Recommended, Article } from "./styles";
 import "./styles.css";
 
 const Marketplace = (props) => {
@@ -62,72 +55,8 @@ const Marketplace = (props) => {
           ))}
         </Recommended>
 
-        <h4>Trending</h4>
-        <Trending id="trends">
-          <li>
-            <div id="top">
-              <FiAirplay />
-            </div>
-            <div id="bottom">
-              <div id="header">
-                <strong>BuildPulse</strong>
-                <span>*</span>
-              </div>
-              <p id="description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dignissimos beatae optio culpa, deleniti ratione enim libero
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div id="top">
-              <FiAirplay />
-            </div>
-            <div id="bottom">
-              <div id="header">
-                <strong>BuildPulse</strong>
-                <span>*</span>
-              </div>
-              <p id="description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dignissimos beatae optio culpa, deleniti ratione enim libero
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div id="top">
-              <FiAirplay />
-            </div>
-            <div id="bottom">
-              <div id="header">
-                <strong>BuildPulse</strong>
-                <span>*</span>
-              </div>
-              <p id="description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dignissimos beatae optio culpa, deleniti ratione enim libero
-              </p>
-            </div>
-          </li>
-
-          <li>
-            <div id="top">
-              <FiAirplay />
-            </div>
-            <div id="bottom">
-              <div id="header">
-                <strong>BuildPulse</strong>
-                <span>*</span>
-              </div>
-              <p id="description">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit.
-                Dignissimos beatae optio culpa, deleniti ratione enim libero
-              </p>
-            </div>
-          </li>
-        </Trending>
+        <h4>Artigos mais destacados</h4>
+        <Trending />
       </main>
     );
   }
@@ -173,9 +102,6 @@ const Marketplace = (props) => {
               </li>
               <li className={activedGroup === 3 ? "actived" : ""}>
                 <a href="/marketplace?tab=3">Code quality</a>
-              </li>
-              <li className={activedGroup === 4 ? "actived" : ""}>
-                <a href="/marketplace?tab=4">Desafios</a>
               </li>
               <li className={activedGroup === 5 ? "actived" : ""}>
                 <a href="/marketplace?tab=5">Feedback</a>
