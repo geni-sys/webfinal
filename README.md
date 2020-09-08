@@ -28,6 +28,7 @@
 - OPENED FEATURES ❌
   - [x] Explore: all about users: best, mentions, news.. ❓
   - [x] Explore DSG
+  - [x] LOGIN COLORS
 
 ## FUNTIONAL
 
@@ -52,10 +53,12 @@
   - [x] Marketplace ✔️
   - [x] Panel for create notifications ✔️
   - [x] Send notification ✔️
+  - [x] Marcar / star in SEARCHRESULT ✔️
+  - [x] get user description (Profile) ✔️
+  - [x] Marcar / star ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] playlist (CHAT) ❓
-  - [x] Marcar / star ❓
-  - [x] unmark user ❓
   - [x] explore ❓
-  - [x] get user description (Profile) ❓
+  - [x] Fill Contributions (Profile) ❓
+  - [x] unmark user ❓

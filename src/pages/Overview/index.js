@@ -2,7 +2,7 @@ import React, { useState, useCallback, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
-import { FiActivity, FiAirplay, FiStar } from "react-icons/fi";
+import { FiActivity, FiAirplay, FiStar, FiCheck } from "react-icons/fi";
 import Header from "../../components/Header";
 // STYLUS | STATIC
 import {
@@ -167,9 +167,9 @@ function Overview() {
 
   const [cookies] = useCookies();
 
+  const { token, user_id } = cookies;
   const getAllLists = useCallback(async () => {
     try {
-      const { token } = cookies;
       const response = await api
         .get("/playlists", {
           headers: { Authorization: String(token) },
@@ -198,11 +198,51 @@ function Overview() {
       console.log(err.message);
       return alert(err.message);
     }
-  }, [cookies]);
+  }, [token]);
 
   useEffect(() => {
     getAllLists();
   }, [getAllLists]);
+
+  async function handleMarkList(isStarry, list_id) {
+    if (isStarry) {
+      return null;
+    }
+
+    try {
+      const response = await api
+        .post(
+          `/user/${user_id}/mark/playlists/${list_id}`,
+          {},
+          {
+            headers: { Authorization: String(token) },
+          }
+        )
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+      if (response.data.id) {
+        window.location.reload(true);
+      }
+    } catch (err) {
+      alert(err.message);
+    }
+  }
 
   function HandleChoosed({ state }) {
     if (state) {
@@ -215,14 +255,14 @@ function Overview() {
           <li key={list.id}>
             <div id="starred">
               <FiActivity />
-              <span>Based on repositories you´re starred</span>
+              <span>Baseado nas tags do seu perfil.</span>
             </div>
 
             <div id="list">
               <div id="unik">
                 <FiAirplay />
                 <p>
-                  <a href={`/users/${list.id}`}>microsoft</a> /{" "}
+                  <a href={`/users/${String(list.id).trim()}`}>3lias-allex</a> /{" "}
                   <strong>
                     <a href={`/share/${list.id}`}>{list.name}</a>
                   </strong>
@@ -230,16 +270,20 @@ function Overview() {
               </div>
 
               <div id="side">
-                <button>
-                  <FiStar />
-                  Star
+                <button
+                  onClick={() => {
+                    handleMarkList(list.starry, list.id);
+                  }}
+                >
+                  {list.starry ? <FiCheck /> : <FiStar />}
+                  {list.starry ? "Marcado" : "Marcar"}
                 </button>
-                <span>{list.issues.length}</span>
+                <span>{list.stars}</span>
               </div>
             </div>
 
             <div id="stamps">
-              <span>Updated 3 min ago</span>
+              <span>Última atualização 3 min ago</span>
               <br />
               <span>* CSS</span>
             </div>

@@ -10,33 +10,11 @@ import Header from "../../components/Header";
 import { Container, Main, Card, Great, Body, GoBack } from "./styles";
 
 const LearningIssue = ({ match }) => {
-  const [cookies] = useCookies();
+  const [data, setData] = useState([]);
 
+  const [cookies] = useCookies();
   const { issue_id } = match.params;
   const { token, user_id } = cookies;
-
-  const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [tags, setTags] = useState("");
-  const [link, setLink] = useState("");
-
-  async function verifyIfIsMarked() {
-    const res = await api
-      .get(`/user/${user_id}/issue/marked?element=${issue_id}`, {
-        headers: { Authorization: String(token) },
-      })
-      .catch((error) => {
-        alert(error.message);
-      });
-    console.log(res.data.length);
-    console.log(res.data);
-    if (res.data.length === 0) {
-      return true;
-    }
-
-    return false;
-  }
-  const [isMarked, setIsMarked] = useState(verifyIfIsMarked);
 
   const getLessonsData = useCallback(async () => {
     try {
@@ -63,10 +41,7 @@ const LearningIssue = ({ match }) => {
           console.log(error.config);
         });
 
-      setTitle(response.data.title);
-      setBody(response.data.body);
-      setTags(response.data.tags);
-      setLink(response.data.link);
+      setData([response.data]);
     } catch (err) {
       console.log(err.message);
       return alert("Erro na conexão");
@@ -93,25 +68,42 @@ const LearningIssue = ({ match }) => {
       </>
     );
   }
-  async function handleMarkIssue() {
-    if (isMarked) {
-      return;
+  async function handleMarkIssue(isStarry) {
+    if (isStarry) {
+      return null;
     }
 
     try {
-      const response = await api.post(
-        `/user/${user_id}/mark/issues/${issue_id}`,
-        {},
-        {
-          headers: { Authorization: String(token) },
-        }
-      );
-
-      if (response.data) alert("Issue marked");
-
-      setIsMarked(true);
+      const response = await api
+        .post(
+          `/user/${user_id}/mark/issues/${issue_id}`,
+          {},
+          {
+            headers: { Authorization: String(token) },
+          }
+        )
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+      if (response.data.id) {
+        return;
+      }
     } catch (err) {
-      console.log(err.message);
       alert(err.message);
     }
   }
@@ -121,48 +113,62 @@ const LearningIssue = ({ match }) => {
       <Header />
 
       <Main id="learn-main">
-        <Card>
-          <strong>{title}</strong>
+        {data.map((issue) => (
+          <>
+            <Card>
+              <strong>{issue.title}</strong>
 
-          <div id="tags">{serializeTags(tags)}</div>
+              <div id="tags">{serializeTags(issue.tags)}</div>
 
-          <div id="featureds">
-            <div id="stars">
-              <span>
-                <FiStar />
-              </span>
-              <p>724</p>
-            </div>
+              <div id="featureds">
+                <div id="stars">
+                  <span>
+                    <FiStar />
+                  </span>
+                  <p>724</p>
+                </div>
 
-            <div id="avorage">
-              <span>
+                <div id="avorage">
+                  <span>
+                    <FiHash />
+                  </span>
+                  <p>122</p>
+                </div>
+              </div>
+
+              <small>Creador: {issue.user.name}</small>
+
+              <a
+                href={issue.link ? issue.link : "/"}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                main document
+              </a>
+
+              <Great
+                onClick={() => handleMarkIssue(issue.starry)}
+                disabled={issue.istarry}
+              >
                 <FiHash />
-              </span>
-              <p>122</p>
-            </div>
-          </div>
+                {issue.istarry ? "Artigo arcado" : "Marcar artigo"}
+              </Great>
+            </Card>
 
-          <small>Creator: Elias alexandre</small>
+            <Body id="learn-app">
+              <GoBack>
+                <FiArrowLeft /> Voltar
+              </GoBack>
 
-          <a href={link ? link : "/"} target="_blank" rel="noopener noreferrer">
-            main document
-          </a>
-
-          <Great onClick={handleMarkIssue} disabled={isMarked}>
-            <FiHash />
-            {isMarked === true ? "Desmarcar" : "Marcar"}
-          </Great>
-        </Card>
-
-        <Body id="learn-app">
-          <GoBack>
-            <FiArrowLeft /> Voltar
-          </GoBack>
-
-          <div id="transcription">
-            <ReactMarkdown renderers={{ code: CodeBlock }} source={body} />
-          </div>
-        </Body>
+              <div id="transcription">
+                <ReactMarkdown
+                  renderers={{ code: CodeBlock }}
+                  source={issue.body}
+                />
+              </div>
+            </Body>
+          </>
+        ))}
       </Main>
     </Container>
   );
