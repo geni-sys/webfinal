@@ -50,11 +50,12 @@
   - [x] Add issue in list ✔️
   - [x] Notifications ✔️
   - [x] Marketplace ✔️
+  - [x] Panel for create notifications ✔️
+  - [x] Send notification ✔️
 
 - OPENED FEATURES ❌ ❓
-  - [x] Marcar / star ❓
   - [x] playlist (CHAT) ❓
-  - [x] get user description (Profile) ❓
-  - [x] panel for create notifications ❓
-  - [x] explore ❓
+  - [x] Marcar / star ❓
   - [x] unmark user ❓
+  - [x] explore ❓
+  - [x] get user description (Profile) ❓

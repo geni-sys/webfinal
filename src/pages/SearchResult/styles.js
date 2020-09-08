@@ -145,15 +145,16 @@ export const Content = styled.div`
 
 // BUTTONS STYLUS
 export const Button = styled.button`
-  background: var(--ENTER);
+  background: var(--dominate);
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: 1px 5px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  margin-top: 7px;
+  border: 0.1px solid rgba(0, 0, 0, 0.1);
 
   &:hover {
-    background: var(--UNANTER);
+    background: var(--discord);
   }
 `;
