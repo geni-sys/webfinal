@@ -53,10 +53,13 @@ export const Aside = styled.aside`
   grid-area: ASIDE;
 
   background: var(--white);
+  background: ${(props) =>
+    props.mode === `dark` ? "#121212" : `var(--white)`};
 
   display: flex;
   flex-direction: column;
-  color: #999;
+  color: ${(props) => (props.mode === `dark` ? "#FFF" : `#999`)};
+
   border-right: 1px solid rgba(0, 0, 0, 0.1);
 
   padding: 30px 10px;
@@ -77,8 +80,10 @@ export const TopInformation = styled.div`
       text-overflow: ellipsis;
       white-space: nowrap;
       margin-left: 4px !important;
+      /* color: #fff; */
 
-      color: var(--grey-dark);
+      color: ${(props) =>
+        props.mode === `dark` ? "#FFF" : `var(--grey-dark)`};
     }
   }
 
@@ -95,7 +100,9 @@ export const TopInformation = styled.div`
       p {
         font-weight: 400;
         font-size: 15px;
-        color: var(--grey-dark);
+
+        color: ${(props) =>
+          props.mode === `dark` ? "#999" : `var(--grey-dark)`};
       }
 
       button {
@@ -177,12 +184,17 @@ export const Footer = styled.footer`
   p {
     font-size: 10px;
     font-family: "Ubuntu", Arial, Helvetica, sans-serif;
+    a {
+      color: ${(props) =>
+        props.mode === `dark` ? "#555" : `var(--grey-dark)`};
+    }
   }
 `;
 
 // MAIN STYLUS
 export const Main = styled.main`
-  background: var(--witer);
+  background: ${(props) =>
+    props.mode === `dark` ? "#1e1e1f" : `var(--witer)`};
   grid-area: MAIN;
 
   overflow-y: auto;

@@ -8,7 +8,7 @@ import CodeBlock from "../CodeBlock";
 // STYLUS | STATIC
 import { List, Item, Transcription, Link } from "./styles";
 
-function IssueList() {
+function IssueList({ mode }) {
   const [data, setData] = useState([]);
   const [cookies] = useCookies([]);
 
@@ -52,9 +52,9 @@ function IssueList() {
   }
 
   return (
-    <List className="unique" id="publications" style={{}}>
+    <List mode={mode} className="unique" id="publications" style={{}}>
       {data.map((lesson) => (
-        <Item key={lesson.id} id="issue-publication">
+        <Item mode={mode} key={lesson.id} id="issue-publication">
           <header>
             <span>
               <Miniature
@@ -68,7 +68,11 @@ function IssueList() {
 
           <div id="tags">{serializeTags(lesson.tags)}</div>
 
-          <Transcription id="transcription" className="issue-limitaion">
+          <Transcription
+            mode={mode}
+            id="transcription"
+            className="issue-limitaion"
+          >
             <ReactMarkdown
               renderers={{ code: CodeBlock }}
               source={lesson.body}

@@ -7,7 +7,8 @@ export const Conatiner = styled.article`
   flex-direction: column;
   color: var(--tertiary);
 
-  background: var(--dominate);
+  background: ${(props) =>
+    props.mode === `dark` ? "#1f2122" : `var(--dominate);`};
   border-left: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 20px;
   padding-left: 10px;
@@ -16,6 +17,7 @@ export const Conatiner = styled.article`
   h3 {
     font-size: 1.7em;
     font-weight: 600;
+    color: ${(props) => (props.mode === `dark` ? "#999" : `auto`)};
   }
 
   &#insights {

@@ -1,5 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
+localStorage.setItem("mode", String("dark"));
+const mode = localStorage.getItem("mode");
+
 export default createGlobalStyle`
   * {
     padding: 0;
@@ -10,7 +13,7 @@ export default createGlobalStyle`
   html, body, #root {
     height: 100%;
   }
-  
+
   html {
     font-size: 62.4%;
   }
@@ -72,7 +75,7 @@ export default createGlobalStyle`
     --quaternary: #292b2f;
     --quinary: #393d42;
     --senary: #828386;
-    
+
     --white: #fff;
     --whit: #FAFAF8;
     --gray: #8a8c90;
@@ -130,7 +133,7 @@ export default createGlobalStyle`
   div#transcription h5,
   div#transcription p {
     margin: 10px 0;
-    color: var(--grey-dark);
+    color: ${() => (mode === `dark` ? "#FFf" : `var(--grey-dark);`)};
   }
   div#transcription h1 {
     font-size: 25px;

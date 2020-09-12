@@ -144,8 +144,8 @@ const Home = () => {
     <Container id="Home">
       <Header />
 
-      <Aside>
-        <TopInformation id="top-aside">
+      <Aside mode={"dark"}>
+        <TopInformation mode={"dark"} id="top-aside">
           <div id="user-aside">
             <Miniature width="30px" height="30px" />
             <a href="/profile">{name}</a>
@@ -212,8 +212,8 @@ const Home = () => {
         </Footer>
       </Aside>
 
-      <Main>
-        <IssueList />
+      <Main mode={"dark"}>
+        <IssueList mode={"dark"} />
       </Main>
       <Article />
 

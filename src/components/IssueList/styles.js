@@ -32,7 +32,8 @@ export const Item = styled.li`
     }
 
     strong {
-      color: var(--grey-dark);
+      color: ${(props) =>
+        props.mode === `dark` ? "#999" : `var(--grey-dark);`};
     }
   }
 
@@ -43,8 +44,10 @@ export const Item = styled.li`
 
     margin-left: 20px;
     span {
-      background: var(--white);
-      color: var(--tertiary);
+      background: ${(props) =>
+        props.mode === `dark` ? "inherit" : `var(--white);`};
+      color: ${(props) =>
+        props.mode === `dark` ? "var(--tertiary);" : `var(--tertiary);`};
       margin: 5px;
       padding: 0 5px;
       border-radius: 6px;
@@ -64,7 +67,12 @@ export const Transcription = styled.div`
   overflow-x: auto;
   overflow-y: hidden;
 
-  background: var(--force);
+  &.issue-limitaion#transcription {
+    /* color: ${(props) => (props.mode === `dark` ? "#FFf" : ``)}; */
+  }
+
+  background: ${(props) =>
+    props.mode === `dark` ? "#1f252e" : `var(--force)`};
   border: 1px solid rgba(0, 0, 0, 0.2);
 `;
 

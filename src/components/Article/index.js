@@ -28,7 +28,7 @@ const Hilights = () => {
   }, [handleRequestOnGithub]);
 
   return (
-    <Conatiner id="insights">
+    <Conatiner mode={"dark"} id="insights">
       <h3>Explore Insights</h3>
 
       <small style={{ color: "#333" }}>
