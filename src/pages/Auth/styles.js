@@ -12,7 +12,7 @@ export const Container = styled.div`
     "ASID MAI";
 
   height: 100vh;
-  background: var(--force);
+  background: #121212 !important;
   overflow-y: hidden;
   height: 100vh;
 
@@ -84,7 +84,7 @@ export const Container = styled.div`
 // ASIDE STYLUS
 export const Aside = styled.aside`
   &#Login-aside {
-    background: #fff;
+    background: #121212;
     grid-area: ASID;
 
     display: flex;
@@ -94,6 +94,7 @@ export const Aside = styled.aside`
 
     h3 {
       font-size: 6rem;
+      color: #ffffff;
     }
     p#text-limited {
       max-width: 400px;
@@ -110,7 +111,7 @@ export const Aside = styled.aside`
 
 // MAIN STYLUS
 export const Main = styled.main`
-  background: #ebf3ff;
+  background: #1f252e;
   grid-area: MAI;
 
   display: flex;
@@ -121,7 +122,7 @@ export const Main = styled.main`
   div#secret {
     display: block;
     font-size: 1.3em;
-
+    color: #777;
     margin-top: 30px;
   }
 `;
@@ -130,24 +131,24 @@ export const Form = styled.form`
   display: block;
   position: relative;
   width: 300px;
-  height: 210px;
+  height: 220px;
 
   border: 1px solid rgba(0, 0, 0, 0.4);
   border-radius: 5px;
-  background-color: #fff;
+  background-color: #121212;
   color: var(--primary);
   margin: auto;
 
   padding: 10px;
 
   &:hover {
-    box-shadow: 1px 0.5px white;
+    box-shadow: 1px 0.5px #1f252e;
   }
 
   div#input-group label {
     font-family: "Ubuntu", Arial, Helvetica, sans-serif;
     font-size: 14px;
-    color: #111;
+    color: #fff;
   }
 
   div#input-group + label {
@@ -179,9 +180,10 @@ export const Input = styled.input`
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 1.4em;
 
-  color: #333;
+  color: #999;
+  background: #1f252e !important;
   border-radius: 3px;
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 0.1px solid #999;
   outline-color: #7159c1;
 `;
 
@@ -197,7 +199,7 @@ export const Submit = styled.button`
 
   font-weight: 700;
   font-family: Roboto, arial, sans-serif;
-  border: 1px solid #aa9696;
+  /* border: 1px solid #aa9696; */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
   &:hover {
@@ -212,8 +214,8 @@ export const Card = styled.div`
   margin-top: 10px;
   border-radius: 3px;
 
-  background-color: #fff;
-  color: var(--primary);
+  background-color: #121212;
+  color: #999;
 
   width: 100%;
   padding: 5px;
