@@ -35,6 +35,7 @@ const Home = () => {
     return true;
   });
   const [showConfirmation, setShowConfirmation] = useState(false);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const [name] = useState(
     () => localStorage.getItem("name") || "Recarregue a página"
@@ -144,7 +145,7 @@ const Home = () => {
     <Container id="Home">
       <Header />
 
-      <Aside mode={"dark"}>
+      <Aside mode={theme}>
         <TopInformation mode={"dark"} id="top-aside">
           <div id="user-aside">
             <Miniature width="30px" height="30px" />
@@ -212,8 +213,8 @@ const Home = () => {
         </Footer>
       </Aside>
 
-      <Main mode={"dark"}>
-        <IssueList mode={"dark"} />
+      <Main mode={theme}>
+        <IssueList mode={theme} />
       </Main>
       <Article />
 

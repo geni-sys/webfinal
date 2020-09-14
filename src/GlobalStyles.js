@@ -1,7 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-localStorage.setItem("mode", String("dark"));
-const mode = localStorage.getItem("mode");
+const mode = localStorage.getItem("theme");
 
 export default createGlobalStyle`
   * {

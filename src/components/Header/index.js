@@ -14,6 +14,7 @@ import {
   OverClick,
   LogOut,
   Close,
+  Themer,
 } from "./styles";
 
 const Header = () => {
@@ -22,9 +23,22 @@ const Header = () => {
   });
   const [query, setQuery] = useState("");
   const [modal, setModal] = useState(true);
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
 
   const history = useHistory();
   const [, , removeCookie] = useCookies();
+
+  function toggleTheme() {
+    if (theme === "dark") {
+      setTheme("light");
+      return localStorage.setItem("theme", "light");
+    }
+
+    setTheme("dark");
+    return localStorage.setItem("theme", "dark");
+  }
 
   function handleSignOut() {
     try {
@@ -94,6 +108,18 @@ const Header = () => {
       </div>
 
       <Session id="session">
+        <Themer
+          onChange={toggleTheme}
+          checked={theme === "dark"}
+          checkedIcon={false}
+          uncheckedIcon={false}
+          height={9}
+          width={38}
+          handleDiameter={18}
+          offColor={"#121212"}
+          onColor={"#DEDEDE"}
+        />
+
         <a id="top-level" href="/notifications" className="desactived-header">
           <FiBell />
         </a>

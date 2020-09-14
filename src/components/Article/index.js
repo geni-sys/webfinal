@@ -7,6 +7,7 @@ import { Conatiner, InsightGroup, List, Inseight } from "./styles";
 
 const Hilights = () => {
   const [data, setData] = useState([]);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const handleRequestOnGithub = useCallback(async () => {
     try {
@@ -28,7 +29,7 @@ const Hilights = () => {
   }, [handleRequestOnGithub]);
 
   return (
-    <Conatiner mode={"dark"} id="insights">
+    <Conatiner mode={theme} id="insights">
       <h3>Explore Insights</h3>
 
       <small style={{ color: "#333" }}>

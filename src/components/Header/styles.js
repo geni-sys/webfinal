@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Switch from "react-switch";
 
 export const Container = styled.header`
   display: flex;
@@ -243,5 +244,13 @@ export const Close = styled.div`
         transform: rotate(20deg);
       }
     }
+  }
+`;
+
+export const Themer = styled(Switch)`
+  margin: 7px auto;
+
+  @media (max-width: 750px) {
+    display: none;
   }
 `;
