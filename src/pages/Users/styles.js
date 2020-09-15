@@ -13,6 +13,7 @@ export const Container = styled.div`
   height: 100vh;
   max-height: 100vh;
   background: var(--white);
+  color: ${(props) => (props.mode === `dark` ? "#FFF" : `initial`)};
   overflow-x: hidden;
 `;
 

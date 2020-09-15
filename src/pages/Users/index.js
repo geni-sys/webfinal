@@ -12,18 +12,19 @@ import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 function Users({ match }) {
   const [data, setData] = useState([]);
   const [isSelected, setIsSelected] = useState(0);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const { friend_email } = match.params;
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
-      return <Lists user={3} />;
+      return <Lists mode={theme} user={3} />;
     }
     if (parseInt(id) === 2) {
-      return <Markeds user={3} />;
+      return <Markeds mode={theme} user={3} />;
     }
 
-    return <Default user={3} />;
+    return <Default mode={theme} user={3} />;
   }
 
   // GLOBAL VARs
@@ -104,7 +105,7 @@ function Users({ match }) {
   }
 
   return (
-    <Container className="profile">
+    <Container mode={theme} className="profile">
       <Header />
 
       <Main>
@@ -141,8 +142,8 @@ function Users({ match }) {
           </Aside>
         ))}
 
-        <Article>
-          <Top>
+        <Article mode={theme}>
+          <Top mode={theme}>
             <li
               onClick={() => setIsSelected(0)}
               className={isSelected === 0 ? "selected" : ""}
@@ -163,7 +164,7 @@ function Users({ match }) {
             </li>
           </Top>
 
-          <Bottom id="let">
+          <Bottom mode={theme} id="let">
             <span>Fixado</span>
 
             <ul id="listeds">

@@ -12,12 +12,13 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === `dark` ? "#121212" : `var(--force);`};
   overflow-x: hidden;
 `;
 
 export const Grid = styled.div`
-  background: #fff;
+  background: ${(props) => (props.mode === `dark` ? "#121212" : ` #fff`)};
   grid-area: MAIN;
   height: 100%;
   overflow-y: auto;
@@ -52,17 +53,18 @@ export const Welcome = styled.div`
   padding: 30px;
   margin-bottom: 60px;
   border-radius: 6px;
-  background-color: var(--force);
+  background: ${(props) =>
+    props.mode === `dark` ? "#1f252e" : `var(--force);`};
 
   h2 {
     margin: 0 auto;
-    color: var(--Notify);
+    color: ${(props) => (props.mode === `dark` ? "#FFF" : `var(--Notify);`)};
     font-size: 30px;
     font-family: "Ubuntu", Arial, Helvetica, sans-serif;
   }
 
   p {
-    color: var(--Notify);
+    color: ${(props) => (props.mode === `dark` ? "#d3d3d3" : `var(--Notify);`)};
     font-size: 18px;
     max-width: 900px;
     text-align: center;
@@ -85,7 +87,7 @@ export const Card = styled.div`
     font-size: 18px;
     margin-bottom: 10px;
     margin-left: -30px;
-    color: var(--quinary);
+    color: ${(props) => (props.mode === `dark` ? "#999" : `var(--quinary);`)};
 
     @media (max-width: 600px) {
       margin-left: 0;
@@ -103,6 +105,7 @@ export const Card = styled.div`
       justify-content: center;
       padding: 10px;
 
+      background: ${(props) => props.mode === `dark` && "#1f252e"};
       height: 100px;
       /* height: 70px; */
       border: 1px solid rgba(0, 0, 0, 0.4);
@@ -111,7 +114,7 @@ export const Card = styled.div`
 
       strong {
         font-family: "Roboto", Arial, Helvetica, sans-serif;
-        color: #335493;
+        color: ${(props) => (props.mode === `dark` ? "#2ea44f" : `#335493;`)};
         text-align: center;
         font-size: 1.3em;
       }
@@ -152,7 +155,7 @@ export const Card = styled.div`
 export const GotIt = styled.div`
   display: flex;
   flex-direction: column;
-  color: #6a6767;
+  color: ${(props) => (props.mode === `dark` ? "#999" : `#6a6767;`)};
   font-family: "Roboto mono", Arial, Helvetica, sans-serif;
   font-size: 1.5em;
 

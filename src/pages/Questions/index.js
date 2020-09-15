@@ -13,6 +13,7 @@ const Questions = () => {
   const [selectedXP, setSelectedXP] = useState(0);
   const [interest, setInterest] = useState("");
   const [selectedPlan, setSelectedPlan] = useState(0);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const [cookies] = useCookies();
   const { user_id, token } = cookies;
@@ -119,12 +120,12 @@ const Questions = () => {
   }
 
   return (
-    <Container id="new-issue">
+    <Container mode={theme} id="new-issue">
       <Header />
 
-      <Grid id="grid" style={{ gridArea: "MAIN" }}>
-        <Main id="create-issue">
-          <Welcome>
+      <Grid mode={theme} id="grid" style={{ gridArea: "MAIN" }}>
+        <Main mode={theme} id="create-issue">
+          <Welcome mode={theme}>
             <h2>Bem vindo a plataforma</h2>
             <p>
               Woohoo! Você está se juntando a milhares de desenvolvedores que
@@ -133,7 +134,7 @@ const Questions = () => {
             </p>
           </Welcome>
 
-          <Card id="card">
+          <Card mode={theme} id="card">
             <h3>Qual tipo de trabalho voçê faz, principalmente</h3>
             <ul id="questions">
               <li
@@ -170,7 +171,7 @@ const Questions = () => {
             </ul>
           </Card>
 
-          <Card id="card">
+          <Card mode={theme} id="card">
             <h3>Quanta experiência voçê tem?</h3>
             <ul id="questions">
               <li
@@ -207,7 +208,7 @@ const Questions = () => {
             </ul>
           </Card>
 
-          <Card id="card">
+          <Card mode={theme} id="card">
             <h3>Qual o seu plano ao usar a plataforma?</h3>
             <ul id="questions">
               <li
@@ -228,7 +229,7 @@ const Questions = () => {
             </ul>
           </Card>
 
-          <GotIt>
+          <GotIt mode={theme}>
             <h3>Estrou + Interesado em:</h3>
             <div id="interests-group">
               <input
