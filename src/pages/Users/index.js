@@ -108,9 +108,9 @@ function Users({ match }) {
     <Container mode={theme} className="profile">
       <Header />
 
-      <Main>
+      <Main mode={theme}>
         {data.map((usr) => (
-          <Aside key={usr.id}>
+          <Aside mode={theme} key={usr.id}>
             <span id="badge-overview">#{usr.questions[0].use_case}</span>
             <Miniature source={usr.github + ".png"} desc="Foto de perfil" />
             <div id="user-over">
