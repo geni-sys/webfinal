@@ -4,7 +4,7 @@ import api from "../../../services/api";
 // STALYS | STATICS
 import { Input, Update } from "./styles";
 
-function Security() {
+function Security({ mode }) {
   const [oldPassword, setOldPassowrd] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -49,6 +49,7 @@ function Security() {
       <li>
         <label htmlFor="old_password">Senha antiga</label>
         <Input
+          mode={mode}
           required
           type="password"
           name="old_password"
@@ -64,6 +65,7 @@ function Security() {
       <li>
         <label htmlFor="new_password">Nova senha</label>
         <Input
+          mode={mode}
           required
           type="password"
           name="new_password"
@@ -79,6 +81,7 @@ function Security() {
       <li>
         <label htmlFor="input_confirm">Confirmar nova senha</label>
         <Input
+          mode={mode}
           required
           type="password"
           id="input_confirm"

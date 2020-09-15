@@ -35,10 +35,10 @@ export const Update = styled.button`
 export const Description = styled.textarea`
   resize: vertical;
   border-radius: 6px;
-  background: #ffffff;
+  background: ${(props) => (props.mode === `dark` ? "#121212" : `#ffffff`)};
+  color: ${(props) => (props.mode === `dark` ? "#999" : `#000`)};
   border: 1px solid #00000010;
   padding: 0 5px;
-  color: #000;
   height: 140px;
   max-width: 400px;
 `;

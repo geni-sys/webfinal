@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 // COMPONENTS
 import Header from "../../components/Header";
@@ -31,9 +32,11 @@ const Settings = () => {
     () => localStorage.getItem("name") || "Recarregue a página"
   );
   const [isSelected, setIsSelected] = useState(1);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const [cookies] = useCookies();
   const { user_id, token } = cookies;
+  const history = useHistory();
 
   function copyToClipboard() {
     var copyText = document.querySelector("input#clipboard");
@@ -60,15 +63,18 @@ const Settings = () => {
       alert(err.message);
     }
   }
+  function goToOverviewPage() {
+    history.push("/overview");
+  }
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
-      return <Default />;
+      return <Default mode={theme} />;
     }
     if (parseInt(id) === 4) {
       return (
         <>
-          <MoreInfo>
+          <MoreInfo mode={theme}>
             <strong>Como as notificações funcionam</strong>
             <p>
               Por padrão, a GS alerta você sempre que um artigo, um usuário ou
@@ -99,12 +105,12 @@ const Settings = () => {
       );
     }
     if (parseInt(id) === 3) {
-      return <Security />;
+      return <Security mode={theme} />;
     }
     if (parseInt(id) === 5) {
       return (
         <>
-          <MoreInfo>
+          <MoreInfo mode={theme}>
             <strong>Artigos</strong>
             <p>
               Os artigos são a base do aplicativo, com eles são passados
@@ -129,18 +135,18 @@ const Settings = () => {
       return <a href="/">HOME</a>;
     }
     if (id === 5) {
-      return <Update>Começar</Update>;
+      return <Update onClick={goToOverviewPage}>Começar</Update>;
     }
 
     return <></>;
   }
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
-      <Main>
-        <Aside>
+      <Main mode={theme}>
+        <Aside mode={theme}>
           <div id="personal">
             <span id="plus">
               <Miniature width={"30px"} height={"30px"} />
@@ -179,7 +185,7 @@ const Settings = () => {
           </ul>
         </Aside>
 
-        <Body>
+        <Body mode={theme}>
           <div>
             <h5>Public profile</h5>
 

@@ -28,9 +28,7 @@ const NewIssue = () => {
   const [linguagem, setLinguagem] = useState("");
   const [link, setLink] = useState("");
   const [body, setBody] = useState("");
-  const [theme, setTheme] = useState(
-    () => localStorage.getItem("theme") || "light"
-  );
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const history = useHistory();
 

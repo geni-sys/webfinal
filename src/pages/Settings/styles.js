@@ -12,7 +12,9 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === `dark` ? "#1f252e" : `var(--force);`};
+  color: ${(props) => (props.mode === `dark` ? "#FFF" : `initial`)};
   overflow-x: hidden;
 `;
 
@@ -54,11 +56,13 @@ export const Aside = styled.aside`
 
     div {
       padding-left: 10px;
-      span {
+      a {
         font-size: 13px;
+        color: ${(props) => (props.mode === `dark` ? "#50fa7b" : `#4764f1`)};
       }
       p {
         font-size: 10px;
+        color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
       }
     }
   }
@@ -74,14 +78,17 @@ export const Aside = styled.aside`
       width: 100%;
       padding: 10px;
       cursor: pointer;
+      color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
 
       &:hover {
-        background-color: var(--white);
+        background-color: ${(props) =>
+          props.mode === `dark` ? "#121212" : `var(--white);`};
       }
     }
 
     li.selected {
-      background-color: var(--white);
+      background-color: ${(props) =>
+        props.mode === `dark` ? "#121212" : `var(--white);`};
     }
   }
 
@@ -117,11 +124,15 @@ export const Body = styled.div`
 
       input {
         margin-left: 5px;
+        background-color: ${(props) =>
+          props.mode === `dark` ? "#121212" : `initial`};
+        color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
       }
 
       label#description {
         font-size: 10px;
         margin-left: 5px;
+        color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
       }
     }
   }
@@ -185,7 +196,7 @@ export const MoreInfo = styled.div`
       padding-left: 3px;
       margin-left: 5px;
       border-left: 1px solid rgba(0, 0, 0, 0.5);
-      background: azure;
+      background: ${(props) => (props.mode === `dark` ? "#121212" : `azure`)};
     }
   }
 

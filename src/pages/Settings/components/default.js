@@ -4,7 +4,7 @@ import api from "../../../services/api";
 // STYLES | STATICS
 import { Input, Description, Update } from "./styles";
 
-function Default() {
+function Default({ mode }) {
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
   const [github, setGithub] = useState("");
@@ -43,6 +43,7 @@ function Default() {
       <li>
         <label htmlFor="input_name">Nome</label>
         <Input
+          mode={mode}
           id="input_name"
           name="input_name"
           placeholder="Eliasallex"
@@ -58,6 +59,7 @@ function Default() {
       <li>
         <label htmlFor="input_description">Bio</label>
         <Description
+          mode={mode}
           id="input_description"
           placeholder="EX: Programmer Focused on technologies around the JS language."
           value={bio}
@@ -71,6 +73,7 @@ function Default() {
       <li>
         <label htmlFor="input_git">Github</label>
         <Input
+          mode={mode}
           id="input_git"
           placeholder="EX: https://github.com/*username*"
           value={github}
