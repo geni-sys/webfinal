@@ -12,12 +12,14 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === `dark` ? "#1e1e1f" : `var(--force)`};
+  color: ${(props) => (props.mode === `dark` ? "#FFF" : `inherit`)};
   overflow: hidden;
 `;
 
 export const Grid = styled.div`
-  background: #fff;
+  background: ${(props) => (props.mode === `dark` ? "#1e1e1f" : `#fff`)};
   grid-area: MAIN;
   height: 100%;
   overflow-y: auto;
@@ -39,6 +41,7 @@ export const Main = styled.main`
 
     p {
       font-size: 1.3em;
+      color: ${(props) => (props.mode === `dark` ? "#DEDEDE" : `inherit`)};
     }
   }
 
@@ -82,7 +85,8 @@ export const Input = styled.input`
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 1.4em;
 
-  color: #333;
+  color: ${(props) => (props.mode === `dark` ? "#999" : `#333`)};
+  background: ${(props) => (props.mode === `dark` ? "inherit" : `inherit`)};
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   outline-color: #7159c1;
@@ -114,15 +118,18 @@ export const Create = styled.button`
 export const Body = styled.div`
   position: relative;
   margin-top: 10px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  border-bottom: 0.1px solid
+    ${(props) => (props.mode === `dark` ? "#d3d3d3" : `rgba(0, 0, 0, 0.2)`)};
   margin-bottom: 25px;
 
   div#transcription {
     position: relative;
     max-width: 700px;
-    background-color: var(--dominate);
+    background-color: ${(props) =>
+      props.mode === `dark` ? "#1f252e" : `var(--dominate)`};
     font-size: 13px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
+    border: 1px solid
+      ${(props) => (props.mode === `dark` ? "#d3d3d3" : `rgba(0, 0, 0, 0.1)`)};
     padding: 3px 5px;
 
     img {
@@ -133,6 +140,8 @@ export const Body = styled.div`
 export const Textarea = styled.textarea`
   resize: vertical;
   width: 100%;
+  background-color: ${(props) =>
+    props.mode === `dark` ? "#D8D8D8" : `inherit`};
 
   margin-top: 3px;
   padding: 7px;

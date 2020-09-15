@@ -28,6 +28,9 @@ const NewIssue = () => {
   const [linguagem, setLinguagem] = useState("");
   const [link, setLink] = useState("");
   const [body, setBody] = useState("");
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
 
   const history = useHistory();
 
@@ -79,11 +82,11 @@ const NewIssue = () => {
   }
 
   return (
-    <Container id="new-issue">
+    <Container mode={theme} id="new-issue">
       <Header />
 
-      <Grid id="grid" style={{ gridArea: "MAIN" }}>
-        <Main id="create-issue">
+      <Grid mode={theme} id="grid" style={{ gridArea: "MAIN" }}>
+        <Main mode={theme} id="create-issue">
           <div id="what-do">
             <h3>Create a new repository</h3>
             <p>
@@ -96,6 +99,7 @@ const NewIssue = () => {
             <div class="large">
               <strong>Titulo da issue *</strong>
               <Input
+                mode={theme}
                 required
                 placeholder="Nome que vai ser idetificado"
                 type="text"
@@ -109,6 +113,7 @@ const NewIssue = () => {
             <div>
               <strong>Idioma *</strong>
               <Input
+                mode={theme}
                 required
                 placeholder="Ex: Português"
                 type="text"
@@ -124,6 +129,7 @@ const NewIssue = () => {
             <div>
               <strong>Tags *</strong>
               <Input
+                mode={theme}
                 required
                 placeholder="Ex: NodeJS, PHP, Iniciante"
                 type="text"
@@ -137,6 +143,7 @@ const NewIssue = () => {
             <div>
               <strong>Link ?</strong>
               <Input
+                mode={theme}
                 required
                 placeholder="Do artigo completo"
                 type="text"
@@ -148,9 +155,10 @@ const NewIssue = () => {
             </div>
           </Card>
 
-          <Body>
+          <Body mode={theme}>
             {isPreview ? (
               <Textarea
+                mode={theme}
                 required
                 name="corpo"
                 id="issue-body"
