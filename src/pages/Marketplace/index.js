@@ -16,6 +16,7 @@ const Marketplace = (props) => {
     const tab = parseInt(params.get("tab"));
     return tab || 0;
   });
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   function Default() {
     const [news, setNews] = useState([]);
@@ -76,11 +77,11 @@ const Marketplace = (props) => {
   }
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
       <Main id="marketplace">
-        <Aside id="aside-primary">
+        <Aside mode={theme} id="aside-primary">
           <div id="first">
             <h2>Expanda GEneSis</h2>
             <p>Encontra ferramentas para melhorar seu fluxo de trabalho</p>
@@ -90,7 +91,7 @@ const Marketplace = (props) => {
           </div>
         </Aside>
 
-        <Article id="main-primary">
+        <Article mode={theme} id="main-primary">
           <aside id="aside-secondary">
             <h4>Categories</h4>
             <ul>

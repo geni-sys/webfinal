@@ -12,7 +12,8 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === `dark` ? "#1f252e" : `var(--force);`};
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -86,6 +87,11 @@ export const Aside = styled.aside`
 
   h2 {
     font-size: 55px;
+    color: ${(props) => (props.mode === `dark` ? "#dedede" : `initial`)};
+  }
+
+  p {
+    color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
   }
 
   div img {
@@ -108,6 +114,7 @@ export const Article = styled.article`
   aside#aside-secondary {
     h4 {
       font-size: 16px;
+      color: ${(props) => (props.mode === `dark` ? "#999999" : `initial`)};
     }
 
     ul {
@@ -121,6 +128,10 @@ export const Article = styled.article`
 
       &.actived {
         text-decoration: underline;
+      }
+
+      a {
+        color: ${(props) => (props.mode === `dark` ? "#4764f1" : `initial`)};
       }
     }
 
