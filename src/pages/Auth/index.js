@@ -78,6 +78,7 @@ const Login = () => {
       localStorage.setItem("questions_status", String(completed));
       localStorage.setItem("github_avatar", String(github + ".png"));
 
+      window.location.reload(true);
       return history.push("/");
     } catch (err) {
       console.log(err.message);

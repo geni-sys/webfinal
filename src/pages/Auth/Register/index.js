@@ -11,7 +11,7 @@ import "./comprovate.css";
 import Stars from "../../../assets/stars.svg";
 import Montains from "../../../assets/montains.svg";
 
-const Login = () => {
+const Register = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -89,7 +89,8 @@ const Login = () => {
 
       setIsLoading(2);
 
-      setTimeout(() => history.push("/"), 1000);
+      window.location.reload(true);
+      return setTimeout(() => history.push("/"), 1000);
     } catch (err) {
       setIsLoading(0);
       alert(err.message);
@@ -202,4 +203,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Register;
