@@ -1,5 +1,14 @@
 import styled from "styled-components";
 
+function deleterminateColor() {
+  const number = Math.floor(Math.random() * 3);
+
+  if (number === 0) return "var(--reports)";
+  if (number === 2) return "var(--mention-detail)";
+  if (number === 3) return "var(--notification)";
+  return "var(--UNANTER)";
+}
+
 export const Container = styled.div`
   display: grid;
 
@@ -109,6 +118,7 @@ export const Article = styled.article`
 
   h4 {
     margin-top: 30px;
+    color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
   }
 
   aside#aside-secondary {
@@ -148,6 +158,11 @@ export const Article = styled.article`
       font-weight: 600;
       font-family: "Ubuntu", Arial, sans-serif;
     }
+
+    h2,
+    h3 {
+      color: ${(props) => (props.mode === `dark` ? `#FFF` : `initial`)};
+    }
   }
 `;
 
@@ -184,7 +199,8 @@ export const Recommended = styled.ul`
       overflow: hidden;
       position: relative;
       font-size: 12px;
-      color: #fff;
+      color: ${(props) =>
+        props.mode === `dark` ? deleterminateColor() : `#FFF`};
       margin-top: 5px;
     }
   }

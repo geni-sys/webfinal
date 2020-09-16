@@ -14,11 +14,11 @@ import {
   Star,
 } from "./styles";
 
-function OurAPI() {
+function OurAPI({ mode }) {
   return (
     <main>
       <h2>Como a API da plataforma funciona</h2>
-      <Points>
+      <Points mode={mode}>
         <li>
           <span>
             A API da plataforma serve para poder acessar seus dados de autras
@@ -34,7 +34,7 @@ function OurAPI() {
       </Points>
 
       <h3>Pontos de acesso</h3>
-      <Access>
+      <Access mode={mode}>
         <li>
           <p>Pegar dados de todos os usuário da plataforma</p>
           <code>api.get('/users')</code>
@@ -74,11 +74,11 @@ function OurAPI() {
   );
 }
 
-export const Extention = () => {
+export const Extention = ({ mode }) => {
   return (
-    <Main>
+    <Main mode={mode}>
       <h2>Como o chat de compartilhamento de lista funciona?</h2>
-      <Points>
+      <Points mode={mode}>
         <li>
           <span>
             Em cada issue ao compartilhar é possível criar anotações que vão ser
@@ -91,7 +91,7 @@ export const Extention = () => {
       <span id="points">
         Os pontos são calculados a cada criação e recriados a cada 7 dias.
       </span>
-      <Access>
+      <Access mode={mode}>
         <li>
           <p>1ª Vermelho / top</p>
           <code>Aumenta ao decorrer de novos artigos</code>
@@ -111,7 +111,7 @@ export const Extention = () => {
   );
 };
 
-export const Feedback = () => {
+export const Feedback = ({ mode }) => {
   const [title, setTitle] = useState("");
   const [message, setMessage] = useState("");
   const [stars, setStars] = useState(0);
@@ -151,19 +151,22 @@ export const Feedback = () => {
   }
 
   return (
-    <Main>
-      <p>
+    <Main mode={mode}>
+      <p id="child">
         Feedback nos ajuda a saber sobre a sua experiência na plataforma e como
         nós podemos melhorar a forma como o nosso conteúdo é entrege aos
         usuários.
       </p>
 
-      <h4>Deixe seu comentário sobre oque você achou da plataforma!</h4>
+      <h4 id="child">
+        Deixe seu comentário sobre oque você achou da plataforma!
+      </h4>
 
-      <Feed onSubmit={(event) => handleFeedback(event)}>
+      <Feed mode={mode} onSubmit={(event) => handleFeedback(event)}>
         <div style={{ marginTop: "20px" }}>
           <label htmlFor="title">TÍtulo da mensagem</label>
           <Input
+            mode={mode}
             type="text"
             name="title"
             id="title"
@@ -174,6 +177,7 @@ export const Feedback = () => {
         <div>
           <label htmlFor="body">Corpo da mensagem</label>
           <MessageBody
+            mode={mode}
             type="text"
             name="body"
             id="body"
@@ -182,7 +186,7 @@ export const Feedback = () => {
           />
         </div>
 
-        <Star>
+        <Star mode={mode}>
           <FiStar fill="#bd93f9" />
           <input
             type="number"

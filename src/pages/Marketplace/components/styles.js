@@ -6,17 +6,29 @@ export const Main = styled.main`
     margin: 10px 0;
   }
 
+  p#child,
+  h4#child {
+    color: ${(props) => (props.mode === `dark` ? `#FFF` : `initial`)};
+  }
+
   span#points {
     border-left: 2px solid var(--new);
     margin-left: 5px;
     padding: 5px;
     background: var(--unpurple);
+    color: ${(props) => (props.mode === `dark` ? `#999` : `initial`)};
   }
 `;
 
 export const Points = styled.ul`
   margin-left: 30px;
   margin-bottom: 30px;
+
+  li {
+    span {
+      color: ${(props) => (props.mode === `dark` ? `#dedede` : `initial`)};
+    }
+  }
 `;
 
 export const Access = styled.ul`
@@ -26,9 +38,13 @@ export const Access = styled.ul`
     list-style: hebrew;
     margin-left: 30px;
     margin-bottom: 20px;
+    p {
+      color: ${(props) => (props.mode === `dark` ? `var(--force)` : `initial`)};
+    }
 
     code {
-      color: maroon;
+      color: ${(props) =>
+        props.mode === `dark` ? `var(--UNANTER)` : `maroon`};
       margin-left: 10px;
     }
   }
@@ -40,6 +56,7 @@ export const Feed = styled.form`
   div {
     label {
       display: block;
+      color: ${(props) => (props.mode === `dark` ? `#999` : `initial`)};
     }
   }
 `;
@@ -57,7 +74,8 @@ export const Input = styled.input`
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 13px;
 
-  color: #333;
+  color: ${(props) => (props.mode === `dark` ? `#ededed` : `#333;`)};
+  background: ${(props) => (props.mode === `dark` ? `#121212` : `initial`)};
   border-radius: 3px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   outline-color: #7159c1;
@@ -69,6 +87,9 @@ export const MessageBody = styled.textarea`
   max-width: 300px;
   margin-left: 20px;
   font-size: 13px;
+
+  color: ${(props) => (props.mode === `dark` ? `#ededed` : `#333;`)};
+  background: ${(props) => (props.mode === `dark` ? `#121212` : `initial`)};
 
   border: 1px solid rgba(0, 0, 0, 0.3);
   outline-color: #7159c1;
@@ -84,6 +105,9 @@ export const Star = styled.article`
 
   input {
     border: 1px solid var(--purple);
+    background: ${(props) => (props.mode === `dark` ? `#121212` : `initial`)};
+    color: ${(props) => (props.mode === `dark` ? `#FFF` : `initial`)};
+    font-weight: bold;
     max-width: 30px;
     height: 30px;
     padding: 0;

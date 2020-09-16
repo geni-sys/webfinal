@@ -18,7 +18,7 @@ const Marketplace = (props) => {
   });
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
-  function Default() {
+  function Default({ mode }) {
     const [news, setNews] = useState([]);
 
     const handleRequestOnGoogleNews = useCallback(async () => {
@@ -40,9 +40,10 @@ const Marketplace = (props) => {
     return (
       <main id="main-secondary">
         <h4>
-          Last news! <span style={{ fontSize: "9px" }}>From google news</span>{" "}
+          Últimas notícias!{" "}
+          <span style={{ fontSize: "9px" }}>From google news</span>{" "}
         </h4>
-        <Recommended id="recomendations">
+        <Recommended mode={theme} id="recomendations">
           {news.map((nws) => (
             <a
               href={nws.url}
@@ -56,31 +57,31 @@ const Marketplace = (props) => {
           ))}
         </Recommended>
 
-        <h4>Artigos mais destacados</h4>
-        <Trending />
+        <h4>Artigos destacados</h4>
+        <Trending mode={theme} />
       </main>
     );
   }
 
   function DeterminateWhoActive({ id }) {
     if (id === 1) {
-      return <OurAPI />;
+      return <OurAPI mode={theme} />;
     }
     if (id === 2) {
-      return <Extention />;
+      return <Extention mode={theme} />;
     }
     if (id === 5) {
-      return <Feedback />;
+      return <Feedback mode={theme} />;
     }
 
-    return <Default />;
+    return <Default mode={theme} />;
   }
 
   return (
     <Container mode={theme}>
       <Header />
 
-      <Main id="marketplace">
+      <Main mode={theme} id="marketplace">
         <Aside mode={theme} id="aside-primary">
           <div id="first">
             <h2>Expanda GEneSis</h2>

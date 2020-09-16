@@ -22,7 +22,12 @@ export const Trending = styled.ul`
     }
 
     div#bottom {
+      div strong {
+        color: ${(props) => (props.mode === `dark` ? "#FFF" : `initial`)};
+      }
       p {
+        /* color: ${(props) =>
+          props.mode === `dark` ? "var(--reports);" : `initial`}; */
         color: var(--support);
         font-size: 14px;
         max-width: 240px;

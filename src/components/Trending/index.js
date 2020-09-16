@@ -5,7 +5,7 @@ import api from "../../services/api";
 import Miniature from "../Miniature";
 import { Trending } from "./styles";
 
-function Trender() {
+function Trender({ mode }) {
   const [data, setData] = useState([]);
 
   const [cookies] = useCookies();
@@ -49,7 +49,7 @@ function Trender() {
   }, [handleRequest]);
 
   return (
-    <Trending>
+    <Trending mode={mode}>
       {!(data.length === 0) ? (
         data.map((item) => (
           <li key={item.id}>
