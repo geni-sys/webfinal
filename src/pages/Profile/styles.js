@@ -12,7 +12,9 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--white);
+  background: ${(props) =>
+    props.mode === `dark` ? "#121212" : `var(--white);`};
+  color: ${(props) => (props.mode === `dark` ? "#FFF" : `initial`)};
   overflow-x: hidden;
 `;
 
@@ -67,7 +69,7 @@ export const Aside = styled.aside`
   span#badge-overview {
     position: relative;
     top: 60px;
-    color: #222;
+    color: ${(props) => (props.mode === `dark` ? "#999" : `#222;`)};
     border: 0;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 4px;
@@ -90,7 +92,8 @@ export const Aside = styled.aside`
       h5 {
         font-size: 16px;
         font-weight: 600;
-        color: #333;
+        color: ${(props) =>
+          props.mode === `dark` ? "var(--support)" : `#333;`};
         margin-top: 10px;
       }
 
@@ -127,12 +130,37 @@ export const Top = styled.ul`
   min-width: 300px;
 
   li {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+
     cursor: pointer;
-    &:hover {
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    color: ${(props) => (props.mode === `dark` ? "var(--link);" : `initial;`)};
+    position: relative;
+    width: 100px;
+
+    /* &:hover {  #fd951f
+      border-bottom: 1px solid
+        ${(props) =>
+      props.mode === `dark` ? "var(--link);" : `rgba(0, 0, 0, 0.3);`};
+    } */
+    &::after {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      content: "";
+      height: 4px;
+      width: 0%;
+
+      background-color: var(--link);
+
+      transition: 0.4s;
     }
-    &.selected {
-      border-bottom: 3px solid rgba(0, 0, 0, 1);
+    &:hover::after,
+    &.selected::after {
+      width: 100%;
     }
   }
 `;
@@ -153,6 +181,8 @@ export const Bottom = styled.div`
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 3px;
       padding: 10px;
+      background: ${(props) =>
+        props.mode === `dark` ? "#1f252e;" : `initial;`};
 
       div#tper {
         font-size: 1.4em;

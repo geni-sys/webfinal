@@ -16,18 +16,19 @@ const Profile = () => {
     () => localStorage.getItem("github_avatar") || null
   );
   const [isSelected, setIsSelected] = useState(0);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const history = useHistory();
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
-      return <Lists />;
+      return <Lists mode={theme} />;
     }
     if (parseInt(id) === 2) {
-      return <Markeds />;
+      return <Markeds mode={theme} />;
     }
 
-    return <Default />;
+    return <Default mode={theme} />;
   }
   function handleNavigateToSetting() {
     history.push("/settings");
@@ -35,10 +36,10 @@ const Profile = () => {
   // "https://github.com/eliasallex" + ".png"
 
   return (
-    <Container className="profile">
+    <Container mode={theme} className="profile">
       <Header />
-      <Main>
-        <Aside>
+      <Main mode={theme}>
+        <Aside mode={theme}>
           <span id="badge-overview">#{userData[0].use_case}</span>
 
           <img
@@ -69,8 +70,8 @@ const Profile = () => {
           </div>
         </Aside>
 
-        <Article>
-          <Top>
+        <Article mode={theme}>
+          <Top mode={theme}>
             <li
               onClick={() => setIsSelected(0)}
               className={isSelected === 0 ? "selected" : ""}
@@ -91,14 +92,14 @@ const Profile = () => {
             </li>
           </Top>
 
-          <Bottom id="let">
+          <Bottom id="let" mode={theme}>
             <span>Fixado</span>
 
             <ul id="listeds">
               <HandleComponents id={isSelected} />
             </ul>
 
-            <Points>
+            <Points mode={theme}>
               <h5>Suas contribuições</h5>
               <ul id="burbble">
                 <li id="first">

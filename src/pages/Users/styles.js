@@ -182,6 +182,8 @@ export const Bottom = styled.div`
       border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 3px;
       padding: 10px;
+      background: ${(props) =>
+        props.mode === `dark` ? "#1f252e;" : `initial;`};
 
       div#tper {
         font-size: 1.4em;
@@ -243,6 +245,7 @@ export const Points = styled.div`
     li#first {
       width: 100%;
       background-color: var(--force);
+      padding: 0;
 
       p {
         background: #f25;
