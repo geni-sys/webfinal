@@ -20,7 +20,7 @@ import {
   AddIn,
 } from "./styles";
 
-function Modal() {
+function Modal({ mode }) {
   const [name, setName] = useState("");
   const [idNewList, setIdNewList] = useState("");
   const [data, setData] = useState([]);
@@ -117,8 +117,8 @@ function Modal() {
 
   return (
     <>
-      <Modals id="create">
-        <Top>
+      <Modals mode={mode} id="create">
+        <Top mode={mode}>
           <input
             type="text"
             name="creation"
@@ -132,10 +132,10 @@ function Modal() {
           </CreateTitle>
         </Top>
 
-        <Lists>
+        <Lists mode={mode}>
           {data.length !== 0 ? (
             data.map((marked, index) => (
-              <ListElement key={marked.id}>
+              <ListElement mode={mode} key={marked.id}>
                 <span>{marked.issue.title}</span>
                 <AddIn
                   disabled={!name ? true : false}
@@ -162,7 +162,7 @@ function Modal() {
 
 function Overview() {
   const [data, setData] = useState([]);
-  // const [star, setStar] = useState(false);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
   const [isActived, setIsActived] = useState(false);
 
   const [cookies] = useCookies();
@@ -244,61 +244,66 @@ function Overview() {
     }
   }
 
-  function HandleChoosed({ state }) {
+  function HandleChoosed({ state, mode }) {
     if (state) {
-      return <Modal />;
+      return <Modal mode={theme} />;
     }
 
     return (
-      <Playlist>
-        {data.map((list) => (
-          <li key={list.id}>
-            <div id="starred">
-              <FiActivity />
-              <span>Baseado nas tags do seu perfil.</span>
-            </div>
-
-            <div id="list">
-              <div id="unik">
-                <FiAirplay />
-                <p>
-                  <a href={`/users/${String(list.id).trim()}`}>3lias-allex</a> /{" "}
-                  <strong>
-                    <a href={`/share/${list.id}`}>{list.name}</a>
-                  </strong>
-                </p>
+      <Playlist mode={theme}>
+        {!(data.length === 0) ? (
+          data.map((list) => (
+            <li key={list.id}>
+              <div id="starred">
+                <FiActivity />
+                <span>Baseado nas tags do seu perfil.</span>
               </div>
 
-              <div id="side">
-                <button
-                  onClick={() => {
-                    handleMarkList(list.starry, list.id);
-                  }}
-                >
-                  {list.starry ? <FiCheck /> : <FiStar />}
-                  {list.starry ? "Marcado" : "Marcar"}
-                </button>
-                <span>{list.stars}</span>
-              </div>
-            </div>
+              <div id="list">
+                <div id="unik">
+                  <FiAirplay />
+                  <p>
+                    <a href={`/users/${String(list.id).trim()}`}>3lias-allex</a>{" "}
+                    /{" "}
+                    <strong>
+                      <a href={`/share/${list.id}`}>{list.name}</a>
+                    </strong>
+                  </p>
+                </div>
 
-            <div id="stamps">
-              <span>Última atualização 3 min ago</span>
-              <br />
-              <span>* CSS</span>
-            </div>
-          </li>
-        ))}
+                <div id="side">
+                  <button
+                    onClick={() => {
+                      handleMarkList(list.starry, list.id);
+                    }}
+                  >
+                    {list.starry ? <FiCheck /> : <FiStar />}
+                    {list.starry ? "Marcado" : "Marcar"}
+                  </button>
+                  <span>{list.stars}</span>
+                </div>
+              </div>
+
+              <div id="stamps">
+                <span>Última atualização 3 min ago</span>
+                <br />
+                <span>* CSS</span>
+              </div>
+            </li>
+          ))
+        ) : (
+          <h1>SEM LISTAS</h1>
+        )}
       </Playlist>
     );
   }
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
-      <Main>
-        <Center>
+      <Main mode={theme}>
+        <Center mode={theme}>
           <CreateList onClick={() => setIsActived(!isActived)}>
             Criar nova lista
           </CreateList>

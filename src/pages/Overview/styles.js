@@ -12,7 +12,8 @@ export const Container = styled.div`
     "MAIN";
 
   height: 100%;
-  background: var(--white);
+  background: ${(props) =>
+    props.mode === "dark" ? `#121212` : `var(--white);`};
 `;
 
 export const Main = styled.main`
@@ -41,6 +42,12 @@ export const Playlist = styled.ul`
   flex-direction: column;
   min-width: 500px;
 
+  h1 {
+    font-size: 50px;
+    margin: 100px auto;
+    color: ${(props) => (props.mode === "dark" ? "#dedede" : "initial")};
+  }
+
   &.active {
     display: none;
   }
@@ -48,11 +55,14 @@ export const Playlist = styled.ul`
   li {
     display: flex;
     flex-direction: column;
-    background-color: var(--witer);
+    background-color: ${(props) =>
+      props.mode === "dark" ? `#1f252e` : `var(--witer);`};
 
     font-size: 1.4em;
     margin-top: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
+    border: 1px solid
+      ${(props) =>
+        props.mode === "dark" ? `#FFFFFF11` : `rgba(0, 0, 0, 0.2);`};
     border-radius: 1.4px;
 
     div {
@@ -64,10 +74,12 @@ export const Playlist = styled.ul`
 
       svg {
         margin-right: 3px;
+        color: ${(props) => (props.mode === "dark" ? `#D3D3D3` : `#000`)};
       }
 
       span {
         font-size: 13px;
+        color: ${(props) => (props.mode === "dark" ? `#D3D3D3` : `#000`)};
       }
     }
 
@@ -79,11 +91,18 @@ export const Playlist = styled.ul`
       }
 
       div#unik {
-        color: var(--reports);
+        color: ${(props) =>
+          props.mode === "dark" ? `var(--mention-detail);` : `var(--reports);`};
+
+        p a {
+          color: ${(props) => props.mode === "dark" && `var(--UNANTER);`};
+        }
       }
 
       div#side {
         border: 1px solid rgba(0, 0, 0, 0.2);
+        background: ${(props) =>
+          props.mode === "dark" ? `#121212` : `initial`};
 
         button {
           padding: 0 5px;
@@ -94,12 +113,17 @@ export const Playlist = styled.ul`
 
         span {
           padding: 0 5px;
+          color: ${(props) => (props.mode === "dark" ? `#FFF` : `initial`)};
         }
       }
     }
 
     div#stamps {
-      background: var(--white);
+      span {
+        color: ${(props) => props.mode === "dark" && `#FFF`};
+      }
+      background: ${(props) =>
+        props.mode === "dark" ? `var(--tertiary);` : `var(--white);`};
       padding: 7px;
       font-size: 10px;
     }
@@ -142,7 +166,8 @@ export const Lists = styled.ul`
   max-height: 220px;
   height: auto;
 
-  background: var(--witer);
+  background: ${(props) =>
+    props.mode === "dark" ? `#1f252e` : `var(--witer);`};
   overflow-y: auto;
 
   border: 1px solid black;
@@ -166,13 +191,16 @@ export const Top = styled.div`
     border: 0;
     padding: 5px 7px;
     height: 100%;
+    background: ${(props) => props.mode === "dark" && `#121212`};
+    color: ${(props) => props.mode === "dark" && `#FFF`};
   }
 `;
 
 export const Checker = styled(FiCheck)``;
 
 export const ListElement = styled.li`
-  border: 0.5px solid rgba(0, 0, 0, 0.1);
+  border: 0.5px solid
+    ${(props) => (props.mode === "dark" ? `#FFFFFF11` : `rgba(0, 0, 0, 0.1);`)};
   max-height: 20px;
   width: 100%;
 
@@ -182,6 +210,10 @@ export const ListElement = styled.li`
   min-height: 23px;
   display: flex;
   align-items: center;
+
+  span {
+    color: ${(props) => props.mode === "dark" && `#FFF`};
+  }
 `;
 
 export const AddIn = styled.button`
