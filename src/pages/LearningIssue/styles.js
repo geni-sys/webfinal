@@ -57,6 +57,11 @@ export const Card = styled.aside`
   max-width: 330px;
   font-size: 1.3em;
 
+  > a {
+    color: ${(props) =>
+      props.mode === "dark" ? `var(--mention-detail);` : `var(--link);`};
+  }
+
   strong {
     color: ${(props) => props.mode === "dark" && `#fff`};
   }
@@ -144,7 +149,8 @@ export const Body = styled.div`
   div#transcription {
     overflow: auto;
 
-    background: var(--dominate);
+    background: ${(props) =>
+      props.mode === "dark" ? `#121212` : `var(--dominate);`};
     border-radius: 4px;
 
     margin: 20px 50px;
@@ -182,4 +188,6 @@ export const Transcription = styled.div`
   display: block;
   font-family: "Roboto", Arial, Helvetica, sans-serif;
   font-size: 1.5em;
+
+  background-color: red;
 `;

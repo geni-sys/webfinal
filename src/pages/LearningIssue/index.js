@@ -20,7 +20,7 @@ const LearningIssue = ({ match }) => {
   const getLessonsData = useCallback(async () => {
     try {
       const response = await api
-        .get(`/issues/${issue_id}`, {
+        .get(`/issues/starry/${user_id}/${issue_id}`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -42,12 +42,12 @@ const LearningIssue = ({ match }) => {
           console.log(error.config);
         });
 
-      setData([response.data]);
+      setData(response.data);
     } catch (err) {
       console.log(err.message);
       return alert("Erro na conexão");
     }
-  }, [issue_id, token]);
+  }, [issue_id, token, user_id]);
 
   useEffect(() => {
     getLessonsData();
@@ -116,7 +116,7 @@ const LearningIssue = ({ match }) => {
       <Main id="learn-main" mode={theme}>
         {data.map((issue) => (
           <>
-            <Card mode={theme}>
+            <Card mode={theme} key={issue.id}>
               <strong>{issue.title}</strong>
 
               <div id="tags">{serializeTags(issue.tags)}</div>
@@ -149,14 +149,14 @@ const LearningIssue = ({ match }) => {
 
               <Great
                 onClick={() => handleMarkIssue(issue.starry)}
-                disabled={issue.istarry}
+                disabled={issue.starry}
               >
                 <FiHash />
-                {issue.istarry ? "Artigo arcado" : "Marcar artigo"}
+                {issue.starry ? "Artigo marcado" : "Marcar artigo"}
               </Great>
             </Card>
 
-            <Body id="learn-app" mode={theme}>
+            <Body id="learn-app" mode={theme} key={issue.user.id}>
               <GoBack>
                 <FiArrowLeft /> Voltar
               </GoBack>

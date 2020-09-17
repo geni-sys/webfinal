@@ -122,6 +122,7 @@ export default createGlobalStyle`
     margin-left: 10px;
     p {
       margin: 0;
+      background: ${() => mode === `dark` && "var(--Notify);"};
     }
     }
   }
@@ -168,6 +169,8 @@ export default createGlobalStyle`
     margin: 5px 0;
     display: flex;
     align-items: center;
+    color: ${() => (mode === `dark` ? "#999" : `var(--grey-dark);`)};
+    font-family: Ubuntu, arial, sans-serif;
   }
 
   div#transcription ul li input {
