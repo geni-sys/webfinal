@@ -10,18 +10,19 @@ import { Container, Aside, List, Main, Content, New } from "./styles";
 const Notifications = ({ match }) => {
   const [activeTab, setActiveTab] = useState(0);
   const [isCreatingNotification, setIsCreatingNotification] = useState(false);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   // const { tab } = match.params;
 
   function ChooseComponent() {
     if (activeTab === 0) {
-      return <All />;
+      return <All mode={theme} />;
     }
     if (activeTab === 1) {
-      return <Mentioned />;
+      return <Mentioned mode={theme} />;
     }
     if (activeTab === 2) {
-      return <OurTeam />;
+      return <OurTeam mode={theme} />;
     }
   }
   function handleCerateNotification() {
@@ -29,12 +30,12 @@ const Notifications = ({ match }) => {
   }
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
-      <Main>
-        <Aside>
-          <List>
+      <Main mode={theme}>
+        <Aside mode={theme}>
+          <List mode={theme}>
             <li
               id={activeTab === 0 ? "clicked" : ""}
               onClick={() => setActiveTab(0)}
@@ -63,7 +64,7 @@ const Notifications = ({ match }) => {
           </List>
         </Aside>
 
-        <Content>
+        <Content mode={theme}>
           {isCreatingNotification ? (
             <CreateNotification
               closeIt={handleCerateNotification}

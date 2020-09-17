@@ -14,7 +14,8 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--dominate);
+  background: ${(props) =>
+    props.mode === "dark" ? `#1f252e` : `var(--dominate);`};
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -56,7 +57,9 @@ export const List = styled.ul`
   width: 100%;
 
   li {
-    color: var(--Notify);
+    color: ${(props) => (props.mode === "dark" ? `#999` : `var(--Notify);`)};
+    background: ${(props) => (props.mode === "dark" ? `#121212` : `initial`)};
+
     margin-right: 30px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 2px 5px;
@@ -66,7 +69,9 @@ export const List = styled.ul`
     align-items: center;
 
     &#clicked {
-      background: var(--white);
+      background: ${(props) =>
+        props.mode === "dark" ? `var(--reports)` : `var(--white);`};
+      color: ${(props) => (props.mode === "dark" ? `var(--witer)` : `initial`)};
     }
 
     a {
@@ -98,6 +103,10 @@ export const Content = styled.div`
     }
   }
 
+  h1 {
+    color: ${(props) => (props.mode === "dark" ? `#dedede` : `initial`)};
+  }
+
   ul {
     min-width: 400px;
 
@@ -118,32 +127,46 @@ export const Triangle = styled(FiAlertTriangle)`
 
 export const Notificate = styled.li`
   position: relative;
-
   display: flex;
-  flex-direction: column;
-  min-height: 100px;
-  padding: 0;
-  font-size: 2rem;
+  flex-direction: row;
+  min-height: 60px;
 
   border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 0;
   margin-bottom: 10px;
-  background: var(--dominating);
-  color: var(--witer);
+  color: ${(props) => (props.mode === "dark" ? `#999` : ` var(--Notify);`)};
+  background: ${(props) => (props.mode === "dark" ? `#121212` : `initial`)};
 
   div#header {
     display: flex;
     justify-content: space-between;
     align-content: center;
-    background: var(--chat-input);
+    padding: 5px;
+    /* background: var(--chat-input); */
+    margin-right: 5px;
   }
 
   div#nlw {
-    padding: 7px;
-    /* border: 0.5px solid rgba(0, 0, 0, 0.2); */
+    padding: 5px;
+    position: relative;
+
+    span {
+      margin: 0 5px;
+    }
+
+    > a {
+      font-size: 14px;
+      color: ${(props) =>
+        props.mode === "dark" ? `var(--reports)` : `var(--reports)`};
+    }
 
     p {
-      font-size: 13px;
-      color: var(--grey-dark);
+      border-radius: 4px;
+      background: ${(props) =>
+        props.mode === "dark" ? `#122112` : `var(--white);`};
+      margin: 0 5px;
+      color: ${(props) =>
+        props.mode === "dark" ? `#dedede` : `var(--grey-dark);`};
     }
   }
 `;
@@ -151,17 +174,21 @@ export const Notificate = styled.li`
 export const Clicked = styled.a`
   position: absolute;
   bottom: 0;
-  left: 0;
+  right: 0;
+  margin-right: 10px;
 
   border: 0;
   border-radius: 1px;
-  background: var(--link);
   text-decoration: none;
   /* var(--force) */
   font-size: 12px;
-  color: var(--white);
-  margin-top: 5px;
+  margin-top: 50px;
   padding: 3px 10px;
+
+  color: ${(props) =>
+    props.mode === "dark" ? `var(--discord);` : `var(--UNANTER);`};
+  background: ${(props) =>
+    props.mode === "dark" ? `var(--Notify);` : `var(--mention-message);`};
 `;
 
 export const New = styled.button`
@@ -174,7 +201,7 @@ export const New = styled.button`
   justify-content: center;
 
   width: 70px;
-  background: var(--Notify);
+  background: #121212;
 
   align-items: center;
   transition: opacity 0.1s;
@@ -183,5 +210,6 @@ export const New = styled.button`
 
   &:hover {
     opacity: 0.9;
+    background: var(--reports);
   }
 `;

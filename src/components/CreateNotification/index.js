@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMP0NENTS
@@ -7,7 +7,9 @@ import Miniature from "../Miniature";
 import { Container, Aside, Main, Shareit, Send } from "./styles";
 
 function CreateNotification({ clsName, closeIt }) {
+  const [data, setData] = useState([]);
   const [link, setLink] = useState("");
+  const [type, setType] = useState("mention");
   const [userSelected, setUserSelected] = useState(0);
 
   const [cookies] = useCookies();
@@ -15,8 +17,25 @@ function CreateNotification({ clsName, closeIt }) {
 
   const transcription = String(link).trim();
 
+  const handleRequests = useCallback(async () => {
+    try {
+      const response = await api.get(`/user/${user_id}/marked/users`, {
+        headers: { Authorization: String(token) },
+      });
+
+      setData(response.data);
+    } catch (err) {
+      alert(err.message);
+      console.log(err.message);
+    }
+  }, [token, user_id]);
+
+  useEffect(() => {
+    handleRequests();
+  }, [handleRequests]);
+
   async function handleNotificate() {
-    if (!userSelected || userSelected === 0) {
+    if (!userSelected || userSelected === 0 || !link || !type) {
       return alert("Seleciona um usuário da sua lista de marcações");
     }
     try {
@@ -25,7 +44,7 @@ function CreateNotification({ clsName, closeIt }) {
         {
           transcription,
           state: "pendente",
-          type: "mention",
+          type,
         },
         {
           headers: { Authorization: String(token) },
@@ -46,38 +65,38 @@ function CreateNotification({ clsName, closeIt }) {
       <Aside>
         <strong>Enviar para:</strong>
 
-        <li
-          className={userSelected === 2 ? "selected" : null}
-          onClick={() => setUserSelected(2)}
-        >
-          <Miniature width={"20px"} height={"20px"} />
-          elias alexandre
-        </li>
-
-        <li>
-          <Miniature width={"20px"} height={"20px"} />
-          gabirel castro
-        </li>
-
-        <li>
-          <Miniature width={"20px"} height={"20px"} />
-          alciomar hollanda
-        </li>
-
-        <li>
-          <Miniature width={"20px"} height={"20px"} />
-          barraba serencovich
-        </li>
+        {data.map((user) => (
+          <li
+            key={user.marked.id}
+            className={userSelected === user.marked.id ? "selected" : null}
+            onClick={() => setUserSelected(user.marked.id)}
+          >
+            <Miniature
+              source={user.marked.github + ".png"}
+              width={"20px"}
+              height={"20px"}
+            />
+            {user.marked.name}
+          </li>
+        ))}
       </Aside>
       <Main>
         <div>
           <span>Notificação:</span>
         </div>
+
         <ul>
           <select name="typeof" id="typeof">
-            <option value="share">Partilhamento</option>
+            <option
+              key="mention"
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+            >
+              Partilhamento de Lista
+            </option>
           </select>
         </ul>
+
         <Shareit
           id="shareit"
           required
@@ -86,6 +105,7 @@ function CreateNotification({ clsName, closeIt }) {
           value={link}
           onChange={(e) => setLink(e.target.value)}
         />
+
         <Send onClick={handleNotificate} type="Submit">
           Enviar
         </Send>

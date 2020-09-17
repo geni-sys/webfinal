@@ -1,9 +1,11 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
-import { Triangle, Notificate, Clicked } from "../styles";
+import { Notificate, Clicked } from "../styles";
 import api from "../../../services/api";
 // COMPONENTS
-export const All = () => {
+import Miniature from "../../../components/Miniature";
+
+export const All = ({ mode }) => {
   const [notify, setNotify] = useState([]);
 
   const [cookies] = useCookies();
@@ -11,9 +13,12 @@ export const All = () => {
 
   const handleRequests = useCallback(async () => {
     try {
-      const response = await api.get(`/notifications/${user_id}`, {
-        headers: { Authorization: String(token) },
-      });
+      const response = await api.get(
+        `/notifications/${user_id}?requesting=true`,
+        {
+          headers: { Authorization: String(token) },
+        }
+      );
 
       setNotify(response.data);
     } catch (err) {
@@ -30,24 +35,26 @@ export const All = () => {
     <>
       {!(notify.length === 0) ? (
         notify.map((note) => (
-          <Notificate
-            key={note.id}
-            href="/playlist"
-            targer="_blannk"
-            id="alert"
-          >
+          <Notificate key={note.id} mode={mode} id="alert">
             <div id="header">
-              <span>Usuário: {note.de.name}</span>
-
-              <Triangle />
+              <Miniature
+                source={note.de.github + ".png"}
+                width={"50px"}
+                height={"50px"}
+              />
             </div>
 
             <div id="nlw">
-              <p>Adicionou você em sua lista de usuários marcados</p>
-            </div>
+              <span>FROM</span>
+              <a href={`/users/${note.de.email}`}>{note.de.name}</a>
 
-            <div id="footer">
-              <Clicked href="/">Adicionar</Clicked>
+              <p>Adicionou você em sua lista de usuários marcados</p>
+
+              <div id="footer">
+                <Clicked mode={mode} href="/">
+                  Adicionar
+                </Clicked>
+              </div>
             </div>
           </Notificate>
         ))
@@ -58,7 +65,7 @@ export const All = () => {
   );
 };
 
-export const Mentioned = () => {
+export const Mentioned = ({ mode }) => {
   const [notify, setNotify] = useState([]);
 
   const [cookies] = useCookies();
@@ -90,24 +97,33 @@ export const Mentioned = () => {
         notify.map((note) => (
           <Notificate
             key={note.id}
+            mode={mode}
             href="/playlist"
             targer="_blannk"
             id="alert"
           >
             <div id="header">
-              <span>De: {note.de.name}</span>
-
-              <Triangle />
+              <Miniature
+                source={note.de.github + ".png"}
+                width={"50px"}
+                height={"50px"}
+              />
             </div>
 
             <div id="nlw">
-              <p>Está compartilhando uma nova playlist com anotações. </p>
-            </div>
+              <span>FROM</span>
+              <a href={`/users/${note.de.email}`}>{note.de.name}</a>
 
-            <div id="footer">
-              <Clicked target="_BLANK" href={note.transcription}>
-                Aceitar
-              </Clicked>
+              <p>Está compartilhando uma nova playlist com anotações. </p>
+
+              <div id="footer">
+                <Clicked
+                  mode={mode}
+                  href={`/playlists?whatch=${note.id}&box=2314`}
+                >
+                  Abrir
+                </Clicked>
+              </div>
             </div>
           </Notificate>
         ))
@@ -118,7 +134,7 @@ export const Mentioned = () => {
   );
 };
 
-export const OurTeam = () => {
+export const OurTeam = ({ mode }) => {
   const [notify, setNotify] = useState([]);
 
   const [cookies] = useCookies();
@@ -148,26 +164,26 @@ export const OurTeam = () => {
     <>
       {!(notify.length === 0) ? (
         notify.map((note) => (
-          <Notificate
-            key={note.id}
-            href="/playlist"
-            targer="_blannk"
-            id="alert"
-          >
+          <Notificate key={note.id} mode={mode} id="alert">
             <div id="header">
-              <span>De: GEneSis</span>
-
-              <Triangle />
+              <Miniature
+                source={note.de.github + ".png"}
+                width={"50px"}
+                height={"50px"}
+              />
             </div>
 
             <div id="nlw">
-              <p>{note.transcription}</p>
-            </div>
+              <span>FROM</span>
+              <a href={`/users/${note.de.email}`}>{note.de.name}</a>
 
-            <div id="footer">
-              <Clicked target="_BLANK" href={note.state}>
-                Prosseguir
-              </Clicked>
+              <p>Adicionou você em sua lista de usuários marcados</p>
+
+              <div id="footer">
+                <Clicked mode={mode} href="/">
+                  Abrir
+                </Clicked>
+              </div>
             </div>
           </Notificate>
         ))
