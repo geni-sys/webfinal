@@ -342,13 +342,26 @@ function Issues({ query, mode }) {
   );
 }
 
-const SearchResult = ({ match }) => {
-  const [clicked, setClicked] = useState(0);
+const SearchResult = ({ match, location }) => {
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
+  const [query_search] = useState(() => {
+    const params = new URLSearchParams(location.search);
+    const searcher = String(params.get("query_search"));
 
-  const { query_search } = match.params;
+    return searcher || "a";
+  });
+
+  const [clicked, setClicked] = useState(() => {
+    const params = new URLSearchParams(location.search);
+    const tab = parseInt(params.get("tab"));
+
+    return tab || 0;
+  });
+
+  // const { query_search } = match.params;
 
   function handleClicked(id, query) {
+    // console.log(clicked);
     if (id === 1) {
       return <Lists mode={theme} query={query} />;
     }
@@ -357,6 +370,7 @@ const SearchResult = ({ match }) => {
       return <Issues mode={theme} query={query} />;
     }
 
+    // setClicked(0);
     return <Users mode={theme} query={query} />;
   }
 
@@ -371,21 +385,23 @@ const SearchResult = ({ match }) => {
               onClick={() => setClicked(0)}
               id={clicked === 0 ? "clicked" : ""}
             >
-              <a href="/search?tab=1&query=elias">Usuários</a>
+              <a href={`/search?query_search=${query_search}&tab=0`}>
+                Usuários
+              </a>
               <strong>234</strong>
             </li>
             <li
               onClick={() => setClicked(1)}
               id={clicked === 1 ? "clicked" : ""}
             >
-              <a href="/search?tab=2&query=elias">Listas</a>
+              <a href={`/search?query_search=${query_search}&tab=1`}>Listas</a>
               <strong>897</strong>
             </li>
             <li
               onClick={() => setClicked(2)}
               id={clicked === 2 ? "clicked" : ""}
             >
-              <a href="/search?tab=3&query=elias">Artigos</a>
+              <a href={`/search?query_search=${query_search}&tab=2`}>Artigos</a>
               <strong>6453</strong>
             </li>
           </List>

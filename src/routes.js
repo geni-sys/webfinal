@@ -30,7 +30,7 @@ function Routes() {
         <Route component={LearningIssue} path="/user/learning/:issue_id" />
         <Route component={Marketplace} path="/marketplace" />
         <Route component={Notifications} path="/notifications" />
-        <Route component={SearchResult} path="/search/:query_search" />
+        <Route component={SearchResult} path="/search" />
         <Route component={Questions} path="/questions" />
         <Route component={Settings} path="/settings" />
         <Route component={Profile} path="/profile" />
