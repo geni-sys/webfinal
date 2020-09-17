@@ -11,6 +11,7 @@ import { Container, Main, Card, Great, Body, GoBack } from "./styles";
 
 const LearningIssue = ({ match }) => {
   const [data, setData] = useState([]);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const [cookies] = useCookies();
   const { issue_id } = match.params;
@@ -109,13 +110,13 @@ const LearningIssue = ({ match }) => {
   }
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
-      <Main id="learn-main">
+      <Main id="learn-main" mode={theme}>
         {data.map((issue) => (
           <>
-            <Card>
+            <Card mode={theme}>
               <strong>{issue.title}</strong>
 
               <div id="tags">{serializeTags(issue.tags)}</div>
@@ -155,13 +156,14 @@ const LearningIssue = ({ match }) => {
               </Great>
             </Card>
 
-            <Body id="learn-app">
+            <Body id="learn-app" mode={theme}>
               <GoBack>
                 <FiArrowLeft /> Voltar
               </GoBack>
 
               <div id="transcription">
                 <ReactMarkdown
+                  mode={theme}
                   renderers={{ code: CodeBlock }}
                   source={issue.body}
                 />

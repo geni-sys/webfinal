@@ -13,7 +13,8 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === "dark" ? `#1f252e` : `var(--force)`};
   overflow: hidden;
 `;
 
@@ -56,6 +57,10 @@ export const Card = styled.aside`
   max-width: 330px;
   font-size: 1.3em;
 
+  strong {
+    color: ${(props) => props.mode === "dark" && `#fff`};
+  }
+
   div#tags {
     font-size: 1em;
     display: flex;
@@ -63,8 +68,10 @@ export const Card = styled.aside`
     padding: 5px 0;
 
     span {
-      background: var(--white);
-      color: var(--tertiary);
+      background: ${(props) =>
+        props.mode === "dark" ? `#121212` : `var(--white);`};
+      color: ${(props) =>
+        props.mode === "dark" ? `var(--reports);` : `var(--tertiary);`};
       margin: 5px 0;
       margin-right: 2px;
       padding: 0 5px;
@@ -82,11 +89,13 @@ export const Card = styled.aside`
       display: flex;
       flex-direction: row;
       margin-right: 30px;
+
+      color: ${(props) => props.mode === "dark" && `#fff`};
     }
   }
 
   small {
-    color: var(--primary);
+    color: ${(props) => (props.mode === "dark" ? `#999` : `var(--primary);`)};
     font-size: 12px;
     margin-bottom: 5px;
     padding: 5px 0;

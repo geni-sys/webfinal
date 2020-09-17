@@ -33,10 +33,12 @@ const Header = () => {
   function toggleTheme() {
     if (theme === "dark") {
       setTheme("light");
+      window.location.reload(true);
       return localStorage.setItem("theme", "light");
     }
 
     setTheme("dark");
+    window.location.reload(true);
     return localStorage.setItem("theme", "dark");
   }
 
@@ -116,8 +118,8 @@ const Header = () => {
           height={9}
           width={38}
           handleDiameter={18}
-          offColor={"#121212"}
-          onColor={"#DEDEDE"}
+          offColor={"#DEDEDE"}
+          onColor={"#121212"}
         />
 
         <a id="top-level" href="/notifications" className="desactived-header">
