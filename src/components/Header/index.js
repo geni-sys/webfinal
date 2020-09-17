@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
-import { FiUser, FiBell, FiMinimize2 } from "react-icons/fi";
+import { FiBell, FiMinimize2 } from "react-icons/fi";
+import Miniature from "../Miniature";
 // STYLUS | STATICS
 import {
   Container,
@@ -127,7 +128,7 @@ const Header = () => {
         </a>
 
         <div id="fi-usr" onClick={() => setModal(!modal)}>
-          <FiUser />
+          <Miniature width={"30px"} height={"30px"} desc="Usuário" />
         </div>
 
         <OverClick className={modal && "desaper"} id="over-modal">
