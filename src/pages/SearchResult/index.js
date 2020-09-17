@@ -225,7 +225,7 @@ function Lists({ query }) {
   );
 }
 
-function Issues({ query }) {
+function Issues({ query, mode }) {
   const [dataIssue, setDataIssue] = useState([]);
 
   const [cookies] = useCookies();
@@ -269,9 +269,7 @@ function Issues({ query }) {
       <>
         {serials.map((serial) => (
           <span key={serial}>
-            <a style={{ color: "#4764f1" }} href={`/search/${serial}`}>
-              {serial}
-            </a>
+            <a href={`/search/${serial}`}>{serial}</a>
           </span>
         ))}
       </>
@@ -321,12 +319,14 @@ function Issues({ query }) {
   return (
     <>
       {dataIssue.map((item) => (
-        <li key={item.id} href="/playlist">
+        <li mode={mode} key={item.id} href="/playlist">
           <span id="ilustry">
             <FiAirplay />
           </span>
           <div id="nlw">
-            <a href={`/lists?title=${item.id}`}>{item.title}</a>
+            <a id="serial" href={`/lists?title=${item.id}`}>
+              {item.title}
+            </a>
             <span>#{parseInt(item.id) * 122}</span>
             <p id="lighs">{serializeTags(item.tags)}</p>
             <div id="ftr">
@@ -344,28 +344,29 @@ function Issues({ query }) {
 
 const SearchResult = ({ match }) => {
   const [clicked, setClicked] = useState(0);
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const { query_search } = match.params;
 
   function handleClicked(id, query) {
     if (id === 1) {
-      return <Lists query={query} />;
+      return <Lists mode={theme} query={query} />;
     }
 
     if (id === 2) {
-      return <Issues query={query} />;
+      return <Issues mode={theme} query={query} />;
     }
 
-    return <Users query={query} />;
+    return <Users mode={theme} query={query} />;
   }
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
-      <Main>
-        <Aside>
-          <List>
+      <Main mode={theme}>
+        <Aside mode={theme}>
+          <List mode={theme}>
             <li
               onClick={() => setClicked(0)}
               id={clicked === 0 ? "clicked" : ""}
@@ -390,8 +391,10 @@ const SearchResult = ({ match }) => {
           </List>
         </Aside>
 
-        <Content>
-          <ul id="concret">{handleClicked(clicked, query_search)}</ul>
+        <Content mode={theme}>
+          <ul mode={theme} id="concret">
+            {handleClicked(clicked, query_search)}
+          </ul>
         </Content>
       </Main>
     </Container>

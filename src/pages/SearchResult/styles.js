@@ -13,7 +13,8 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === "dark" ? `#1f252e` : `var(--force)`};
   overflow-y: auto;
   overflow-x: hidden;
 `;
@@ -52,8 +53,12 @@ export const Aside = styled.aside`
   }
 `;
 export const List = styled.ul`
+  /* background: ${(props) =>
+    props.mode === "dark" ? `#121212` : `initial`}; */
+
   li {
-    color: var(--Notify);
+    color: ${(props) => (props.mode === "dark" ? `#999` : `var(--Notify);`)};
+    background: ${(props) => (props.mode === "dark" ? `#121212` : `initial`)};
     margin-right: 30px;
     border: 1px solid rgba(0, 0, 0, 0.1);
     padding: 2px 5px;
@@ -64,7 +69,9 @@ export const List = styled.ul`
     justify-content: space-between;
 
     &#clicked {
-      background: var(--white);
+      background: ${(props) =>
+        props.mode === "dark" ? `var(--reports)` : `var(--white);`};
+      color: ${(props) => (props.mode === "dark" ? `var(--witer)` : `initial`)};
     }
 
     a {
@@ -104,7 +111,8 @@ export const Content = styled.div`
       border: 1px solid rgba(0, 0, 0, 0.1);
       padding: 10px;
       margin-bottom: 10px;
-      color: var(--Notify);
+      color: ${(props) => (props.mode === "dark" ? `#999` : ` var(--Notify);`)};
+      background: ${(props) => (props.mode === "dark" ? `#121212` : `initial`)};
 
       span#ilustry {
         display: flex;
@@ -115,6 +123,33 @@ export const Content = styled.div`
         svg {
           width: 50px;
           height: 20px;
+        }
+      }
+
+      div#nlw {
+        a {
+          color: ${(props) =>
+            props.mode === "dark" ? `var(--reports)` : `initial`};
+        }
+
+        p#lighs {
+          display: flex;
+
+          span {
+            a {
+              margin: 0 auto;
+              font-size: 11px;
+              color: ${(props) =>
+                props.mode === "dark" ? `#999` : `var(--reports);`};
+            }
+
+            border-radius: 4px;
+            background: ${(props) =>
+              props.mode === "dark" ? `#122112` : `var(--white);`};
+            margin: 0 3px;
+            color: ${(props) =>
+              props.mode === "dark" ? `#999` : `var(--grey-dark);`};
+          }
         }
       }
     }
@@ -128,16 +163,6 @@ export const Content = styled.div`
       p {
         font-size: 13px;
         margin: 5px 0;
-      }
-
-      p#lighs {
-        display: flex;
-
-        span {
-          background: var(--white);
-          margin: 0 3px;
-          color: var(--grey-dark);
-        }
       }
     }
   }
