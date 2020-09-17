@@ -16,6 +16,7 @@
   - [x] PROFILE ✔️
   - [x] USERS ✔️
   - [x] LEARN-PLAYLIST ✔️
+  - [x] LOGIN COLORS ✔️
 
 - CLOSED FEATURES ✅
 
@@ -28,7 +29,6 @@
 - OPENED FEATURES ❌
   - [x] Explore: all about users: best, mentions, news.. ❓
   - [x] Explore DSG
-  - [x] LOGIN COLORS
 
 ## FUNTIONAL
 

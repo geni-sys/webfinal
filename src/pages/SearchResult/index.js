@@ -16,7 +16,7 @@ function Users({ query }) {
   const handleUsersQuery = useCallback(async () => {
     try {
       const response = await api
-        .get(`/users?query=${query}`, {
+        .get(`/users_query?query=${query}&user_id=${user_id}`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -44,7 +44,7 @@ function Users({ query }) {
       console.log(err.message);
       return alert(err.message);
     }
-  }, [query, token]);
+  }, [query, token, user_id]);
 
   useEffect(() => {
     handleUsersQuery(query);
@@ -58,7 +58,7 @@ function Users({ query }) {
     try {
       const response = await api
         .post(
-          `//user/${user_id}/mark/users/${user_mark}`,
+          `/user/${user_id}/mark/users/${user_mark}`,
           {},
           {
             headers: { Authorization: String(token) },
@@ -106,7 +106,7 @@ function Users({ query }) {
             <span>{item.email}</span>
             <div id="ftr">
               <Button
-                disabled={item.isFriend && true}
+                disabled={item.starry}
                 type="button"
                 onClick={() => handleMarkUser(item.starry, item.id)}
               >

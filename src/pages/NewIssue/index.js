@@ -86,16 +86,16 @@ const NewIssue = () => {
       <Grid mode={theme} id="grid" style={{ gridArea: "MAIN" }}>
         <Main mode={theme} id="create-issue">
           <div id="what-do">
-            <h3>Create a new repository</h3>
+            <h3>Crie um novo artigo</h3>
             <p>
-              A repository contains all project files, including the revision
-              history. Already have a project repository elsewhere?
+              Artigos são a base do aplicativo. Um artigo deve conter seus
+              conteúdos bem definidos, incluindo o proprietário.
             </p>
           </div>
 
           <Card id="card">
             <div class="large">
-              <strong>Titulo da issue *</strong>
+              <strong>Titulo do artigo *</strong>
               <Input
                 mode={theme}
                 required
@@ -174,7 +174,7 @@ const NewIssue = () => {
             <Preview onClick={() => setIsPreview(!isPreview)}>Preview</Preview>
           </Body>
 
-          <Create onClick={createNewIssue}>Create repository</Create>
+          <Create onClick={createNewIssue}>Criar novo artigo</Create>
         </Main>
       </Grid>
     </Container>
