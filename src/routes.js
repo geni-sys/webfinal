@@ -15,6 +15,7 @@ import Settings from "./pages/Settings"; // "/settings"
 import Profile from "./pages/Profile"; // "/profile"
 import Users from "./pages/Users"; // "/users/:user_email"
 import Overview from "./pages/Overview"; // "/Overview"
+import Store from "./pages/Store"; // "/Overview"
 import LearningPlaylist from "./pages/LearningPlaylist"; // "/share/lists/:list_id/user/:user_id"
 // STYLUS
 import GlobalStyles from "./GlobalStyles";
@@ -37,6 +38,7 @@ function Routes() {
         <Route component={Users} path="/users/:friend_email" />
         <Route component={LearningPlaylist} path="/share/:list_id" />
         <Route component={Overview} path="/overview" />
+        <Route component={Store} path="/explore" />
         <GlobalStyles />
       </CookiesProvider>
     </BrowserRouter>
