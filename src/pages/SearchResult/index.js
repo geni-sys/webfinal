@@ -269,7 +269,7 @@ function Issues({ query, mode }) {
       <>
         {serials.map((serial) => (
           <span key={serial}>
-            <a href={`/search/${serial}`}>{serial}</a>
+            <a href={`/search?query_search=${serial}&tab=2`}>{serial}</a>
           </span>
         ))}
       </>

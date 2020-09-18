@@ -42,7 +42,10 @@ function IssueList({ mode }) {
       <>
         {serials.map((serial) => (
           <span key={serial}>
-            <a style={{ color: "#4764f1" }} href={`/search/${serial}`}>
+            <a
+              style={{ color: "#4764f1" }}
+              href={`/search?query_search=${serial}&tab=2`}
+            >
               {serial}
             </a>
           </span>
