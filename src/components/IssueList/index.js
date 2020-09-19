@@ -8,7 +8,7 @@ import CodeBlock from "../CodeBlock";
 // STYLUS | STATIC
 import { List, Item, Transcription, Link } from "./styles";
 
-function IssueList({ mode }) {
+function IssueList({ mode, withoutFilter }) {
   const [data, setData] = useState([]);
   const [cookies] = useCookies([]);
 
@@ -55,7 +55,13 @@ function IssueList({ mode }) {
   }
 
   return (
-    <List mode={mode} className="unique" id="publications" style={{}}>
+    <List
+      withoutFilter={withoutFilter}
+      mode={mode}
+      className="unique"
+      id="publications"
+      style={{}}
+    >
       {data.map((lesson) => (
         <Item mode={mode} key={lesson.id} id="issue-publication">
           <header>

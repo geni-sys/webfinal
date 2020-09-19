@@ -146,7 +146,7 @@ const Home = () => {
       <Header />
 
       <Aside mode={theme}>
-        <TopInformation mode={"dark"} id="top-aside">
+        <TopInformation mode={theme} id="top-aside">
           <div id="user-aside">
             <Miniature width="30px" height="30px" />
             <a href="/profile">{name}</a>

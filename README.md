@@ -25,10 +25,10 @@
   - [x] Overview screens ✔️
   - [x] market pages : 4/6 ✔️
   - [x] Header contextmenu ✔️
+  - [x] Explore: all about users: best, mentions, news.. ✔️
+  - [x] Explore ✔️
 
 - OPENED FEATURES ❌
-  - [x] Explore: all about users: best, mentions, news.. ❓
-  - [x] Explore DSG
 
 ## FUNTIONAL
 

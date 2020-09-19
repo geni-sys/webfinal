@@ -4,7 +4,7 @@ export const List = styled.ul`
   display: flex;
   flex-direction: column;
   height: 100%;
-  width: 100%;
+  width: ${(props) => (props.withoutFilter ? `600px` : `100%;`)};
   position: relative;
 
   overflow-y: auto;
