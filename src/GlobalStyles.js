@@ -88,6 +88,7 @@ export default createGlobalStyle`
     --mention-message: #413f3f;
 
     --link: #5d80d6;
+    --url: maroon;
     --force: #ebf3ff;
     --new: #2ea44f;
     --support: #6a737d;

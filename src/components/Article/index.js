@@ -1,5 +1,6 @@
 import React, { memo, useEffect, useCallback, useState } from "react";
 import { hub } from "../../services/api";
+import addColorsWith from "../Utils/useColorsWith";
 // COMPONENTS
 import { FiHexagon, FiStar } from "react-icons/fi";
 // "STYLUS"
@@ -39,7 +40,7 @@ const Hilights = () => {
       <InsightGroup id="insight-group">
         <List id="inside">
           {data.map((git) => (
-            <Inseight key={git.id}>
+            <Inseight mode={theme} key={git.id}>
               <span>
                 <a
                   rel="noopener noreferrer"
@@ -52,11 +53,16 @@ const Hilights = () => {
               <p> {git.description} </p>
               <div id="resouces">
                 <span>
-                  <FiHexagon color="#8be" />
+                  <FiHexagon
+                    color="#8be"
+                    fill={addColorsWith(String(git.language).charAt(0))}
+                  />
+                  &nbsp;
                   {git.language}
                 </span>
                 <span>
                   <FiStar />
+                  &nbsp;
                   {git.size}
                 </span>
               </div>

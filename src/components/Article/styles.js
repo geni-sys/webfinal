@@ -64,10 +64,13 @@ export const Inseight = styled.li`
     span {
       display: flex;
       flex-wrap: nowrap;
+      justify-content: center;
+      align-items: center;
 
       padding: 2px;
       margin-right: 20px;
-      color: var(--tertiary);
+      color: ${(props) =>
+        props.mode === "dark" ? `#999` : `var(--tertiary);`};
       font-size: 13px;
     }
   }

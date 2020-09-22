@@ -129,7 +129,7 @@ const Home = () => {
 
   function filterActivities(collection, newValue) {
     const arrayFiltered = _.filter(collection, (item) =>
-      String(item.link).toLowerCase().includes(String(newValue).toLowerCase())
+      String(item.title).toLowerCase().includes(String(newValue).toLowerCase())
     );
 
     if (!(arrayFiltered.length === 0)) {
@@ -180,11 +180,15 @@ const Home = () => {
           <List id="aside-items-group">
             {issues.map((issue) => (
               <li key={issue.id}>
-                <a href={issue.link} rel="noopener noreferrer" target="_BLANK">
+                <a
+                  href={`/user/learning/${issue.id}`}
+                  rel="noopener noreferrer"
+                  target="_BLANK"
+                >
                   <span className="items-icon">
                     <FiActivity color="#555" />
                   </span>
-                  <span>{issue.link}</span>
+                  <span>{issue.title}</span>
                 </a>
               </li>
             ))}
@@ -216,7 +220,7 @@ const Home = () => {
       <Main mode={theme}>
         <IssueList mode={theme} />
       </Main>
-      <Article />
+      <Article mode={theme} />
 
       <Confirmations
         title={"Atualizar o perfil!"}

@@ -161,7 +161,7 @@ export const List = styled.ul`
       flex-wrap: nowrap;
       color: #0366d6;
       text-decoration: none;
-      width: auto;
+      width: fit-content;
 
       &:hover {
         text-decoration: underline;

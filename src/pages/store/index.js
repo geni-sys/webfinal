@@ -35,12 +35,9 @@ const Explore = () => {
                 <div id="unik">
                   <FiAirplay />
                   <p>
-                    <a href="{`/users/${String(list.id).trim()}`}">
-                      3lias-allex
-                    </a>{" "}
-                    /{" "}
+                    <a href="/}">3lias-allex</a> /{" "}
                     <strong>
-                      <a href="{`/share/${list.id}`}">NodeJS with Crypto</a>
+                      <a href="/">NodeJS with Crypto</a>
                     </strong>
                   </p>
                 </div>
@@ -71,12 +68,9 @@ const Explore = () => {
                 <div id="unik">
                   <FiAirplay />
                   <p>
-                    <a href="{`/users/${String(list.id).trim()}`}">
-                      3lias-allex
-                    </a>{" "}
-                    /{" "}
+                    <a href="/">3lias-allex</a>{" "}
                     <strong>
-                      <a href="{`/share/${list.id}`}">NodeJS with Crypto</a>
+                      <a href="/">NodeJS with Crypto</a>
                     </strong>
                   </p>
                 </div>

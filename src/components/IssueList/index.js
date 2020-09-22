@@ -13,11 +13,31 @@ function IssueList({ mode, withoutFilter }) {
   const [cookies] = useCookies([]);
 
   const getAllData = useCallback(async () => {
-    const { token } = cookies;
+    const { token, user_id } = cookies;
+
+    if (withoutFilter) {
+      try {
+        const response = await api
+          .get("/issues", { headers: { Authorization: token || "" } })
+          .catch((err) => {
+            console.log(err.message);
+            return;
+          });
+
+        setData(response.data);
+      } catch (err) {
+        console.log("Erro desconecido");
+        return alert("Erro ao se conectar");
+      }
+
+      return;
+    }
 
     try {
       const response = await api
-        .get("/issues", { headers: { Authorization: token || "" } })
+        .get(`/home/${user_id}/issues`, {
+          headers: { Authorization: token || "" },
+        })
         .catch((err) => {
           console.log(err.message);
           return;
@@ -28,7 +48,7 @@ function IssueList({ mode, withoutFilter }) {
       console.log("Erro desconecido");
       return alert("Erro ao se conectar");
     }
-  }, [cookies]);
+  }, [cookies, withoutFilter]);
 
   useEffect(() => {
     getAllData();
