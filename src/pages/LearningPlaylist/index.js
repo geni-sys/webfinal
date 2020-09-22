@@ -16,20 +16,35 @@ import {
   Sender,
 } from "./styles";
 
-function LearningPlaylist({ match }) {
+function LearningPlaylist({ match, location }) {
   const [data, setData] = useState([]);
   const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
   const [isSelected, setIsSelected] = useState(1);
+  const [watch] = useState(() => {
+    const params = new URLSearchParams(location.search);
+    const searcher = Number(params.get("watch"));
+
+    return searcher || Number(1);
+  });
+  const [box] = useState(() => {
+    const params = new URLSearchParams(location.search);
+    const searcher = Number(params.get("box"));
+
+    return searcher || Number(1);
+  });
 
   const [cookies] = useCookies();
 
-  const { list_id } = match.params;
   const { token } = cookies;
   const getLessonsData = useCallback(async () => {
     try {
+      if (!watch) {
+        return alert("Lista não encontrada!");
+      }
+
       const response = await api
-        .get(`/playlist/${list_id}`, {
+        .get(`/playlist/${watch}`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -57,7 +72,7 @@ function LearningPlaylist({ match }) {
       console.log(err.message);
       return alert("Erro no conexão");
     }
-  }, [list_id, token]);
+  }, [token, watch]);
 
   useEffect(() => {
     getLessonsData();

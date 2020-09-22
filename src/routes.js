@@ -36,7 +36,7 @@ function Routes() {
         <Route component={Settings} path="/settings" />
         <Route component={Profile} path="/profile" />
         <Route component={Users} path="/users/:friend_email" />
-        <Route component={LearningPlaylist} path="/share/:list_id" />
+        <Route component={LearningPlaylist} path="/playlists" />
         <Route component={Overview} path="/overview" />
         <Route component={Store} path="/explore" />
         <GlobalStyles />

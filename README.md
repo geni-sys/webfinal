@@ -56,10 +56,10 @@
   - [x] Marcar / star in SEARCHRESULT ✔️
   - [x] get user description (Profile) ✔️
   - [x] Marcar / star ✔️
+  - [x] RSLV query_search ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] playlist (CHAT) ❓
   - [x] explore ❓
   - [x] Fill Contributions (Profile) ❓
-  - [x] RSLV query_search ❓
   - [x] unmark user ❓

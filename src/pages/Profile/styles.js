@@ -162,6 +162,13 @@ export const Top = styled.ul`
     &.selected::after {
       width: 100%;
     }
+
+    &.selected::after {
+      background-color: var(--link);
+    }
+    &:hover::after {
+      background-color: #1f252e;
+    }
   }
 `;
 

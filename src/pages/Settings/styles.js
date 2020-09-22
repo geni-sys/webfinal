@@ -188,6 +188,7 @@ export const MoreInfo = styled.div`
   p {
     margin: 5px 0 20px 10px;
     max-width: 500px;
+    color: ${(props) => (props.mode === `dark` ? "#999" : `initial`)};
 
     &#non {
       margin: 0;

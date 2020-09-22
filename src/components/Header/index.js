@@ -10,7 +10,6 @@ import {
   Navegation,
   Session,
   InputSearch,
-  Search,
   List,
   OverClick,
   LogOut,
