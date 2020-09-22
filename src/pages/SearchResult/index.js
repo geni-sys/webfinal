@@ -342,7 +342,7 @@ function Issues({ query, mode }) {
   );
 }
 
-const SearchResult = ({ match, location }) => {
+const SearchResult = ({ location }) => {
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
   const [query_search] = useState(() => {
     const params = new URLSearchParams(location.search);

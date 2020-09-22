@@ -59,12 +59,14 @@ const Header = () => {
       alert("Antes de terminar a sessão conclua os campos necessários");
     }
   }
-  function handleSearch(query_search) {
+  function handleSearch(e, query_search) {
+    e.preventDefault();
+
     if (!query_search) {
       alert("Insira uma pesquisa válida");
       return history.goBack();
     }
-    return history.push(`/search/${query_search}`);
+    return history.push(`/search?query_search=${query_search}`);
   }
 
   return (
@@ -82,18 +84,23 @@ const Header = () => {
 
         <Navegation className="desactived-header">
           <div style={{ position: "relative" }}>
-            <InputSearch
-              placeholder="Search or jump to"
-              type="text"
-              name="search"
-              id="search-bar"
-              autocapitalize="none"
-              autocomplete="off"
-              autocorrect="off"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-            />
-            <Search onClick={() => handleSearch(query)}>GO</Search>
+            <form
+              // action={`/search?query_search=${query}`}
+              onSubmit={(e) => handleSearch(e, query)}
+            >
+              <InputSearch
+                placeholder="Pesquisar ou ir para?"
+                type="text"
+                name="search"
+                id="search-bar"
+                autocapitalize="none"
+                autocomplete="off"
+                autocorrect="off"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+              />
+              {/* <Search onClick={() => handleSearch(query)}>GO</Search> */}
+            </form>
           </div>
 
           <List>
