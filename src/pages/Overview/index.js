@@ -256,7 +256,7 @@ function Overview() {
             <li key={list.id}>
               <div id="starred">
                 <FiActivity />
-                <span>Baseado nas tags do seu perfil.</span>
+                <span>Baseado nas tags mais buscadas.</span>
               </div>
 
               <div id="list">

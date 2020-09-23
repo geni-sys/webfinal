@@ -110,8 +110,8 @@ export default createGlobalStyle`
   }
 
   div#transcription.issue-limitaion img {
-    width: 100%;
-    height: 400px;
+    width: auto;
+    height: auto;
   }
   div#transcription {
     blockquote {

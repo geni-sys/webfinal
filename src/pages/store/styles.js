@@ -48,17 +48,40 @@ export const Container = styled.div`
   }
 `;
 
+export const Banner = styled.div`
+  grid-area: BANNER;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: ${(props) =>
+    props.mode === "dark" ? `#f9a839` : `var(--dominate);`};
+`;
+
+export const Icone = styled.img`
+  /* max-width: 230px; */
+  height: auto;
+`;
+
 export const Main = styled.main`
   grid-area: MAIN;
-  display: flex;
-  flex-direction: row;
+  overflow-y: auto;
 
-  overflow: hidden;
+  div#contents {
+    /* overflow: hidden; */
+    display: flex;
+    flex-direction: row;
+  }
 `;
 
 export const Aside = styled.aside`
   background: ${(props) =>
     props.mode === "dark" ? `#1e1e1f` : `var(--dominate);`};
+
+  > h1 {
+    color: ${(props) => (props.mode === "dark" ? `#dedede` : `initial`)};
+  }
 
   flex: 1;
   padding: 40px;
@@ -167,8 +190,15 @@ export const Article = styled.article`
   background: ${(props) =>
     props.mode === "dark" ? `#121212` : `var(--white);`};
 
+  ${(props) =>
+    props.mode === "light" && `border-left: 1px solid rgba(0,0,0, .3)`};
+
   flex: 1;
   padding: 40px;
 
   overflow-y: auto;
+
+  > h1 {
+    color: ${(props) => (props.mode === "dark" ? `#dedede` : `initial`)};
+  }
 `;

@@ -5,7 +5,6 @@ import api from "../../services/api";
 // COMPONENTS
 import { FiArrowDown, FiXOctagon } from "react-icons/fi";
 import ReactLoading from "react-loading";
-import Header from "../../components/Header";
 // STYLUS | STATIC
 import { Container, Aside, Main, Form, Input, Submit, Card } from "./styles";
 import Friends from "../../assets/friends-negesys.svg";
@@ -118,7 +117,7 @@ const Login = () => {
 
   return (
     <Container id="Login">
-      <Header />
+      {/* <Header /> */}
 
       <Aside id="Login-aside">
         <div id="anuncios">

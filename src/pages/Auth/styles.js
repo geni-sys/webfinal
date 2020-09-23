@@ -5,11 +5,9 @@ export const Container = styled.div`
   display: grid;
 
   grid-template-columns: auto;
-  grid-template-rows: 6rem auto;
+  grid-template-rows: auto;
 
-  grid-template-areas:
-    "HEADER HEADER"
-    "ASID MAI";
+  grid-template-areas: "ASID MAI";
 
   height: 100vh;
   background: #121212 !important;
@@ -20,10 +18,9 @@ export const Container = styled.div`
     overflow-y: auto;
 
     grid-template-columns: auto;
-    grid-template-rows: 6rem auto auto;
+    grid-template-rows: auto auto;
 
     grid-template-areas:
-      "HEADER"
       "ASID"
       "MAI";
 
@@ -34,12 +31,12 @@ export const Container = styled.div`
     }
   }
 
-  @media (max-width: 768px) {
+  /* @media (max-width: 768px) {
     grid-template-rows: 4.9rem auto;
-  }
+  } */
 
   @media (max-width: 600px) {
-    grid-template-rows: 4rem 160px auto;
+    grid-template-rows: 160px auto;
 
     height: 100%;
     overflow-y: auto;
