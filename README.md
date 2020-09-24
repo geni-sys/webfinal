@@ -57,9 +57,9 @@
   - [x] get user description (Profile) ✔️
   - [x] Marcar / star ✔️
   - [x] RSLV query_search ✔️
+  - [x] explore ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] playlist (CHAT) ❓
-  - [x] explore ❓
   - [x] Fill Contributions (Profile) ❓
   - [x] unmark user ❓

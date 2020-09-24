@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
+import formatTime from "../Utils/fomatTimestamps";
 // COMPONENTS
 import { FiActivity, FiAirplay, FiStar, FiCheck } from "react-icons/fi";
 import Header from "../../components/Header";
@@ -263,10 +264,12 @@ function Overview() {
                 <div id="unik">
                   <FiAirplay />
                   <p>
-                    <a href={`/users/${String(list.id).trim()}`}>3lias-allex</a>{" "}
+                    <a href={`/users/${String(list.user.email).trim()}`}>
+                      {list.user.name}
+                    </a>{" "}
                     /{" "}
                     <strong>
-                      <a href={`/share/${list.id}`}>{list.name}</a>
+                      <a href={`/playlists?watch=${list.id}`}>{list.name}</a>
                     </strong>
                   </p>
                 </div>
@@ -285,9 +288,9 @@ function Overview() {
               </div>
 
               <div id="stamps">
-                <span>Última atualização 3 min ago</span>
+                <span>Última atualização {formatTime(list.updatedAt)}</span>
                 <br />
-                <span>* CSS</span>
+                {/* <span>* CSS</span> */}
               </div>
             </li>
           ))

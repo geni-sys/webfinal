@@ -89,7 +89,7 @@ const Explore = () => {
 
       <Main mode={theme}>
         <Banner mode={theme}>
-          <Icone src={PlayingImg} alt="playing" />
+          <Icone src={PlayingImg} alt="playing" draggable={false} />
 
           <h1>
             Todos os conteúdos para levar a sua carreira para o outro nível.
@@ -119,12 +119,14 @@ const Explore = () => {
                       <div id="unik">
                         <FiAirplay />
                         <p>
-                          <a href={`/users/${String(list.id).trim()}`}>
-                            3lias-allex
+                          <a href={`/users/${String(list.user.email).trim()}`}>
+                            {list.user.name}
                           </a>{" "}
                           /{" "}
                           <strong>
-                            <a href={`/share/${list.id}`}>{list.name}</a>
+                            <a href={`/playlists?watch=${list.id}`}>
+                              {list.name}
+                            </a>
                           </strong>
                         </p>
                       </div>

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../../services/api";
+import formatTime from "../../Utils/fomatTimestamps";
 //COMPONENTS
 import { FiBox } from "react-icons/fi";
 import Miniature from "../../../components/Miniature";
@@ -128,7 +129,7 @@ export const Lists = ({ user }) => {
           </p>
 
           <div id="btom">
-            <p id="language">{itm.issue.createdAt}</p>
+            <p id="language">{formatTime(itm.issue.createdAt)}</p>
             <span>JavaScript</span>
           </div>
         </li>
