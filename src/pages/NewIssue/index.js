@@ -39,8 +39,12 @@ const NewIssue = () => {
   }
 
   async function createNewIssue() {
+    if (!titulo || !tags || !body || !linguagem) {
+      return alert("Preenche todos os campos necessários!");
+    }
+
     try {
-      await api
+      const response = await api
         .post(
           `/user/${cookies.user_id}/new/issue`,
           {
@@ -71,8 +75,20 @@ const NewIssue = () => {
           console.log(error.config);
         });
 
-      alert("Issue criada!");
-      history.push("/");
+      if (response.data.owner || response.data.issue) {
+        alert("Issue criada!");
+        await api.put(
+          `/scores/issue/${cookies.user_id}`,
+          {
+            issue: true,
+          },
+          {
+            headers: { Authorization: String(cookies.token) },
+          }
+        );
+
+        history.push("/");
+      }
       return;
     } catch (err) {
       console.log("Erro desconhecido");
@@ -109,11 +125,11 @@ const NewIssue = () => {
             </div>
 
             <div>
-              <strong>Idioma *</strong>
+              <strong>Linguagem / Tecnologia *</strong>
               <Input
                 mode={theme}
                 required
-                placeholder="Ex: Português"
+                placeholder="Ex: Javascript / UX-UI"
                 type="text"
                 name="tags"
                 id="tags"

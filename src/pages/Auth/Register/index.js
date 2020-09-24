@@ -80,6 +80,14 @@ const Register = () => {
       const github = response.data.user.github;
       const completed = response.data.user.completed;
 
+      await api.post(
+        `/scores/${String(user_id)}`,
+        {},
+        {
+          headers: { Authorization: String(token) },
+        }
+      );
+
       setCookie("token", `Bearer ${token}`.trim());
       setCookie("user_id", String(user_id).trim());
       localStorage.setItem("email", String(email));
@@ -130,7 +138,7 @@ const Register = () => {
     <Container id="register" Montains={Montains} Stars={Stars}>
       <Main id="session-group">
         <div id="welcome">
-          <h3>Registrar-se na plataforma</h3>
+          <h3>Registrar-se na plataforma Wheezy</h3>
         </div>
 
         <Form className="form-session" onSubmit={handleSubmit}>
@@ -196,7 +204,14 @@ const Register = () => {
 
         <Card id="terms-services">
           ao se registrar voce aceita nossos
-          <a href="/"> termos de serviço.</a>
+          <a
+            href="http://localhost/web/public/term_services.html"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            {" "}
+            termos de serviço.
+          </a>
         </Card>
       </Main>
     </Container>

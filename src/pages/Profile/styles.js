@@ -277,7 +277,7 @@ export const Points = styled.div`
       p {
         background: #8be9fd;
         width: ${(props) =>
-          props.three >= 0 ? String(props.two) + `%;` : `0%;`};
+          props.three >= 0 ? String(props.three) + `%;` : `0%;`};
         height: 100%;
       }
     }

@@ -252,11 +252,11 @@ export const Points = styled.div`
     li#first {
       width: 100%;
       background-color: var(--force);
-      padding: 0;
 
       p {
         background: #f25;
-        width: 50%;
+        width: ${(props) =>
+          props.one >= 0 ? String(props.one) + `%;` : `0%;`};
         height: 100%;
       }
     }
@@ -266,7 +266,8 @@ export const Points = styled.div`
 
       p {
         background: #bd93f9;
-        width: 30%;
+        width: ${(props) =>
+          props.two >= 0 ? String(props.two) + `%;` : `0%;`};
         height: 100%;
       }
     }
@@ -276,7 +277,8 @@ export const Points = styled.div`
 
       p {
         background: #8be9fd;
-        width: 80%;
+        width: ${(props) =>
+          props.three >= 0 ? String(props.three) + `%;` : `0%;`};
         height: 100%;
       }
     }

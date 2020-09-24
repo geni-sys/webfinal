@@ -10,6 +10,7 @@ import { Default, Lists, Markeds } from "./components";
 import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 
 function Users({ match }) {
+  const [Scores, setScores] = useState([]);
   const [data, setData] = useState([]);
   const [isSelected, setIsSelected] = useState(0);
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
@@ -61,10 +62,41 @@ function Users({ match }) {
       alert(err.message);
     }
   }, [friend_email, token, user_id]);
+  const getScores = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/scores/0?email=${friend_email}`, {
+          headers: { Authorization: token },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      setScores(response.data);
+    } catch (err) {
+      alert(err.message);
+    }
+  }, [friend_email, token]);
 
   useEffect(() => {
     handleRequest();
-  }, [handleRequest]);
+    getScores();
+  }, [getScores, handleRequest]);
 
   async function markUser(id) {
     try {
@@ -154,7 +186,7 @@ function Users({ match }) {
               onClick={() => setIsSelected(1)}
               className={isSelected === 1 ? "selected" : ""}
             >
-              Listas
+              Marcados
             </li>
             <li
               onClick={() => setIsSelected(2)}
@@ -171,20 +203,28 @@ function Users({ match }) {
               <HandleComponents id={isSelected} />
             </ul>
 
-            <Points>
-              <h5>Atividate das contribuições</h5>
-              <ul id="burbble">
-                <li id="first">
-                  <p></p>
-                </li>
-                <li id="second">
-                  <p></p>
-                </li>
-                <li id="three">
-                  <p></p>
-                </li>
-              </ul>
-            </Points>
+            {Scores.map((score) => (
+              <Points
+                key={score.id}
+                one={score.issues_createds}
+                two={score.lists_createds}
+                three={score.anotations}
+                mode={theme}
+              >
+                <h5>Atividate das contribuições</h5>
+                <ul id="burbble">
+                  <li id="first">
+                    <p></p>
+                  </li>
+                  <li id="second">
+                    <p></p>
+                  </li>
+                  <li id="three">
+                    <p></p>
+                  </li>
+                </ul>
+              </Points>
+            ))}
           </Bottom>
         </Article>
       </Main>

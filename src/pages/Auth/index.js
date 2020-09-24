@@ -123,7 +123,7 @@ const Login = () => {
         <div id="anuncios">
           <h3>Build for Engineers</h3>
           <p id="text-limited">
-            Elias é uma plataforma para te ajudar a levar a sua carreira pro
+            Wheezy é uma plataforma para te ajudar a levar a sua carreira para o
             outro nível, da melhor forma e sem custo!
           </p>
         </div>

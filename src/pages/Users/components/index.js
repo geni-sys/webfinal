@@ -56,7 +56,7 @@ export const Default = ({ user }) => {
             <span id="left">
               <FiBox />
             </span>
-            <a href="/user/learning/1">{over.title}</a>
+            <a href={`/user/learning/${over.id}`}>{over.title}</a>
           </div>
 
           <p>Create a basic contextmenu with html, css and JS</p>
@@ -121,7 +121,7 @@ export const Lists = ({ user }) => {
             <span id="left">
               <FiBox />
             </span>
-            <a href={`/share/`}>{itm.issue.title}</a>
+            <a href={`/playlists?watch=${itm.id}`}>{itm.issue.title}</a>
           </div>
 
           <p>
@@ -194,7 +194,7 @@ export const Markeds = ({ user }) => {
                 source={marked.marked.github + ".png"}
               />
             </span>
-            <a href="/user/learning/1">{marked.marked.name}</a>
+            <a href={`/users/${marked.marked.email}`}>{marked.marked.name}</a>
           </div>
 
           <p>{marked.marked.email}</p>

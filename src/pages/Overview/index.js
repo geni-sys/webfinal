@@ -106,9 +106,19 @@ function Modal({ mode }) {
         { headers: { Authorization: String(token) } }
       );
 
-      if (response.data) {
-        alert("Lista criada!");
+      if (response.data.id) {
         setIdNewList(response.data.id);
+        alert("Lista criada!");
+
+        await api.put(
+          `/scores/list/${user_id}`,
+          {
+            list: true,
+          },
+          {
+            headers: { Authorization: String(token) },
+          }
+        );
       }
     } catch (err) {
       console.log(err.message);
