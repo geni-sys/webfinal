@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { useCookies } from "react-cookie";
+import api from "../../services/api";
 // COMPONENTS
 import { FiUser } from "react-icons/fi";
 import Header from "../../components/Header";
@@ -9,6 +11,7 @@ import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 import ProfileImage from "../../assets/github-icon.png";
 
 const Profile = () => {
+  const [Scores, setScores] = useState([]);
   const [userData] = useState(
     () => JSON.parse(localStorage.getItem("user_description")) || {}
   );
@@ -19,6 +22,8 @@ const Profile = () => {
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   const history = useHistory();
+  const [cookies] = useCookies();
+  const { user_id, token } = cookies;
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
@@ -33,7 +38,41 @@ const Profile = () => {
   function handleNavigateToSetting() {
     history.push("/settings");
   }
+  const getScores = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/scores/${user_id}`, {
+          headers: { Authorization: token },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      setScores(response.data);
+    } catch (err) {
+      alert(err.message);
+    }
+  }, [token, user_id]);
   // "https://github.com/eliasallex" + ".png"
+
+  useEffect(() => {
+    getScores();
+  }, [getScores]);
 
   return (
     <Container mode={theme} className="profile">
@@ -99,20 +138,28 @@ const Profile = () => {
               <HandleComponents id={isSelected} />
             </ul>
 
-            <Points mode={theme}>
-              <h5>Suas contribuições</h5>
-              <ul id="burbble">
-                <li id="first">
-                  <p></p>
-                </li>
-                <li id="second">
-                  <p></p>
-                </li>
-                <li id="three">
-                  <p></p>
-                </li>
-              </ul>
-            </Points>
+            {Scores.map((score) => (
+              <Points
+                key={score.id}
+                one={score.issues_createds}
+                two={score.lists_createds}
+                three={score.anotations}
+                mode={theme}
+              >
+                <h5>Suas contribuições</h5>
+                <ul id="burbble">
+                  <li id="first">
+                    <p></p>
+                  </li>
+                  <li id="second">
+                    <p></p>
+                  </li>
+                  <li id="three">
+                    <p></p>
+                  </li>
+                </ul>
+              </Points>
+            ))}
           </Bottom>
         </Article>
       </Main>

@@ -58,8 +58,8 @@
   - [x] Marcar / star ✔️
   - [x] RSLV query_search ✔️
   - [x] explore ✔️
+  - [x] Fill Contributions (Profile) ✔️
 
 - OPENED FEATURES ❌ ❓
   - [x] playlist (CHAT) ❓
-  - [x] Fill Contributions (Profile) ❓
   - [x] unmark user ❓
