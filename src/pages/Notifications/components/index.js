@@ -51,7 +51,7 @@ export const All = ({ mode }) => {
               <p>Adicionou você em sua lista de usuários marcados</p>
 
               <div id="footer">
-                <Clicked mode={mode} href="/">
+                <Clicked mode={mode} href={`/users/${note.de.email}`}>
                   Adicionar
                 </Clicked>
               </div>
@@ -119,7 +119,7 @@ export const Mentioned = ({ mode }) => {
               <div id="footer">
                 <Clicked
                   mode={mode}
-                  href={`/playlists?whatch=${note.id}&box=2314`}
+                  href={`/playlists?watch=${note.id}&box=2314`}
                 >
                   Abrir
                 </Clicked>

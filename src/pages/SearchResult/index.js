@@ -84,6 +84,17 @@ function Users({ query }) {
         });
       if (response.data.id) {
         window.location.reload(true);
+        await api.post(
+          `/notifications/${user_id}/to/${user_mark}`,
+          {
+            transcription: "http://localhost/3337/profile",
+            state: "pendente",
+            type: "request",
+          },
+          {
+            Headers: { Authorization: String(token) },
+          }
+        );
       }
     } catch (err) {
       alert(err.message);

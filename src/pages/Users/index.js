@@ -10,7 +10,7 @@ import { Default, Lists, Markeds } from "./components";
 import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 
 function Users({ match }) {
-  const [idFriend, setIdFriend] = useState(1);
+  const [idFriend, setIdFriend] = useState(3);
   const [Scores, setScores] = useState([]);
   const [data, setData] = useState([]);
   const [isSelected, setIsSelected] = useState(0);
@@ -132,6 +132,17 @@ function Users({ match }) {
       console.log(response);
       if (response.data) {
         alert("Usuario marcada");
+        await api.post(
+          `/notifications/${user_id}/to/${id}`,
+          {
+            transcription: "http://localhost/3337/profile",
+            state: "pendente",
+            type: "request",
+          },
+          {
+            Headers: { Authorization: String(token) },
+          }
+        );
       }
     } catch (err) {
       alert(err.message);
