@@ -10,6 +10,7 @@ import { Default, Lists, Markeds } from "./components";
 import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 
 function Users({ match }) {
+  const [idFriend, setIdFriend] = useState(1);
   const [Scores, setScores] = useState([]);
   const [data, setData] = useState([]);
   const [isSelected, setIsSelected] = useState(0);
@@ -19,13 +20,13 @@ function Users({ match }) {
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
-      return <Lists mode={theme} user={3} />;
+      return <Lists mode={theme} user={idFriend || null} />;
     }
     if (parseInt(id) === 2) {
-      return <Markeds mode={theme} user={3} />;
+      return <Markeds mode={theme} user={idFriend || null} />;
     }
 
-    return <Default mode={theme} user={3} />;
+    return <Default mode={theme} user={idFriend || null} />;
   }
 
   // GLOBAL VARs
@@ -57,6 +58,7 @@ function Users({ match }) {
           console.log(error.config);
         });
 
+      setIdFriend(response.data.id);
       setData([response.data]);
     } catch (err) {
       alert(err.message);
