@@ -82,7 +82,8 @@ function Users({ query }) {
           }
           console.log(error.config);
         });
-      if (response.data.id) {
+
+      if (response.data) {
         window.location.reload(true);
         await api.post(
           `/notifications/${user_id}/to/${user_mark}`,
