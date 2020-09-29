@@ -175,9 +175,9 @@ export const OurTeam = ({ mode }) => {
 
             <div id="nlw">
               <span>FROM</span>
-              <a href={`/users/${note.de.email}`}>{note.de.name}</a>
+              <a href={`/users/${note.de.email}`}>Genesis Systems</a>
 
-              <p>Adicionou você em sua lista de usuários marcados</p>
+              <p>{note.transcription}</p>
 
               <div id="footer">
                 <Clicked mode={mode} href="/">
