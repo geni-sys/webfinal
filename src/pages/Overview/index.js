@@ -182,7 +182,7 @@ function Overview() {
   const getAllLists = useCallback(async () => {
     try {
       const response = await api
-        .get("/playlists", {
+        .get(`/overview/${user_id}/playlists`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -204,12 +204,12 @@ function Overview() {
           console.log(error.config);
         });
 
-      setData(response.data.lists);
+      setData(response.data);
     } catch (err) {
       console.log(err.message);
       return alert(err.message);
     }
-  }, [token]);
+  }, [token, user_id]);
 
   useEffect(() => {
     getAllLists();
