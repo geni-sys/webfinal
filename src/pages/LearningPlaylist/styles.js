@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { FiSend } from "react-icons/fi";
 
 export const Container = styled.div`
   display: grid;
@@ -136,10 +137,15 @@ export const Article = styled.article`
   background: inherit;
   grid-area: ARTICLE;
   border-left: 1px solid rgba(0, 0, 0, 0.3);
-  overflow-y: auto;
+  overflow: hidden;
   font-size: 1.4rem;
 
   ul#messages {
+    max-height: calc(100vh - (70px + 84px));
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+
     li {
       border-radius: 1.4px;
       padding: 2px 10px;
@@ -182,20 +188,35 @@ export const Transcription = styled.div`
   font-size: 1.4em;
 `;
 
-export const Sender = styled.div`
+export const Sender = styled.form`
   position: absolute;
   bottom: 0;
   width: 100%;
-  height: 40px;
   border-radius: 0;
 
-  input {
+  textarea {
     width: 100%;
-    height: 100%;
+    height: 65px;
+    resize: none;
     border: 1px solid rgba(0, 0, 0, 0.1);
 
     padding: 0 5px;
     font-size: 15px;
     color: var(--grey-dark);
   }
+
+  button {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+      background-color: var(--ENTER);
+    }
+  }
+`;
+
+export const SendIcon = styled(FiSend)`
+  padding-right: 5px;
 `;

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 // SERVICES
@@ -22,6 +22,10 @@ import {
 import "./styles.css";
 
 const NewIssue = () => {
+  useEffect(() => {
+    document.title = "Criar novo artigo";
+  }, []);
+
   const [isPreview, setIsPreview] = useState(true);
   const [titulo, setTitulo] = useState("");
   const [tags, setTags] = useState("");

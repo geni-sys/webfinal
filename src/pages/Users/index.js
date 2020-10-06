@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useCallback, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
@@ -95,7 +96,13 @@ function Users({ match }) {
     }
   }, [friend_email, token]);
 
+  const loadTitle = useCallback(
+    () => (document.title = data[0]?.name + " (Usuário) " || "(Usuário)"),
+    [data]
+  );
+
   useEffect(() => {
+    loadTitle();
     handleRequest();
     getScores();
   }, [getScores, handleRequest]);

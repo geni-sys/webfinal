@@ -122,6 +122,8 @@ const Home = () => {
   }
 
   useEffect(() => {
+    document.title = "Wheezy";
+
     middleware();
     getIssueOfUser();
     userAlreadyCompleteProfile();

@@ -22,12 +22,14 @@ const Register = () => {
   const history = useHistory();
 
   useEffect(() => {
+    document.title = "Registrar | Wheezy";
+
     if (!cookies.token && !cookies.user_id) {
       console.log("Usuário sem log " + JSON.stringify(cookies));
       return;
     }
 
-    history.push("/");
+    history.push("/wheezy");
   }, [cookies, history]);
 
   async function handleSubmit(event) {
@@ -205,7 +207,7 @@ const Register = () => {
         <Card id="terms-services">
           ao se registrar voce aceita nossos
           <a
-            href="http://localhost/web/public/term_services.html"
+            href="https://genesisys.azurewebsites.net/"
             target="_blank"
             rel="noopener noreferrer"
           >

@@ -57,6 +57,7 @@ const Explore = () => {
   }, [token]);
 
   useEffect(() => {
+    document.title = "Explorar todos os conteúdos";
     handleRequest();
   }, [handleRequest]);
 

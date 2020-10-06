@@ -77,7 +77,7 @@ const Header = () => {
       </Screen>
 
       <div id="comun">
-        <a href="/">
+        <a href="/wheezy">
           <h1>GENESIS</h1>
         </a>
 
@@ -151,7 +151,7 @@ const Header = () => {
             <a href="/profile">Ver seu perfil</a>
             <a href="/overview?newList=true">Overview - nova lista</a>
             <a href="/settings">Definições</a>
-            <a href="/">Genesis</a>
+            <a href="/wheezy">Genesis</a>
           </div>
 
           <LogOut onClick={handleSignOut}>Sair</LogOut>

@@ -386,6 +386,10 @@ const SearchResult = ({ location }) => {
     return <Users mode={theme} query={query} />;
   }
 
+  useEffect(() => {
+    document.title = "Resultados para " + query_search;
+  }, [query_search]);
+
   return (
     <Container mode={theme}>
       <Header />

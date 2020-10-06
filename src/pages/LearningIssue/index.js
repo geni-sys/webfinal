@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useCallback, useState, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { useCookies } from "react-cookie";
@@ -49,7 +50,16 @@ const LearningIssue = ({ match }) => {
     }
   }, [issue_id, token, user_id]);
 
+  const loadTitle = useCallback(
+    () =>
+      (document.title =
+        data[0]?.title + " (Artigo)" || "Aprendendo novo artigo"),
+    [data]
+  );
+
   useEffect(() => {
+    loadTitle();
+
     getLessonsData();
   }, [getLessonsData]);
 

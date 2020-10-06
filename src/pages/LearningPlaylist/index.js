@@ -14,10 +14,25 @@ import {
   Article,
   Transcription,
   Sender,
+  SendIcon,
 } from "./styles";
 
 function LearningPlaylist({ match, location }) {
+  const [message, setMessage] = useState("");
   const [data, setData] = useState([]);
+  const [elements] = useState([
+    {
+      id: 1,
+      message:
+        "Os elemento servem para separar os components das *uls* e *lis*",
+      type: "owner",
+    },
+    {
+      id: 2,
+      message: "No primeiro parágravo acrescentado uma matriz",
+      type: "receptor",
+    },
+  ]);
   const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
   const [isSelected, setIsSelected] = useState(1);
@@ -74,9 +89,16 @@ function LearningPlaylist({ match, location }) {
     }
   }, [token, watch]);
 
+  const loadTitle = useCallback(
+    () =>
+      (document.title = title + " (Playlist)" || "Aprendendo nova playlist"),
+    [title]
+  );
+
   useEffect(() => {
+    loadTitle();
     getLessonsData();
-  }, [getLessonsData]);
+  }, [getLessonsData, loadTitle]);
 
   function alterateBody(id) {
     const view = data.map((item) => {
@@ -88,6 +110,34 @@ function LearningPlaylist({ match, location }) {
 
     setBody(String(view));
   }
+
+  const createMessageElement = (msg, id) => {
+    const ulElement = document.querySelector("ul#messages");
+
+    const element = document.createElement("li");
+    const span = document.createElement("span");
+    const p = document.createElement("p");
+
+    span.textContent = `#${id}`;
+    p.textContent = `${msg}`;
+
+    element.appendChild(span);
+    element.appendChild(p);
+
+    element.setAttribute("id", "owner");
+    ulElement.appendChild(element);
+
+    return 0;
+  };
+
+  const sendeAnotations = (event) => {
+    event.preventDefault();
+
+    if (!message) return;
+
+    createMessageElement(message, 234);
+    setMessage("");
+  };
 
   return (
     <Container>
@@ -127,36 +177,26 @@ function LearningPlaylist({ match, location }) {
 
       <Article>
         <ul id="messages">
-          <li id="receptor">
-            <span>#34321</span>
-            <p>No primeiro parágravo acrescentado uma matriz</p>
-          </li>
-
-          <li id="owner">
-            <span>#34321</span>
-            <p>No primeiro parágravo acrescentado uma matriz</p>
-          </li>
-          <li id="owner">
-            <span>#34321</span>
-            <p>Inspiração ao longo do percurso!</p>
-          </li>
-          <li id="owner">
-            <span>#34321</span>
-            <p>getting all.</p>
-          </li>
-
-          <li id="receptor">
-            <span>#34321</span>
-            <p>Nos primeiros acima dos parâgrafos</p>
-          </li>
+          {elements.map((element) => (
+            <li key={element.id} id={element.type}>
+              <span>#{element.id}</span>
+              <p>{element.message}</p>
+            </li>
+          ))}
         </ul>
 
-        <Sender>
-          <input
-            placeholder="Type here"
+        <Sender onSubmit={sendeAnotations}>
+          <button type="submit">
+            <SendIcon />
+            Enviar
+          </button>
+          <textarea
+            placeholder="Criar anotações..."
             type="text"
             name="message"
             id="message"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
           />
         </Sender>
       </Article>

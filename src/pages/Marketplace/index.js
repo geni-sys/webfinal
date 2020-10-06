@@ -18,6 +18,10 @@ const Marketplace = (props) => {
   });
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
+  useEffect(() => {
+    document.title = "Marketplace";
+  }, []);
+
   function Default({ mode }) {
     const [news, setNews] = useState([]);
 

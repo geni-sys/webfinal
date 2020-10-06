@@ -18,12 +18,14 @@ const Login = () => {
   const [cookies, setCookie] = useCookies(["token"]);
 
   useEffect(() => {
+    document.title = "Login | Wheezy";
+
     if (!cookies.token && !cookies.user_id) {
       console.log("Usuário sem log " + JSON.stringify(cookies));
       return;
     }
 
-    history.push("/");
+    history.push("/wheezy");
   }, [cookies, history]);
 
   async function handleSubmit(event) {
@@ -172,8 +174,8 @@ const Login = () => {
           </Submit>
 
           <Card id="card-account">
-            <h4>New to Genesys?</h4>
-            <a href="/register">create an account</a>
+            <h4>Nova na Genesys?</h4>
+            <a href="/register">Criar conta</a>
           </Card>
         </Form>
       </Main>

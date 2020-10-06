@@ -2,6 +2,7 @@ import React from "react";
 import { Route, BrowserRouter } from "react-router-dom";
 import { CookiesProvider } from "react-cookie";
 // COMPONENTS
+import LandingPage from "./pages/LandingPage"; // "/landing"
 import Auth from "./pages/Auth"; // "/login"
 import Register from "./pages/Auth/Register"; // "/register"
 import Home from "./pages/Home"; // "/"
@@ -24,9 +25,10 @@ function Routes() {
   return (
     <BrowserRouter>
       <CookiesProvider>
+        <Route component={LandingPage} exact path="/" />
         <Route component={Auth} path="/login" />
+        <Route component={Home} exact path="/wheezy" />
         <Route component={Register} exact path="/register" />
-        <Route component={Home} exact path="/" />
         <Route component={NewIssue} exact path="/new/issue" />
         <Route component={LearningIssue} path="/user/learning/:issue_id" />
         <Route component={Marketplace} path="/marketplace" />

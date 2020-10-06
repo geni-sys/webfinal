@@ -212,6 +212,7 @@ function Overview() {
   }, [token, user_id]);
 
   useEffect(() => {
+    document.title = "Playlists";
     getAllLists();
   }, [getAllLists]);
 

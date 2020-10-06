@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
@@ -118,6 +118,10 @@ const Questions = () => {
       return;
     }
   }
+
+  useEffect(() => {
+    document.title = "Completar o seu perfil";
+  }, []);
 
   return (
     <Container mode={theme} id="new-issue">

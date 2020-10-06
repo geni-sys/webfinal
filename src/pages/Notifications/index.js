@@ -1,4 +1,4 @@
-import React, { useState, memo } from "react";
+import React, { useState, memo, useEffect } from "react";
 // COMPONENS
 import { FiTarget, FiGitBranch, FiShield } from "react-icons/fi";
 import { All, Mentioned, OurTeam } from "./components";
@@ -13,6 +13,10 @@ const Notifications = ({ match }) => {
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
   // const { tab } = match.params;
+
+  useEffect(() => {
+    document.title = "Notificações";
+  }, []);
 
   function ChooseComponent() {
     if (activeTab === 0) {

@@ -12,6 +12,7 @@ import ProfileImage from "../../assets/github-icon.png";
 
 const Profile = () => {
   const [Scores, setScores] = useState([]);
+  const [username] = useState(() => localStorage.getItem("name") || "Perfil");
   const [userData] = useState(
     () => JSON.parse(localStorage.getItem("user_description")) || {}
   );
@@ -71,8 +72,9 @@ const Profile = () => {
   // "https://github.com/eliasallex" + ".png"
 
   useEffect(() => {
+    document.title = username;
     getScores();
-  }, [getScores]);
+  }, [getScores, username]);
 
   return (
     <Container mode={theme} className="profile">

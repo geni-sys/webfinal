@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
@@ -132,7 +132,7 @@ const Settings = () => {
   }
   function Buttons({ id }) {
     if (id === 4) {
-      return <a href="/">HOME</a>;
+      return <a href="/wheezy">HOME</a>;
     }
     if (id === 5) {
       return <Update onClick={goToOverviewPage}>Começar</Update>;
@@ -140,6 +140,10 @@ const Settings = () => {
 
     return <></>;
   }
+
+  useEffect(() => {
+    document.title = "Definições | " + user_name;
+  }, [user_name]);
 
   return (
     <Container mode={theme}>
