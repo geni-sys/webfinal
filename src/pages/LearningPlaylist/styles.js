@@ -13,7 +13,8 @@ export const Container = styled.div`
 
   height: 100vh;
   max-height: 100vh;
-  background: var(--force);
+  background: ${(props) =>
+    props.mode === "dark" ? `#1f252e` : `var(--force)`};
   overflow: hidden;
 
   @media (max-width: 1024px) {
@@ -75,7 +76,8 @@ export const Container = styled.div`
 export const Aside = styled.aside`
   grid-area: ASIDE;
 
-  background: var(--white);
+  background: ${(props) =>
+    props.mode === "dark" ? `#1f252e` : `var(--white)`};
 
   display: flex;
   flex-direction: column;
@@ -93,6 +95,7 @@ export const Aside = styled.aside`
     h3 {
       padding: 15px 3px;
       color: var(--grey-dark);
+      color: ${(props) => props.mode === "dark" && `#dedede`};
     }
   }
 
@@ -108,7 +111,8 @@ export const Aside = styled.aside`
         margin: 0;
         width: 100%;
         font-size: 14px;
-        background: var(--white);
+        background: ${(props) =>
+          props.mode === "dark" ? `var(--Notify);` : `var(--white);`};
 
         span svg {
           margin-right: 3px;
@@ -117,9 +121,12 @@ export const Aside = styled.aside`
 
         &:hover {
           background: var(--dominating);
+          color: ${(props) =>
+            props.mode === "dark" ? `var(--white);` : `var(--Notify);`};
         }
         &.isLearning {
           border-left: 5px solid rgba(0, 0, 0, 0.5);
+          color: #999;
         }
       }
     }
@@ -127,9 +134,18 @@ export const Aside = styled.aside`
 `;
 
 export const Main = styled.main`
-  background: #ebf3ff;
+  background: ${(props) => (props.mode === "dark" ? `#121212` : `#ebf3ff;`)};
+
   grid-area: MAIN;
   overflow-y: auto;
+
+  div#transcription {
+    /* overflow: auto; */
+
+    background: ${(props) =>
+      props.mode === "dark" ? `#121212` : `var(--dominate);`};
+    border-radius: 4px;
+  }
 `;
 
 export const Article = styled.article`
@@ -202,7 +218,10 @@ export const Sender = styled.form`
 
     padding: 0 5px;
     font-size: 15px;
-    color: var(--grey-dark);
+    /* color: var(--grey-dark);  */
+    color: ${(props) => (props.mode === "dark" ? `#999` : `var(--grey-dark);`)};
+    background: ${(props) =>
+      props.mode === "dark" ? `var(--Notify);` : `var(--witer)`};
   }
 
   button {

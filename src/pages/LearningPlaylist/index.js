@@ -17,8 +17,13 @@ import {
   SendIcon,
 } from "./styles";
 
-function LearningPlaylist({ match, location }) {
+const firstLesson = `
+  # O FOCO
+`;
+
+const LearningPlaylist = ({ match, location }) => {
   const [message, setMessage] = useState("");
+  const [theme] = useState(() => localStorage.getItem("theme") || "light");
   const [data, setData] = useState([]);
   const [elements] = useState([
     {
@@ -59,7 +64,7 @@ function LearningPlaylist({ match, location }) {
       }
 
       const response = await api
-        .get(`/playlist/${watch}`, {
+        .get(`/playlist/${watch}?box=${box}`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -87,7 +92,7 @@ function LearningPlaylist({ match, location }) {
       console.log(err.message);
       return alert("Erro no conexão");
     }
-  }, [token, watch]);
+  }, [box, token, watch]);
 
   const loadTitle = useCallback(
     () =>
@@ -96,6 +101,8 @@ function LearningPlaylist({ match, location }) {
   );
 
   useEffect(() => {
+    setBody(String(firstLesson));
+
     loadTitle();
     getLessonsData();
   }, [getLessonsData, loadTitle]);
@@ -105,7 +112,7 @@ function LearningPlaylist({ match, location }) {
       if (id === item.id) {
         return item.issues.body;
       }
-      return "";
+      return null;
     });
 
     setBody(String(view));
@@ -140,10 +147,10 @@ function LearningPlaylist({ match, location }) {
   };
 
   return (
-    <Container>
+    <Container mode={theme}>
       <Header />
 
-      <Aside>
+      <Aside mode={theme}>
         <div id="learn-theme-group">
           <FiFolder />
           <h3 id="desaper">{title}</h3>
@@ -169,13 +176,13 @@ function LearningPlaylist({ match, location }) {
         </div>
       </Aside>
 
-      <Main>
+      <Main mode={theme}>
         <Transcription id="transcription">
           <ReactMarkdown renderers={{ code: CodeBlock }} source={body} />
         </Transcription>
       </Main>
 
-      <Article>
+      <Article mode={theme}>
         <ul id="messages">
           {elements.map((element) => (
             <li key={element.id} id={element.type}>
@@ -185,7 +192,7 @@ function LearningPlaylist({ match, location }) {
           ))}
         </ul>
 
-        <Sender onSubmit={sendeAnotations}>
+        <Sender mode={theme} onSubmit={sendeAnotations}>
           <button type="submit">
             <SendIcon />
             Enviar
@@ -202,6 +209,6 @@ function LearningPlaylist({ match, location }) {
       </Article>
     </Container>
   );
-}
+};
 
 export default LearningPlaylist;
