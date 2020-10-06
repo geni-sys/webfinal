@@ -28,12 +28,15 @@ export default createGlobalStyle`
     }
 
     ::-webkit-scrollbar-thumb {
-      background-color: var(--dominate);
+      ${"" /* background-color: var(--dominate); */}
+      background-color: var(--mention-detail);
       border-radius: 0;
     }
 
     ::-webkit-scrollbar-track {
-      background-color: #6633cc;
+      background-color: transparent;
+      ${"" /* background-color: #6633cc; */}
+      ${"" /* background-color: var(--mention-detail); */}
     }
   }
 
