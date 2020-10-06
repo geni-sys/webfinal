@@ -1,5 +1,8 @@
 # the final of WEB project
 
+### For web presentation 
+<img width="250" src="./src/assets/qrcode_genesys.png" alt="QR code" />
+
 ## DESIGN
 
 - CLOSED SCREENS ✅
