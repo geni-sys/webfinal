@@ -4,6 +4,7 @@ import api from "../../services/api";
 // COMPONENTS
 import ReactMarkdown from "react-markdown";
 import { FiFileText, FiFolder } from "react-icons/fi";
+import Miniature from "../../components/Miniature";
 import Header from "../../components/Header";
 import CodeBlock from "../../components/CodeBlock";
 // STYLES | STATIC
@@ -15,17 +16,29 @@ import {
   Transcription,
   Sender,
   SendIcon,
+  CreateAnotations,
+  GoMessages,
+  UserMarkeds,
 } from "./styles";
 
 const firstLesson = `
-  # O FOCO
+  # Como aprender uma nova Skill?
+
+  ### A Regra das 10,000 horas
+    - Voçê precisa 10,000 horas de práticas deliberadas para ser um metre das skill.
+
+  ### Esto é real?
 `;
 
 const LearningPlaylist = ({ match, location }) => {
+  const [initAnimation, setInitAnimation] = useState(true);
+  const [loadAnotations, setLoadAnotations] = useState(false);
+  const [userSelected, setUserSelected] = useState(0);
   const [message, setMessage] = useState("");
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
   const [data, setData] = useState([]);
-  const [elements] = useState([
+  const [boxs, setBoxs] = useState([]);
+  useState([
     {
       id: 1,
       message:
@@ -51,12 +64,12 @@ const LearningPlaylist = ({ match, location }) => {
     const params = new URLSearchParams(location.search);
     const searcher = Number(params.get("box"));
 
-    return searcher || Number(1);
+    return searcher;
   });
 
   const [cookies] = useCookies();
 
-  const { token } = cookies;
+  const { token, user_id } = cookies;
   const getLessonsData = useCallback(async () => {
     try {
       if (!watch) {
@@ -94,6 +107,43 @@ const LearningPlaylist = ({ match, location }) => {
     }
   }, [box, token, watch]);
 
+  const getBoxsMessages = useCallback(async () => {
+    try {
+      if (!box) {
+        console.log(box);
+        return alert("SEM Anotações!");
+      }
+
+      const response = await api
+        .get(`/boxs?playlist=3&guest=2&sender=3`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      setBoxs(response.data);
+    } catch (err) {
+      console.log(err.message);
+      return alert("Erro ao carregar as Anotações!");
+    }
+  }, [box, token]);
+
   const loadTitle = useCallback(
     () =>
       (document.title = title + " (Playlist)" || "Aprendendo nova playlist"),
@@ -101,11 +151,12 @@ const LearningPlaylist = ({ match, location }) => {
   );
 
   useEffect(() => {
-    setBody(String(firstLesson));
+    // setBody(String(firstLesson));
 
     loadTitle();
     getLessonsData();
-  }, [getLessonsData, loadTitle]);
+    getBoxsMessages();
+  }, [getBoxsMessages, getLessonsData, loadTitle]);
 
   function alterateBody(id) {
     const view = data.map((item) => {
@@ -146,6 +197,10 @@ const LearningPlaylist = ({ match, location }) => {
     setMessage("");
   };
 
+  function selectUser(user) {
+    setUserSelected(user);
+  }
+
   return (
     <Container mode={theme}>
       <Header />
@@ -177,23 +232,64 @@ const LearningPlaylist = ({ match, location }) => {
       </Aside>
 
       <Main mode={theme}>
+        {!initAnimation && (
+          <UserMarkeds>
+            <ul>
+              <h1>Iniciar anotações com:</h1>
+              <li
+                onClick={() => selectUser(1)}
+                className={userSelected === 1 ? "selected" : null}
+              >
+                <Miniature width={"30px"} height={"30px"} /> Elias alexandre
+              </li>
+              <li
+                className={userSelected === 2 ? "selected" : null}
+                onClick={() => selectUser(2)}
+              >
+                <Miniature width={"30px"} height={"30px"} /> Barraba serencovich
+              </li>
+              <li
+                className={userSelected === 3 ? "selected" : null}
+                onClick={() => selectUser(3)}
+              >
+                <Miniature width={"30px"} height={"30px"} /> Luis Garcia
+              </li>
+              <button disabled={userSelected === 0 && true} type="button">
+                OK
+              </button>
+            </ul>
+          </UserMarkeds>
+        )}
+
         <Transcription id="transcription">
           <ReactMarkdown renderers={{ code: CodeBlock }} source={body} />
         </Transcription>
       </Main>
 
       <Article mode={theme}>
-        <ul id="messages">
-          {elements.map((element) => (
-            <li key={element.id} id={element.type}>
-              <span>#{element.id}</span>
-              <p>{element.message}</p>
-            </li>
-          ))}
-        </ul>
+        {box && (
+          <CreateAnotations onClick={() => setInitAnimation(!initAnimation)}>
+            <GoMessages />
+            Iniciar anotações
+          </CreateAnotations>
+        )}
+
+        {loadAnotations && (
+          <ul id="messages">
+            {boxs.map((bxs) => (
+              <li
+                key={bxs.id}
+                id={bxs.sender === user_id ? "owner" : "receptor"}
+              >
+                <span>#{bxs.sender}</span>
+                <p>{bxs.message}</p>
+              </li>
+            ))}
+          </ul>
+        )}
 
         <Sender mode={theme} onSubmit={sendeAnotations}>
-          <button type="submit">
+          <button disabled={true} type="submit">
             <SendIcon />
             Enviar
           </button>

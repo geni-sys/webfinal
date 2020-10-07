@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { FiSend } from "react-icons/fi";
+import { FiSend, FiActivity } from "react-icons/fi";
 
 export const Container = styled.div`
   display: grid;
@@ -196,6 +196,89 @@ export const Article = styled.article`
       display: none;
     }
   }
+`;
+
+export const UserMarkeds = styled.div`
+  transition: display 0.2s ease-in-out;
+  height: 250px;
+
+  ul {
+    background: #121212;
+    border: 1px solid rgba(0, 0, 0, 1);
+    box-shadow: 4px 3px black;
+
+    margin: 30px auto;
+    border-radius: 6px;
+    padding: 5px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+    min-height: 200px;
+    max-height: 220px;
+    max-width: 300px;
+
+    > h1 {
+      color: var(--desfoque);
+      margin-bottom: 15px;
+    }
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      margin: 5px;
+      cursor: pointer;
+
+      font-size: 18px;
+      color: var(--ENTER);
+
+      img {
+        margin-right: 7px;
+      }
+
+      &:hover {
+        opacity: 0.3;
+      }
+
+      &.selected {
+        background: var(--discord);
+      }
+    }
+  }
+
+  button {
+    width: 100%;
+    min-height: 20px;
+    margin-top: 23px;
+    border-radius: 6px;
+    background: var(--dominating);
+
+    :hover {
+      background: var(--discord);
+    }
+  }
+`;
+
+export const CreateAnotations = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--rocketseat);
+  /* color: var(--notification); */
+  width: 100%;
+  min-height: 30px;
+  font-size: 16px;
+
+  border-radius: 3px;
+
+  &:hover {
+    background: var(--dominating);
+  }
+`;
+
+export const GoMessages = styled(FiActivity)`
+  margin-right: 3px;
 `;
 
 export const Transcription = styled.div`
