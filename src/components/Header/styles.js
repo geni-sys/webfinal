@@ -123,6 +123,7 @@ export const Session = styled.div`
   a#top-level {
     background-color: var(--secondary);
     border-radius: 50%;
+    border: 2px solid var(--mention-detail);
     margin-right: 10px;
 
     display: flex;

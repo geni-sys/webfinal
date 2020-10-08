@@ -17,6 +17,11 @@ export default createGlobalStyle`
     font-size: 62.4%;
   }
 
+  #root {
+    overflow-x: hidden;
+    overflow: auto;
+  }
+
   *, button, input {
     font-family: 'Roboto', Arial, Helvetica, sans-serif;
     box-sizing: border-box;

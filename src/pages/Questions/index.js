@@ -112,7 +112,7 @@ const Questions = () => {
       localStorage.setItem("questions_status", String("true"));
       alert("Perfil atualizado!");
 
-      history.push("/");
+      history.push("/wheezy");
     } catch (err) {
       console.log(err.message);
       return;
