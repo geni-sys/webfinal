@@ -119,7 +119,7 @@ export const Mentioned = ({ mode }) => {
               <div id="footer">
                 <Clicked
                   mode={mode}
-                  href={`/playlists?watch=${note.id}&box=2314`}
+                  href={note.transcription}
                 >
                   Abrir
                 </Clicked>

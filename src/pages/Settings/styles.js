@@ -209,6 +209,27 @@ export const MoreInfo = styled.div`
     font-size: 9px;
     color: green;
   }
+
+  ul#reports {
+    display: flex;
+    flex-direction: column;
+    max-height: 150px;
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    a {
+      color: ${props => props.mode === 'dark' ? `var(--landing);` : `var(--reports)` } ;
+      font-size: 17px;
+      margin: 5px;
+      width: fit-content;
+
+      span#guest {
+        color: var(--gray);
+      }
+    }
+
+    margin-bottom: 40px;
+  }
 `;
 
 export const Token = styled.button`

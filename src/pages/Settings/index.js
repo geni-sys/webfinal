@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 import api from "../../services/api";
@@ -23,6 +23,7 @@ import {
 import ProfileImage from "../../assets/github-icon.png";
 
 const Settings = () => {
+  const [boxsReports, setBoxsReports] = useState([]);
   const [newToken, setNewToken] = useState("");
   const [desactived, setDesactived] = useState(false);
   const [githubAvatar] = useState(
@@ -66,6 +67,17 @@ const Settings = () => {
   function goToOverviewPage() {
     history.push("/overview");
   }
+  const getboxsReports = useCallback(async () => {
+    try {
+      const reports = await api.get(`/boxs_reports/${user_id}`,{
+        headers: { Authorization: String(token)}
+      })
+
+      setBoxsReports(reports.data)
+    } catch (err) {
+      alert(err.message)
+    }
+  }, [token, user_id])
 
   function HandleComponents({ id }) {
     if (parseInt(id) === 1) {
@@ -129,6 +141,27 @@ const Settings = () => {
         </>
       );
     }
+    if (parseInt(id) === 6) {
+      return (
+        <>
+          <MoreInfo mode={theme}>
+            <strong>Listas compartilhadas recentemente</strong>
+            <ul id="reports">
+              {boxsReports.map(report => (
+                <a key={report.id} target="_blank" href={report.report} rel="noopener noreferrer">
+                  <span>{report.playlist}</span> {" / "}
+                  <span id="guest">{report.guest}</span>
+                </a>))}
+            </ul>
+
+            <strong>!!!</strong>
+            <p>
+              Em notificações voçÊ encontrara as listas que estão compartilhando com você.
+            </p>
+          </MoreInfo>
+        </>
+      );
+    }
   }
   function Buttons({ id }) {
     if (id === 4) {
@@ -143,7 +176,8 @@ const Settings = () => {
 
   useEffect(() => {
     document.title = "Definições | " + user_name;
-  }, [user_name]);
+    getboxsReports()
+  }, [getboxsReports, user_name]);
 
   return (
     <Container mode={theme}>
@@ -166,13 +200,13 @@ const Settings = () => {
               onClick={() => setIsSelected(1)}
               className={isSelected === 1 ? "selected" : ""}
             >
-              Profile
+              Perfil
             </li>
             <li
               onClick={() => setIsSelected(3)}
               className={isSelected === 3 ? "selected" : ""}
             >
-              Account security
+              Segurança da conta
             </li>
             <li
               onClick={() => setIsSelected(4)}
@@ -186,12 +220,18 @@ const Settings = () => {
             >
               Repositories
             </li>
+            <li
+              onClick={() => setIsSelected(6)}
+              className={isSelected === 6 ? "selected" : ""}
+            >
+              Atividades
+            </li>
           </ul>
         </Aside>
 
         <Body mode={theme}>
           <div>
-            <h5>Public profile</h5>
+            <h5>Perfil Público</h5>
 
             <ul id="configurate">
               <HandleComponents id={isSelected} />

@@ -33,9 +33,9 @@ const firstLesson = `
 const LearningPlaylist = ({ location }) => {
   const [initAnimation, setInitAnimation] = useState(true);
   const [userSelected, setUserSelected] = useState(0);
+  const [userSelectedName, setUserSelectedName] = useState("");
   const [usersMarkeds, setUsersMarkeds] = useState(0);
   const [message, setMessage] = useState("");
-  const [user_email] = useState(() => localStorage.getItem("email"));
 
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
@@ -199,6 +199,26 @@ const LearningPlaylist = ({ location }) => {
     loadTitle,
   ]);
 
+  const registBoxReports = async (guest) => {
+    try {
+      const link = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
+
+      await api.post(
+        `/boxs_reports/${user_id}`,
+        {
+          report: link,
+          playlist: title,
+          guest: userSelectedName,
+        },
+        {
+          Headers: { Authorization: String(token) },
+        }
+      );
+
+    } catch (err) {
+      alert(err.message)
+    }
+  }
   function alterateBody(id) {
     const view = data.map((item) => {
       if (id === item.id) {
@@ -236,6 +256,7 @@ const LearningPlaylist = ({ location }) => {
       `/boxs/${watch}/${box.principal}/to/${box.co_principal}`,
       {
         message: message,
+        now: cookies.user_id
       },
       {
         headers: { Authorization: String(token) },
@@ -249,8 +270,9 @@ const LearningPlaylist = ({ location }) => {
     createMessageElement(message, user_id);
     setMessage("");
   };
-  function selectUser(user) {
+  function selectUser(user, username) {
     setUserSelected(user);
+    setUserSelectedName(username)
   }
   async function initAnotations(guest) {
     try {
@@ -281,9 +303,14 @@ const LearningPlaylist = ({ location }) => {
             Headers: { Authorization: String(token) },
           }
         );
+
+        await registBoxReports(guest)
+
+        window.location.href = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
       }
     } catch (err) {
-      alert(err.message);
+      // alert(err.message);
+      alert("Não pode completar a solicitação");
     }
   }
 
@@ -326,7 +353,7 @@ const LearningPlaylist = ({ location }) => {
               {usersMarkeds.map((userMarked) => (
                 <li
                   key={userMarked.id}
-                  onClick={() => selectUser(userMarked.user_mark)}
+                  onClick={() => selectUser(userMarked.user_mark, userMarked.marked.name)}
                   className={
                     userSelected === userMarked.user_mark ? "selected" : null
                   }
@@ -372,9 +399,9 @@ const LearningPlaylist = ({ location }) => {
                 key={bxs.id}
                 guest={bxs.convidado.id}
                 sender={bxs.enviar.id}
-                id={bxs.convidado.email === user_email ? "owner" : "receptor"}
+                id={Number(bxs.now) === Number(cookies.user_id) ? "owner" : "receptor"}
               >
-                <span>#{bxs.sender}</span>
+                <span>#{bxs.now}</span>
                 <p>{bxs.message}</p>
               </li>
             ))}
