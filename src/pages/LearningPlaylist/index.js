@@ -30,27 +30,16 @@ const firstLesson = `
   ### Esto é real?
 `;
 
-const LearningPlaylist = ({ match, location }) => {
+const LearningPlaylist = ({ location }) => {
   const [initAnimation, setInitAnimation] = useState(true);
-  const [loadAnotations, setLoadAnotations] = useState(false);
   const [userSelected, setUserSelected] = useState(0);
+  const [usersMarkeds, setUsersMarkeds] = useState(0);
   const [message, setMessage] = useState("");
+
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
+
   const [data, setData] = useState([]);
   const [boxs, setBoxs] = useState([]);
-  useState([
-    {
-      id: 1,
-      message:
-        "Os elemento servem para separar os components das *uls* e *lis*",
-      type: "owner",
-    },
-    {
-      id: 2,
-      message: "No primeiro parágravo acrescentado uma matriz",
-      type: "receptor",
-    },
-  ]);
   const [body, setBody] = useState("");
   const [title, setTitle] = useState("");
   const [isSelected, setIsSelected] = useState(1);
@@ -64,7 +53,22 @@ const LearningPlaylist = ({ match, location }) => {
     const params = new URLSearchParams(location.search);
     const searcher = Number(params.get("box"));
 
-    return searcher;
+    if (searcher === 1) {
+      const pr = Number(params.get("principal"));
+      const co = Number(params.get("guest"));
+
+      return {
+        isDefined: true,
+        principal: pr,
+        co_principal: co,
+      };
+    }
+
+    return {
+      isDefined: false,
+      principal: 0,
+      co_principal: 0,
+    };
   });
 
   const [cookies] = useCookies();
@@ -77,7 +81,7 @@ const LearningPlaylist = ({ match, location }) => {
       }
 
       const response = await api
-        .get(`/playlist/${watch}?box=${box}`, {
+        .get(`/playlist/${watch}`, {
           headers: { Authorization: String(token) },
         })
         .catch((error) => {
@@ -105,19 +109,16 @@ const LearningPlaylist = ({ match, location }) => {
       console.log(err.message);
       return alert("Erro no conexão");
     }
-  }, [box, token, watch]);
-
+  }, [token, watch]);
   const getBoxsMessages = useCallback(async () => {
     try {
-      if (!box) {
-        console.log(box);
-        return alert("SEM Anotações!");
-      }
-
       const response = await api
-        .get(`/boxs?playlist=3&guest=2&sender=3`, {
-          headers: { Authorization: String(token) },
-        })
+        .get(
+          `/boxs?playlist=${watch}&guest=${box.co_principal}&sender=${box.principal}`,
+          {
+            headers: { Authorization: String(token) },
+          }
+        )
         .catch((error) => {
           if (error.response) {
             // The request was made and the server responded with a status code
@@ -142,7 +143,37 @@ const LearningPlaylist = ({ match, location }) => {
       console.log(err.message);
       return alert("Erro ao carregar as Anotações!");
     }
-  }, [box, token]);
+  }, [box.co_principal, box.principal, token, watch]);
+  const getUsersMarkeds = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/user/${user_id}/marked/users`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      setUsersMarkeds(response.data);
+    } catch (err) {
+      alert(err.message);
+    }
+  }, [token, user_id]);
 
   const loadTitle = useCallback(
     () =>
@@ -151,12 +182,21 @@ const LearningPlaylist = ({ match, location }) => {
   );
 
   useEffect(() => {
-    // setBody(String(firstLesson));
+    setBody(String(firstLesson));
 
     loadTitle();
     getLessonsData();
-    getBoxsMessages();
-  }, [getBoxsMessages, getLessonsData, loadTitle]);
+    if (box.isDefined) {
+      getBoxsMessages();
+    }
+    getUsersMarkeds();
+  }, [
+    box.isDefined,
+    getBoxsMessages,
+    getLessonsData,
+    getUsersMarkeds,
+    loadTitle,
+  ]);
 
   function alterateBody(id) {
     const view = data.map((item) => {
@@ -168,7 +208,6 @@ const LearningPlaylist = ({ match, location }) => {
 
     setBody(String(view));
   }
-
   const createMessageElement = (msg, id) => {
     const ulElement = document.querySelector("ul#messages");
 
@@ -187,18 +226,64 @@ const LearningPlaylist = ({ match, location }) => {
 
     return 0;
   };
-
-  const sendeAnotations = (event) => {
+  const sendAnotations = async (event) => {
     event.preventDefault();
 
     if (!message) return;
 
-    createMessageElement(message, 234);
+    const response = await api.post(
+      `/boxs/${watch}/${box.principal}/to/${box.co_principal}`,
+      {
+        message: message,
+      },
+      {
+        headers: { Authorization: String(token) },
+      }
+    );
+
+    if (!response.data.id) {
+      alert("Anotação não enviada");
+    }
+
+    createMessageElement(message, user_id);
     setMessage("");
   };
-
   function selectUser(user) {
     setUserSelected(user);
+  }
+  async function initAnotations(guest) {
+    try {
+      const response = await api.post(
+        `/boxs/${watch}/${user_id}/to/${guest}`,
+        { message: "..." },
+        { headers: { Authorization: String(token) } }
+      );
+
+      if (response.data.id) {
+        await api.put(
+          `/scores/anotation/${cookies.user_id}`,
+          {
+            anotation: true,
+          },
+          {
+            headers: { Authorization: String(cookies.token) },
+          }
+        );
+        await api.post(
+          `/notifications/${user_id}/to/${guest}`,
+          {
+            transcription: `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`,
+            state: "pendente",
+            type: "mention",
+          },
+          {
+            Headers: { Authorization: String(token) },
+          }
+        );
+      }
+    } catch (err) {
+      alert(err.message);
+    }
   }
 
   return (
@@ -236,25 +321,30 @@ const LearningPlaylist = ({ match, location }) => {
           <UserMarkeds>
             <ul>
               <h1>Iniciar anotações com:</h1>
-              <li
-                onClick={() => selectUser(1)}
-                className={userSelected === 1 ? "selected" : null}
+
+              {usersMarkeds.map((userMarked) => (
+                <li
+                  key={userMarked.id}
+                  onClick={() => selectUser(userMarked.user_mark)}
+                  className={
+                    userSelected === userMarked.user_mark ? "selected" : null
+                  }
+                >
+                  <Miniature
+                    source={userMarked.marked.github + ".png"}
+                    width={"30px"}
+                    height={"30px"}
+                  />{" "}
+                  {userMarked.marked.name}
+                </li>
+              ))}
+              <button
+                disabled={userSelected === 0 && true}
+                onClick={() => {
+                  initAnotations(userSelected);
+                }}
+                type="button"
               >
-                <Miniature width={"30px"} height={"30px"} /> Elias alexandre
-              </li>
-              <li
-                className={userSelected === 2 ? "selected" : null}
-                onClick={() => selectUser(2)}
-              >
-                <Miniature width={"30px"} height={"30px"} /> Barraba serencovich
-              </li>
-              <li
-                className={userSelected === 3 ? "selected" : null}
-                onClick={() => selectUser(3)}
-              >
-                <Miniature width={"30px"} height={"30px"} /> Luis Garcia
-              </li>
-              <button disabled={userSelected === 0 && true} type="button">
                 OK
               </button>
             </ul>
@@ -267,14 +357,14 @@ const LearningPlaylist = ({ match, location }) => {
       </Main>
 
       <Article mode={theme}>
-        {box && (
+        {!box.isDefined && (
           <CreateAnotations onClick={() => setInitAnimation(!initAnimation)}>
             <GoMessages />
             Iniciar anotações
           </CreateAnotations>
         )}
 
-        {loadAnotations && (
+        {box.isDefined && (
           <ul id="messages">
             {boxs.map((bxs) => (
               <li
@@ -288,8 +378,8 @@ const LearningPlaylist = ({ match, location }) => {
           </ul>
         )}
 
-        <Sender mode={theme} onSubmit={sendeAnotations}>
-          <button disabled={true} type="submit">
+        <Sender mode={theme} onSubmit={sendAnotations}>
+          <button disabled={!box.isDefined} type="submit">
             <SendIcon />
             Enviar
           </button>
