@@ -35,6 +35,7 @@ const LearningPlaylist = ({ location }) => {
   const [userSelected, setUserSelected] = useState(0);
   const [usersMarkeds, setUsersMarkeds] = useState(0);
   const [message, setMessage] = useState("");
+  const [user_email] = useState(() => localStorage.getItem("email"));
 
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
 
@@ -242,7 +243,7 @@ const LearningPlaylist = ({ location }) => {
     );
 
     if (!response.data.id) {
-      alert("Anotação não enviada");
+      return alert("Anotação não enviada");
     }
 
     createMessageElement(message, user_id);
@@ -369,7 +370,9 @@ const LearningPlaylist = ({ location }) => {
             {boxs.map((bxs) => (
               <li
                 key={bxs.id}
-                id={bxs.sender === user_id ? "owner" : "receptor"}
+                guest={bxs.convidado.id}
+                sender={bxs.enviar.id}
+                id={bxs.convidado.email === user_email ? "owner" : "receptor"}
               >
                 <span>#{bxs.sender}</span>
                 <p>{bxs.message}</p>
