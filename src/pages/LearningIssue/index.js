@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import { useCookies } from "react-cookie";
 import api from "../../services/api";
 // COMPONENTS
-import { FiHash, FiStar, FiArrowLeft } from "react-icons/fi";
+import { FiHash, FiArrowLeft } from "react-icons/fi";
 import CodeBlock from "../../components/CodeBlock";
 import Header from "../../components/Header";
 // STYLUS | STATIC
@@ -115,7 +115,7 @@ const LearningIssue = ({ match }) => {
           console.log(error.config);
         });
       if (response.data.id) {
-        return;
+        return window.location.reload(true);
       }
     } catch (err) {
       alert(err.message);

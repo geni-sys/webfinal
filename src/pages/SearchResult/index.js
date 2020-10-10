@@ -355,6 +355,10 @@ function Issues({ query, mode }) {
 }
 
 const SearchResult = ({ location }) => {
+  const [totalUsers, setTotalUsers] = useState(0)
+  const [totalLists, setTotalLists] = useState(0)
+  const [totalIssues, setTotalIssues] = useState(0)
+
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
   const [query_search] = useState(() => {
     const params = new URLSearchParams(location.search);
@@ -371,6 +375,8 @@ const SearchResult = ({ location }) => {
   });
 
   // const { query_search } = match.params;
+  const [cookies] = useCookies();
+  const { token, user_id } = cookies;
 
   function handleClicked(id, query) {
     // console.log(clicked);
@@ -385,10 +391,102 @@ const SearchResult = ({ location }) => {
     // setClicked(0);
     return <Users mode={theme} query={query} />;
   }
+  const getTotUsers = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/users_query?query=${query_search}&user_id=${user_id}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      const data = response.data.length;
+      setTotalUsers(data);
+    } catch (err) {
+      console.log(err.message);
+      return alert(err.message);
+    }
+  }, [query_search, token, user_id])
+  const getTotLists = useCallback(async () => {
+    try {
+      const response = await api
+        .get(`/playlists?query=${query_search}&user_id=${user_id}`, {
+          headers: { Authorization: String(token) },
+        })
+        .catch((error) => {
+          if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            alert(error.response.data.error);
+            console.log(error.response.status);
+            return;
+          } else if (error.request) {
+            // The request was made but no response was received
+            // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+            // http.ClientRequest in node.js
+            console.log(error.request);
+          } else {
+            // Something happened in setting up the request that triggered an Error
+            console.log("Error", error.message);
+          }
+          console.log(error.config);
+        });
+
+      return setTotalLists(response.data.length);
+    } catch (err) {
+      console.log(err.message);
+      return alert(err.message);
+    }
+  }, [query_search, token, user_id]);
+  const getTotIssues = useCallback(async () => {
+    const response = await api
+      .get(`/issues?query=${query_search}&user_id=${user_id}`, {
+        headers: { Authorization: String(token) },
+      })
+      .catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          alert(error.response.data.error);
+          console.log(error.response.status);
+          return;
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
+
+      setTotalIssues(response.data.length);
+  }, [query_search, token, user_id]);
 
   useEffect(() => {
     document.title = "Resultados para " + query_search;
-  }, [query_search]);
+    getTotUsers()
+    getTotLists()
+    getTotIssues()
+  }, [getTotIssues, getTotLists, getTotUsers, query_search]);
 
   return (
     <Container mode={theme}>
@@ -404,21 +502,21 @@ const SearchResult = ({ location }) => {
               <a href={`/search?query_search=${query_search}&tab=0`}>
                 Usuários
               </a>
-              <strong>234</strong>
+              <strong>{totalUsers}</strong>
             </li>
             <li
               onClick={() => setClicked(1)}
               id={clicked === 1 ? "clicked" : ""}
             >
               <a href={`/search?query_search=${query_search}&tab=1`}>Listas</a>
-              <strong>897</strong>
+              <strong>{totalLists}</strong>
             </li>
             <li
               onClick={() => setClicked(2)}
               id={clicked === 2 ? "clicked" : ""}
             >
               <a href={`/search?query_search=${query_search}&tab=2`}>Artigos</a>
-              <strong>6453</strong>
+              <strong>{totalIssues}</strong>
             </li>
           </List>
         </Aside>

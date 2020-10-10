@@ -180,7 +180,7 @@ export const OurTeam = ({ mode }) => {
               <p>{note.transcription}</p>
 
               <div id="footer">
-                <Clicked mode={mode} href="/">
+                <Clicked mode={mode} href="/wheezy">
                   Abrir
                 </Clicked>
               </div>

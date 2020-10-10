@@ -91,7 +91,7 @@ const NewIssue = () => {
           }
         );
 
-        history.push("/");
+        history.push("/wheezy");
       }
       return;
     } catch (err) {

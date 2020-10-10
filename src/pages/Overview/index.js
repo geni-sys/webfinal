@@ -139,7 +139,7 @@ function Modal({ mode }) {
             onChange={(e) => setName(e.target.value)}
           />
           <CreateTitle type="submit" onClick={createListName}>
-            <Checker /> Create
+            <Checker /> Criar
           </CreateTitle>
         </Top>
 
@@ -268,7 +268,7 @@ function Overview() {
             <li key={list.id}>
               <div id="starred">
                 <FiActivity />
-                <span>Baseado nas tags mais buscadas.</span>
+                <span>Baseado nos usuários que você marcou.</span>
               </div>
 
               <div id="list">

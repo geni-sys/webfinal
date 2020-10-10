@@ -203,8 +203,6 @@ const LearningPlaylist = ({ location }) => {
     try {
       const link = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
 
-      alert(token)
-
       await api.post(
         `/boxs_reports/${Number(user_id)}`,
         {
@@ -300,32 +298,30 @@ const LearningPlaylist = ({ location }) => {
         { headers: { Authorization: String(token) } }
       );
 
-      if (response.data[0].id) {
-        await api.put(
-          `/scores/anotation/${cookies.user_id}`,
-          {
-            anotation: true,
-          },
-          {
-            headers: { Authorization: String(cookies.token) },
-          }
-        );
-        await api.post(
-          `/notifications/${user_id}/to/${guest}`,
-          {
-            transcription: `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`,
-            state: "pendente",
-            type: "mention",
-          },
-          {
-            Headers: { Authorization: String(token) },
-          }
-        );
+      await api.put(
+        `/scores/anotation/${cookies.user_id}`,
+        {
+          anotation: true,
+        },
+        {
+          headers: { Authorization: String(cookies.token) },
+        }
+      );
+      await api.post(
+        `/notifications/${user_id}/to/${guest}`,
+        {
+          transcription: `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`,
+          state: "pendente",
+          type: "mention",
+        },
+        {
+          Headers: { Authorization: String(token) },
+        }
+      );
 
-        await registBoxReports(guest)
+      await registBoxReports(guest)
 
-        window.location.href = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
-      }
+      window.location.href = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
     } catch (err) {
       alert(err.message);
       // alert("Não pode completar a solicitação");

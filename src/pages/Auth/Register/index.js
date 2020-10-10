@@ -120,7 +120,7 @@ const Register = () => {
       setIsLoading(2);
 
       window.location.reload(true);
-      return setTimeout(() => history.push("/"), 1000);
+      return setTimeout(() => history.push("/wheezy"), 1000);
     } catch (err) {
       setIsLoading(0);
       alert(err.message);

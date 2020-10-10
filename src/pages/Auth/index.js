@@ -80,7 +80,7 @@ const Login = () => {
       localStorage.setItem("github_avatar", String(github + ".png"));
 
       window.location.reload(true);
-      return history.push("/");
+      return history.push("/wheezy");
     } catch (err) {
       console.log(err.message);
       alert("Erro ao fazer o login!");
