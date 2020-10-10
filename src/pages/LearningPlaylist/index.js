@@ -415,7 +415,7 @@ const LearningPlaylist = ({ location }) => {
                 sender={bxs.enviar.id}
                 id={Number(bxs.now) === Number(cookies.user_id) ? "owner" : "receptor"}
               >
-                <span>#{bxs.now}</span>
+                <span>#{bxs.agora.name}</span>
                 <p>{bxs.message}</p>
               </li>
             ))}

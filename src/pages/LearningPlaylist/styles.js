@@ -165,6 +165,15 @@ export const Article = styled.article`
     li {
       border-radius: 1.4px;
       padding: 2px 10px;
+
+      p {
+        margin-top: 5px;
+      }
+      span {
+        /* border: 1px solid rgba(255,255,255, 0.3);
+        padding: 0 3px; */
+        border-radius: 6px;
+      }
     }
 
     li#receptor {
@@ -176,6 +185,7 @@ export const Article = styled.article`
 
       span {
         background: var(--secondary);
+        color: var(--ENTER);
       }
     }
 
@@ -187,6 +197,7 @@ export const Article = styled.article`
 
       span {
         background: var(--unpurple);
+        color: var(--symbol);
       }
     }
   }
