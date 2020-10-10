@@ -8,29 +8,29 @@
 
 - CLOSED SCREENS ✅
 
-  - [x] AUTH ✔️️
-  - [x] HOME ✔️️
-  - [x] NEW-ISSUE ✔️️
-  - [x] MARKETPLACE ✔️️
-  - [x] NOTIFICATIONS ✔️️
-  - [x] RESULTS ✔️️
-  - [x] LEARNING-A-ISSUE ✔️️
-  - [x] QUESTIONS ✔️️
-  - [x] SETTINGS ✔️️
-  - [x] PROFILE ✔️
-  - [x] USERS ✔️
-  - [x] LEARN-PLAYLIST ✔️
-  - [x] LOGIN COLORS ✔️
+  - [x] AUTH ✔️️✔
+  - [x] HOME ✔️️✔
+  - [x] NEW-ISSUE ✔️️✔
+  - [x] MARKETPLACE ✔️️✔
+  - [x] NOTIFICATIONS ✔️️✔
+  - [x] RESULTS ✔️️✔
+  - [x] LEARNING-A-ISSUE ✔️️✔
+  - [x] QUESTIONS ✔️️✔
+  - [x] SETTINGS ✔️️✔
+  - [x] PROFILE ✔️✔
+  - [x] USERS ✔️✔
+  - [x] LEARN-PLAYLIST ✔️✔
+  - [x] LOGIN COLORS ✔️✔
 
 - CLOSED FEATURES ✅
 
-  - [x] Create a list (review) ✔️
-  - [x] Add issue in list (review) ✔️
-  - [x] Overview screens ✔️
-  - [x] market pages : 4/6 ✔️
-  - [x] Header contextmenu ✔️
-  - [x] Explore: all about users: best, mentions, news.. ✔️
-  - [x] Explore ✔️
+  - [x] Create a list (review) ✔️✔
+  - [x] Add issue in list (review) ✔️✔
+  - [x] Overview screens ✔️✔
+  - [x] market pages : 4/6 ✔️✔
+  - [x] Header contextmenu ✔️✔
+  - [x] Explore: all about users: best, mentions, news.. ✔️✔
+  - [x] Explore ✔️✔
 
 - OPENED FEATURES ❌
 
