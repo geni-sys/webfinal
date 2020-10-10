@@ -129,25 +129,25 @@ const LearningIssue = ({ match }) => {
       <Main id="learn-main" mode={theme}>
         {data.map((issue) => (
           <>
-            <Card mode={theme} key={issue.id}>
+            <Card mode={theme} key={1}>
               <strong>{issue.title}</strong>
 
               <div id="tags">{serializeTags(issue.tags)}</div>
 
               <div id="featureds">
-                <div id="stars">
+                {/* <div id="stars">
                   <span>
                     <FiStar />
                   </span>
-                  <p>724</p>
+                  <p>0</p>
                 </div>
 
                 <div id="avorage">
                   <span>
                     <FiHash />
                   </span>
-                  <p>122</p>
-                </div>
+                  <p>0</p>
+                </div> */}
               </div>
 
               <small>Creador: {issue.user.name}</small>
@@ -157,7 +157,7 @@ const LearningIssue = ({ match }) => {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                main document
+                documento principal
               </a>
 
               <Great
@@ -169,7 +169,7 @@ const LearningIssue = ({ match }) => {
               </Great>
             </Card>
 
-            <Body id="learn-app" mode={theme} key={issue.user.id}>
+            <Body id="learn-app" mode={theme} key={2}>
               <GoBack>
                 <FiArrowLeft /> Voltar
               </GoBack>
