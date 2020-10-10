@@ -203,17 +203,35 @@ const LearningPlaylist = ({ location }) => {
     try {
       const link = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
 
+      alert(token)
+
       await api.post(
-        `/boxs_reports/${user_id}`,
+        `/boxs_reports/${Number(user_id)}`,
         {
           report: link,
           playlist: title,
-          guest: userSelectedName,
-        },
+          guest: userSelectedName,},
         {
-          Headers: { Authorization: String(token) },
+          Headers: { Authorization: `${String(token)}` },
         }
-      );
+      ).catch((error) => {
+        if (error.response) {
+          // The request was made and the server responded with a status code
+          // that falls out of the range of 2xx
+          alert(error.response.data.error);
+          console.log(error.response.status);
+          return;
+        } else if (error.request) {
+          // The request was made but no response was received
+          // `error.request` is an instance of XMLHttpRequest in the browser and an instance of
+          // http.ClientRequest in node.js
+          console.log(error.request);
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log("Error", error.message);
+        }
+        console.log(error.config);
+      });
 
     } catch (err) {
       alert(err.message)
@@ -282,7 +300,7 @@ const LearningPlaylist = ({ location }) => {
         { headers: { Authorization: String(token) } }
       );
 
-      if (response.data.id) {
+      if (response.data[0].id) {
         await api.put(
           `/scores/anotation/${cookies.user_id}`,
           {
@@ -309,8 +327,8 @@ const LearningPlaylist = ({ location }) => {
         window.location.href = `http://localhost:3337/playlists?watch=${watch}&principal=${user_id}&guest=${guest}&box=1`;
       }
     } catch (err) {
-      // alert(err.message);
-      alert("Não pode completar a solicitação");
+      alert(err.message);
+      // alert("Não pode completar a solicitação");
     }
   }
 
