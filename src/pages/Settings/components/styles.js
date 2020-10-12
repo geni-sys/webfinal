@@ -30,6 +30,14 @@ export const Update = styled.button`
   &:hover {
     background: #50fa7b;
   }
+
+  &#delete {
+    background: var(--notification);
+    &:hover {
+      background: var(--url);
+      color: white;
+    }
+  }
 `;
 
 export const Description = styled.textarea`

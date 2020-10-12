@@ -117,7 +117,7 @@ const Settings = () => {
       );
     }
     if (parseInt(id) === 3) {
-      return <Security mode={theme} />;
+      return <Security mode={theme} username={user_name} />;
     }
     if (parseInt(id) === 5) {
       return (

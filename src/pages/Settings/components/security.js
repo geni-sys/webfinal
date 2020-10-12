@@ -1,16 +1,19 @@
 import React, { useState } from "react";
 import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 import api from "../../../services/api";
 // STALYS | STATICS
 import { Input, Update } from "./styles";
 
-function Security({ mode }) {
+function Security({ mode, username }) {
   const [oldPassword, setOldPassowrd] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const [cookies] = useCookies();
   const { user_id, token } = cookies;
+  const [, , removeCookie] = useCookies();
+  const history = useHistory();
 
   async function handleChangePassword() {
     if (!oldPassword || !newPassword || !confirmPassword) {
@@ -36,11 +39,41 @@ function Security({ mode }) {
         .catch((error) => alert(error.message));
 
       if (response.data.oparation) {
-        alert("PASSWORD UPDATED :D");
+        alert("SENHA ATUALIZADA :D");
       }
     } catch (err) {
       console.log(err.message);
       alert("ERROR IN UPDATE PASSWORD :-");
+    }
+  }
+  async function handleDesactiveAccount() {
+    const confirmation = prompt(`Para desativar a conta digite: *${username}*`)
+    if(confirmation === username) {
+      try {
+        const response = await api
+          .delete(
+            `users/${user_id}/desactive_account`,
+            { headers: { Authorization: String(token) } }
+          )
+          .catch((error) => alert(error.message));
+
+        if (response.status === 200) {
+          alert("USUÁRIO DESATIVADO!");
+
+          removeCookie("token");
+          removeCookie("user_id");
+          localStorage.removeItem("name");
+          localStorage.removeItem("email");
+          localStorage.removeItem("github_avatar");
+          localStorage.removeItem("questions_status");
+          localStorage.removeItem("user_description");
+
+          history.push("/login")
+          // return handleSignOut()
+        }
+      } catch (err) {
+        console.log(err.message);
+      }
     }
   }
 
@@ -100,7 +133,11 @@ function Security({ mode }) {
       </li>
 
       <Update type="submit" onClick={handleChangePassword}>
-        Update password
+        Atualizar Senha
+      </Update>
+
+      <Update disabled={!(oldPassword === "")}  id="delete" type="button" onClick={handleDesactiveAccount}>
+        Desativar conta <span role="img" aria-label="triste pro voce ter que ir">😢</span>
       </Update>
     </>
   );
