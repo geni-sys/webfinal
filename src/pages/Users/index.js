@@ -11,7 +11,7 @@ import { Default, Lists, Markeds } from "./components";
 import { Container, Main, Aside, Article, Top, Bottom, Points } from "./styles";
 
 function Users({ match }) {
-  const [idFriend, setIdFriend] = useState(3);
+  const [idFriend, setIdFriend] = useState(1);
   const [Scores, setScores] = useState([]);
   const [data, setData] = useState([]);
   const [isSelected, setIsSelected] = useState(0);

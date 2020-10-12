@@ -222,7 +222,7 @@ function Lists({ query }) {
             <FiAirplay />
           </span>
           <div id="nlw">
-            <a href={`/share?title=${item.id}`}>{item.name}</a>
+            <a href={`/playlists?watch=/${item.id}`}>{item.name}</a>
             <span>{item.stars}</span>
             <div id="ftr">
               <Button onClick={() => handleMarkList(item.starry, item.id)}>
@@ -336,7 +336,7 @@ function Issues({ query, mode }) {
             <FiAirplay />
           </span>
           <div id="nlw">
-            <a id="serial" href={`/lists?title=${item.id}`}>
+            <a id="serial" href={`/user/learning/${item.id}`}>
               {item.title}
             </a>
             <span>#{parseInt(item.id) * 122}</span>
