@@ -22,12 +22,7 @@ import {
 } from "./styles";
 
 const firstLesson = `
-  # Como aprender uma nova Skill?
-
-  ### A Regra das 10,000 horas
-    - Voçê precisa 10,000 horas de práticas deliberadas para ser um metre das skill.
-
-  ### Esto é real?
+  # Clique em um dos artigos para começar.
 `;
 
 const LearningPlaylist = ({ location }) => {
