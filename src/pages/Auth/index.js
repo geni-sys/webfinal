@@ -130,7 +130,7 @@ const Login = () => {
           </p>
         </div>
         <div id="ilustry">
-          <img src={Friends} alt="WELCOME FROM FRIENDS IN GENESIS" />
+          <img draggable={false} src={Friends} alt="WELCOME FROM FRIENDS IN GENESIS" />
         </div>
       </Aside>
 

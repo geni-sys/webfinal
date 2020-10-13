@@ -64,7 +64,7 @@ const Notifications = ({ match }) => {
               <a href="/notifications?tab=3">Nossa equipe</a>
             </li>
 
-            <New onClick={handleCerateNotification}>New</New>
+            <New onClick={handleCerateNotification}>Nova</New>
           </List>
         </Aside>
 

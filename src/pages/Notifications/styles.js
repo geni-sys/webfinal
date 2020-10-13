@@ -149,6 +149,7 @@ export const Notificate = styled.li`
   div#nlw {
     padding: 5px;
     position: relative;
+    width: calc(100% - 60px);
 
     span {
       margin: 0 5px;
