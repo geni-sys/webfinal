@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
+import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 // COMPONENTS
 import ReactMarkdown from "react-markdown";
@@ -11,6 +12,8 @@ import { List, Item, Transcription, Link } from "./styles";
 function IssueList({ mode, withoutFilter }) {
   const [data, setData] = useState([]);
   const [cookies] = useCookies([]);
+
+  const history = useHistory();
 
   const getAllData = useCallback(async () => {
     const { token, user_id } = cookies;
@@ -35,7 +38,7 @@ function IssueList({ mode, withoutFilter }) {
 
     try {
       const response = await api
-        .get(`/home/${user_id}/issues`, {
+        .get(`/friends_issue/${user_id}`, {
           headers: { Authorization: token || "" },
         })
         .catch((err) => {
@@ -73,6 +76,9 @@ function IssueList({ mode, withoutFilter }) {
       </>
     );
   }
+  function handleLearning(id) {
+    return history.push(`/user/learning/${id}`);
+  }
 
   return (
     <List
@@ -86,13 +92,17 @@ function IssueList({ mode, withoutFilter }) {
         <Item mode={mode} key={lesson.id} id="issue-publication">
           <header>
             <span>
-              <Miniature
-                source={lesson.user.github + ".png"}
-                width="40px"
-                hright="40px"
-              />
+              <a href={`/users/${lesson.user.email}`} target='_BLANK' rel="noopener noreferrer">
+                <Miniature
+                  source={lesson.user.github + ".png"}
+                  width="40px"
+                  hright="40px"
+                />
+              </a>
             </span>
-            <strong>{lesson.user.name}</strong>
+            <strong onClick={() => handleLearning(lesson.id)}>
+              {lesson.title}
+            </strong>
           </header>
 
           <div id="tags">{serializeTags(lesson.tags)}</div>
@@ -111,7 +121,6 @@ function IssueList({ mode, withoutFilter }) {
           <Link
             className="commun"
             href={`/user/learning/${lesson.id}`}
-            target="_blank"
             rel="noopener noreferrer"
           >
             Ver completo

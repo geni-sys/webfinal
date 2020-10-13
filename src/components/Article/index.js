@@ -19,6 +19,7 @@ const Hilights = () => {
       const [one, two, there, four] = response.data;
 
       setData([one, there, two, four]);
+      console.log(one);
     } catch (err) {
       console.log(err.message);
       return alert(err.message);

@@ -44,22 +44,14 @@ const LearningIssue = ({ match }) => {
         });
 
       setData(response.data);
+      document.title = (response.data[0].title)+ " (Artigo)"
     } catch (err) {
       console.log(err.message);
       return alert("Erro na conexão");
     }
   }, [issue_id, token, user_id]);
 
-  const loadTitle = useCallback(
-    () =>
-      (document.title =
-        data[0]?.title + " (Artigo)" || "Aprendendo novo artigo"),
-    [data]
-  );
-
   useEffect(() => {
-    loadTitle();
-
     getLessonsData();
   }, [getLessonsData]);
 

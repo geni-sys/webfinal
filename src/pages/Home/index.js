@@ -158,7 +158,7 @@ const Home = () => {
             <div>
               <p>Activits</p>
               <button onClick={newIssue}>
-                <FiPlus /> New
+                <FiPlus /> Novo
               </button>
             </div>
 

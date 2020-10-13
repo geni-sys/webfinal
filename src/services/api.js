@@ -12,7 +12,7 @@ export const news = axios.create({
 // US
 export const google = axios.create({
   baseURL:
-    "https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=3f03e096e3aa46d9bfcca671b64d84c6",
+    "https://newsapi.org/v2/top-headlines?country=br&category=technology&apiKey=3f03e096e3aa46d9bfcca671b64d84c6",
 });
 
 export const hub = axios.create({

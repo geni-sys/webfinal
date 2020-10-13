@@ -145,6 +145,7 @@ export const Body = styled.div`
   display: flex;
   flex-direction: column;
   font-size: 1.5em;
+  overflow-x: auto;
 
   div#transcription {
     overflow: auto;

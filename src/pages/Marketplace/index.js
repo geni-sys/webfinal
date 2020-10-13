@@ -29,7 +29,7 @@ const Marketplace = (props) => {
       try {
         const response = await google.get();
 
-        const [one, three, two, four] = response.data.articles;
+        const [, , one, three, two, four] = response.data.articles;
         console.log(one);
         setNews([one, three, two, four]);
       } catch (err) {
@@ -55,7 +55,7 @@ const Marketplace = (props) => {
               rel="noopener noreferrer"
               key={nws.title}
             >
-              <img src={nws.image || Nine} alt={nws.description || nws.url} />
+              <img draggable={false} src={nws.urlToImage || Nine} alt={nws.description || nws.url} />
               <span id="middle">{nws.title}</span>
             </a>
           ))}
@@ -88,7 +88,7 @@ const Marketplace = (props) => {
       <Main mode={theme} id="marketplace">
         <Aside mode={theme} id="aside-primary">
           <div id="first">
-            <h2>Expanda GEneSis</h2>
+            <h2>Expanda WHeeZy {/* GEneSis */}</h2>
             <p>Encontra ferramentas para melhorar seu fluxo de trabalho</p>
           </div>
           <div id="second">
@@ -98,10 +98,10 @@ const Marketplace = (props) => {
 
         <Article mode={theme} id="main-primary">
           <aside id="aside-secondary">
-            <h4>Categories</h4>
+            <h4>Categorias</h4>
             <ul>
               <li className={activedGroup === 1 ? "actived" : ""}>
-                <a href="/marketplace?tab=1">API management</a>
+                <a href="/marketplace?tab=1">Integração com API</a>
               </li>
               <li className={activedGroup === 2 ? "actived" : ""}>
                 <a href="/marketplace?tab=2">Extenção</a>

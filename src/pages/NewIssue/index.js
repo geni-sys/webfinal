@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useCookies } from "react-cookie";
 import { useHistory } from "react-router-dom";
 // SERVICES
@@ -22,10 +22,6 @@ import {
 import "./styles.css";
 
 const NewIssue = () => {
-  useEffect(() => {
-    document.title = "Criar novo artigo";
-  }, []);
-
   const [isPreview, setIsPreview] = useState(true);
   const [titulo, setTitulo] = useState("");
   const [tags, setTags] = useState("");
@@ -33,6 +29,20 @@ const NewIssue = () => {
   const [link, setLink] = useState("");
   const [body, setBody] = useState("");
   const [theme] = useState(() => localStorage.getItem("theme") || "light");
+
+  const middleware = useCallback(() => {
+    function confirmExit() {
+      if (titulo || tags || body || linguagem || link) {
+        return "Tem tarefas em progresso. Voçê tem certeza que quer fechar a janela?";
+      }
+    }
+    window.onbeforeunload = confirmExit;
+  }, [body, linguagem, link, tags, titulo])
+
+  useEffect(() => {
+    document.title = "Criar novo artigo";
+    middleware()
+  }, [middleware]);
 
   const history = useHistory();
 
@@ -114,7 +124,7 @@ const NewIssue = () => {
           </div>
 
           <Card id="card">
-            <div class="large">
+            <div className="large">
               <strong>Titulo do artigo *</strong>
               <Input
                 mode={theme}
@@ -135,8 +145,8 @@ const NewIssue = () => {
                 required
                 placeholder="Ex: Javascript / UX-UI"
                 type="text"
-                name="tags"
-                id="tags"
+                name="tech"
+                id="tech"
                 value={linguagem}
                 onChange={(e) => setLinguagem(e.target.value)}
               />
@@ -151,8 +161,8 @@ const NewIssue = () => {
                 required
                 placeholder="Ex: NodeJS, PHP, Iniciante"
                 type="text"
-                name="title"
-                id="title"
+                name="tags"
+                id="tags"
                 value={tags}
                 onChange={(e) => setTags(e.target.value)}
               />
@@ -165,8 +175,8 @@ const NewIssue = () => {
                 required
                 placeholder="Do artigo completo"
                 type="text"
-                name="tags"
-                id="tags"
+                name="link"
+                id="link"
                 value={link}
                 onChange={(e) => setLink(e.target.value)}
               />

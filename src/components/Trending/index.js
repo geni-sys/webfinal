@@ -62,7 +62,7 @@ function Trender({ mode }) {
             </div>
             <div id="bottom">
               <div id="header">
-                <strong>{item.title}</strong>
+                <strong><a href={`/user/learning/${item.id}`}>{item.title}</a></strong>
                 <span>*</span>
               </div>
               <p id="description">

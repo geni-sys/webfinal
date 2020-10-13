@@ -32,6 +32,7 @@ export const Item = styled.li`
     }
 
     strong {
+      cursor: pointer;
       color: ${(props) =>
         props.mode === `dark` ? "#999" : `var(--grey-dark);`};
     }

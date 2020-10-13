@@ -78,7 +78,7 @@ const Header = () => {
 
       <div id="comun">
         <a href="/wheezy">
-          <h1>GENESIS</h1>
+          <h1>Wheezy</h1>
         </a>
 
         <Navegation className="desactived-header">
@@ -151,7 +151,7 @@ const Header = () => {
             <a href="/profile">Ver seu perfil</a>
             <a href="/overview?newList=true">Overview - nova lista</a>
             <a href="/settings">Definições</a>
-            <a href="/wheezy">Genesis</a>
+            <a href="/wheezy">Wheezy</a>
           </div>
 
           <LogOut onClick={handleSignOut}>Sair</LogOut>

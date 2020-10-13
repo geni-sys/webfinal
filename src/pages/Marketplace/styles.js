@@ -188,9 +188,9 @@ export const Recommended = styled.ul`
     border-radius: 3px;
 
     img {
-      width: 100px;
+      width: 170px;
       height: 100px;
-      border-radius: 50%;
+      border-radius: 6px;
     }
     span#middle {
       max-width: 100%;

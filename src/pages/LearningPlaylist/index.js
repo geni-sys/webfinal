@@ -292,7 +292,7 @@ const LearningPlaylist = ({ location }) => {
   }
   async function initAnotations(guest) {
     try {
-      const response = await api.post(
+      await api.post(
         `/boxs/${watch}/${user_id}/to/${guest}`,
         { message: "..." },
         { headers: { Authorization: String(token) } }
