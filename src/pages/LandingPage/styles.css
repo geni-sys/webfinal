@@ -6,9 +6,9 @@
 }
 
 :root {
-  --black: #000;
-  --gray: #888;
-  --white: #fff;
+  --black-jack: #000;
+  --gray-jack: #888;
+  --white-jack: #fff;
 }
 
 button#do-login,
@@ -17,8 +17,8 @@ button#new-registry {
 }
 
 html {
-  background: var(--black);
-  color: var(--gray);
+  background: var(--black-jack);
+  color: var(--gray-jack);
   font-size: 62.5%;
 }
 
@@ -98,7 +98,7 @@ main#landing h1 {
   font-size: 12.8rem;
   line-height: 12.8rem;
   letter-spacing: -1.24rem;
-  color: var(--white);
+  color: var(--white-jack);
 }
 
 main#landing h1 span {
@@ -160,12 +160,12 @@ main#landing .buttons {
 }
 
 main#landing .buttons > button {
-  background: var(--white);
-  color: var(--black);
+  background: var(--white-jack);
+  color: var(--black-jack);
   border-radius: 0.4rem;
   margin: 1.2rem;
   padding: 1.5rem 4.5rem;
-  border: 0.1rem solid var(--white);
+  border: 0.1rem solid var(--white-jack);
   font-size: 1.6rem;
   font-weight: 500;
   cursor: pointer;
@@ -175,14 +175,14 @@ main#landing .buttons > button {
 
 main#landing .buttons > button.outlined {
   background: transparent;
-  color: var(--gray);
-  border: 0.1rem solid var(--gray);
+  color: var(--gray-jack);
+  border: 0.1rem solid var(--gray-jack);
 }
 
 main#landing .buttons > button:hover {
   background: transparent;
-  color: var(--white);
-  border: 0.1rem solid var(--white);
+  color: var(--white-jack);
+  border: 0.1rem solid var(--white-jack);
 }
 
 main#landing h2 {
@@ -194,7 +194,7 @@ main#landing h2 {
 }
 
 footer#landing {
-  color: var(--white);
+  color: var(--white-jack);
   text-transform: uppercase;
   font-size: 1.2rem;
   font-weight: 700;

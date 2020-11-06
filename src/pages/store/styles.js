@@ -57,6 +57,10 @@ export const Banner = styled.div`
 
   background: ${(props) =>
     props.mode === "dark" ? `#f9a839` : `var(--dominate);`};
+
+  > h1 {
+    color: ${(props) => (props.mode === "dark" ? `#444` : `initial`)};
+  }
 `;
 
 export const Icone = styled.img`
