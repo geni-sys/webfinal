@@ -1,83 +1,48 @@
-import React, { useEffect, useRef } from "react";
-import lottie from "lottie-web";
+import React from "react";
+import { useHistory } from 'react-router-dom'
 // STYLES | STATICS
-import {
-  Container,
-  Header,
-  Box,
-  Aside,
-  Checklist,
-  CheckIcon,
-  Main,
-  MobileBox,
-} from "./styles";
-import letit from "../../assets/animations/mobile-news-network.json";
+import "./styles.css";
 
 const LandingPage = () => {
-  const mobileBox = useRef(null);
+  const history = useHistory()
 
-  useEffect(() => {
-    lottie.loadAnimation({
-      container: mobileBox.current,
-      render: "svg",
-      loop: false,
-      autoplay: true,
-      animationData: letit,
-    });
-  }, []);
+  const handleNavigation = (route) => {
+    history.push(`/${route}`)
+  }
 
   return (
-    <Container>
-      <Header>
-        <div>
-          <small>mantido por </small>
-          <h1>GENESIS SYSTEMS</h1>
+    <div id="wrapper">
+      <main id="landing">
+        <h1>
+          <span>GEneSys.</span>
+          <span>WHeeZy.</span>
+          <span>Ship.</span>
+        </h1>
+
+        <div class="buttons">
+          <button
+            id="do-login"
+            type="button"
+            onClick={() => handleNavigation('login')}
+          >
+            Fazer login
+          </button>
+          <button
+            id="new-registry"
+            type="button"
+            onClick={() => handleNavigation('register')} class="outlined"
+          >
+            Fazer registro
+          </button>
         </div>
-      </Header>
 
-      <Box>
-        <Aside>
-          <h1>Wheezy</h1>
+        <h2>
+          O WHeeZy combina a melhor experiência de desenvolvedor com um foco obsessivo no desempenho do usuário final. Nossa plataforma permite que as equipes fullstack façam seu melhor trabalho.
+        </h2>
+      </main>
 
-          <Checklist>
-            <CheckIcon /> Dados criptografados de ponta-a-ponta.
-          </Checklist>
-          <Checklist>
-            <CheckIcon /> Atualização contínua.
-          </Checklist>
-          <Checklist>
-            <CheckIcon /> API para integrar com outras aplicações.
-          </Checklist>
-          <Checklist>
-            <CheckIcon /> Layout flexível.
-          </Checklist>
-          <Checklist>
-            <CheckIcon /> Comunidade open source.
-          </Checklist>
-
-          <div className="last-group">
-            <span>Só mais um passo.</span>
-            <p>
-              Se ainda não possui registro na plataforma inscreva-se ou pode
-              realizar o login abaixo!
-            </p>
-          </div>
-
-          <div id="buttons">
-            <a id="login" href="/login">
-              Logar
-            </a>
-            <a id="new" href="/register">
-              registrar-se
-            </a>
-          </div>
-        </Aside>
-
-        <Main>
-          <MobileBox ref={mobileBox}></MobileBox>
-        </Main>
-      </Box>
-    </Container>
+      <footer id="landing">Explore o jeito WHeeZy.</footer>
+    </div>
   );
 };
 
